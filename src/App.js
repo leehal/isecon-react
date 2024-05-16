@@ -5,10 +5,12 @@ import Goods from "./pages/goods/goods";
 import LOGIN from "./pages/login/login";
 import MyPage from "./pages/myPage/myPage";
 import Consert from "./pages/consert/consert";
+import GlobalStyle from "./global";
 
 function App() {
   return (
     <>
+      <GlobalStyle />
       <Router>
         <Routes>
           <Route path="/" element={<LOGIN />} />
