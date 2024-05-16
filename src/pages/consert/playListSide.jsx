@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ConsertAxiosApi from "../../api/ConsertAxios";
+import PlayListContainer from "./playListContainer";
 
 const Container = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ const PlayListSide = () => {
         <SearchBar>
           <input type="text" placeholder="검색" />
         </SearchBar>
+        <PlayListContainer />
       </Container>
     </>
   );
