@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ConsertAxiosApi from "../../api/ConsertAxios";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ const PlHead = styled.div`
   background-color: #ce0aff75;
   color: white;
   width: 100%;
-  height: 3vh;
+  height: 7%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,23 +26,39 @@ const PlHead = styled.div`
 const SearchBar = styled.div`
   background-color: black;
   width: 100%;
-  height: 3vh;
+  height: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
   input {
     border-radius: 5%;
     background-color: gray;
+    width: 70%;
+    color: white;
+    ::placeholder {
+      color: white;
+    }
   }
 `;
 
 const PlayListSide = () => {
+  const [music, setMusic] = useState([]); // 음악 넣을 곳
+
+  useEffect(() => {
+    const conMusic = async () => {
+      const rsp = await ConsertAxiosApi.conAllMusic();
+      console.log(rsp.data);
+      setMusic(rsp.data);
+    };
+    conMusic();
+  }, []);
+
   return (
     <>
       <Container>
         <PlHead>ISECON</PlHead>
         <SearchBar>
-          <input type="text" />
+          <input type="text" placeholder="검색" />
         </SearchBar>
       </Container>
     </>
