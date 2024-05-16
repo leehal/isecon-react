@@ -6,6 +6,7 @@ import LOGIN from "./pages/login/login";
 import MyPage from "./pages/myPage/myPage";
 import Consert from "./pages/consert/consert";
 import GlobalStyle from "./global";
+import GoodsDetail from "./pages/goods/goodsdetail";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LOGIN />} />
           <Route path="/goods" element={<Goods />} />
+          <Route path="/goodsdetail" element={<GoodsDetail />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/consert" element={<Consert />} />
         </Routes>

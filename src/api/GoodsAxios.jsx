@@ -7,5 +7,9 @@ const ProductAxiosApi = {
   goodAllproduct: async () => {
     return await axios.get(ISECON_URL + CON_URL + "/allgoods");
   },
+  detailProduct: async () => {
+    return await axios.get(ISECON_URL + CON_URL + `/detailproduct`);
+  },
 };
+
 export default ProductAxiosApi;

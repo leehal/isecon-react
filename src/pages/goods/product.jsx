@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import ProductAxiosApi from "../../api/GoodsAxios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Productdiv = styled.ul`
-  width: 25%;
+  width: 30%;
+  min-width: 30%;
   height: 20%;
+  min-height: 20%;
   background-color: red;
   display: flex;
   flex-direction: column;
@@ -21,44 +26,34 @@ const Producttext = styled.div`
   width: 90%;
   height: 45%;
 `;
-
 const ProductMap = () => {
-  const prod = [
-    {
-      Productimg:
-        "https://cafe24img.poxo.com/withmuulive/web/product/small/202402/054d9313676e4b3ef01ecef081fa4e9b.jpg",
-      name: "이세계 아이돌 - 01 페이스 쿠션",
-      price: 35000,
-    },
-    {
-      Productimg:
-        "https://cafe24img.poxo.com/withmuulive/web/product/small/202402/054d9313676e4b3ef01ecef081fa4e9b.jpg",
-      name: "이세계아이돌 - 02 아크릴 디오라마",
-      price: 29000,
-    },
-    {
-      Productimg:
-        "https://cafe24img.poxo.com/withmuulive/web/product/small/202402/054d9313676e4b3ef01ecef081fa4e9b.jpg",
-      name: "이세계아이돌 - 03 포토카드 세트",
-      price: 7000,
-    },
-  ];
-  const pm = prod.map((pd) => (
-    <Productdiv>
-      <Productimg url={pd.Productimg}></Productimg>
-      <Producttext>{pd.name}</Producttext>
-      <Producttext>{pd.price}</Producttext>
-    </Productdiv>
-  ));
-  return pm;
-};
+  const [prod, setProd] = useState([]);
 
-const Product = () => {
+  useEffect(() => {
+    const godProd = async () => {
+      const rsp = await ProductAxiosApi.goodAllproduct();
+      setProd(rsp.data);
+    };
+    godProd();
+  }, []);
+
+  const navigate = useNavigate();
+
   return (
     <>
-      <ProductMap></ProductMap>
+      {prod.map((pd) => (
+        <Productdiv
+          onClick={() => {
+            navigate(`/goodsdetail?name=${pd.pname}`);
+          }}
+        >
+          <Productimg url={pd.pimg}></Productimg>
+          <Producttext>{pd.pname}</Producttext>
+          <Producttext>{pd.price}</Producttext>
+        </Productdiv>
+      ))}
     </>
   );
 };
 
-export default Product;
+export default ProductMap;
