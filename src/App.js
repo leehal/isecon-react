@@ -1,11 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Goods from "./pages/goods/goods";
+import LOGIN from "./pages/login/login";
+import MyPage from "./pages/myPage/myPage";
+import Consert from "./pages/consert/consert";
 
 function App() {
   return (
     <>
-      <h1>리액트 시작</h1>
-      <h1>안녕하세요</h1>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LOGIN />} />
+          <Route path="/goods" element={<Goods />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/consert" element={<Consert />} />
+        </Routes>
+      </Router>
     </>
   );
 }
