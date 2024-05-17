@@ -77,8 +77,6 @@ function UserUpdateFrom() {
     setAddress(e.target.value);
   };
 
-  const updateInfo = (e) => {};
-
   return (
     <Container>
       <ChangeBox>
@@ -124,7 +122,7 @@ function UserUpdateFrom() {
             />
           </label>
         </TextForm>
-        <Button onClick={updateInfo}>저장</Button>
+        <Button>저장</Button>
       </ChangeBox>
     </Container>
   );

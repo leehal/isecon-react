@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -29,6 +30,7 @@ const Img = styled.div`
   top: 20%;
   left: 18%;
   border-radius: 150px;
+  overflow: hidden;
 `;
 
 const Userbox = styled.div`
@@ -163,11 +165,18 @@ const MyPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+  const myinfo = (e) => {
+    navigate("/UserUpdateFrom");
+  };
+
   useEffect(() => {
+    const muno = localStorage.getItem("uno");
+    console.log(muno);
     const userData = async (uno) => {
       try {
         const response = await axios.get(
-          "http://localhost:8125/isecon/users/userinfo?uno=27"
+          `http://localhost:8125/isecon/users/userinfo?uno=${uno}`
         );
         setMypageInfo(response.data);
         setLoading(false);
@@ -176,7 +185,7 @@ const MyPage = () => {
         setLoading(false);
       }
     };
-    userData();
+    userData(muno);
   }, []);
 
   if (loading) {
@@ -189,7 +198,12 @@ const MyPage = () => {
   return (
     <Container>
       <Mybox>
-        <Img></Img>
+        <Img>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHbnGNCaUuLwJDOqaNB7RKM1Cw2Cxb0M24Va-FGjaDTg&s"
+            alt=""
+          />
+        </Img>
         <Userbox>
           <Ptext>
             <p>아이디: {mypageInfo.id}</p>
@@ -198,7 +212,7 @@ const MyPage = () => {
             <p>주소: {mypageInfo.address}</p>
           </Ptext>
         </Userbox>
-        <Button>수정하기</Button>
+        <Button onClick={myinfo}>수정하기</Button>
       </Mybox>
       <Mybox2>
         <Userbox2>

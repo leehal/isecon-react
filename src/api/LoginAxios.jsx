@@ -4,7 +4,7 @@ const ISECON_URL = "http://localhost:8125/isecon";
 const MY_URL = "/users";
 
 const LoginAxiosApi = {
-  mypageAll: async (id, pwd) => {
+  myLogin: async (id, pwd) => {
     console.log(id, "id");
     console.log(pwd, "pwd");
     const login = {

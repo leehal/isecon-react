@@ -13,7 +13,6 @@ const LOGIN = () => {
   const [inputPwd, setInputPwd] = useState("");
 
   // 유효성 검사
-  const [isId, setIsId] = useState("");
   const [isPwd, setIsPwd] = useState("");
 
   const navigate = useNavigate();
@@ -21,12 +20,12 @@ const LOGIN = () => {
   const onClickLogin = async () => {
     // 로그인을 위해 axios호출
     try {
-      const rsp = await LoginAxiosApi.mypageAll(id, pwd);
+      const rsp = await LoginAxiosApi.myLogin(id, pwd);
       console.log(rsp.data);
-      if (rsp.data) {
-        localStorage.setItem("email", isId); // 저장
+      if (rsp.data !== null) {
+        localStorage.setItem("uno", rsp.data); // 저장
         localStorage.setItem("isLogin", "TRUE");
-        // navigate("/home");
+        navigate("/mypage");
         alert("성공");
       } else {
         // 서버의 응답을 줬지만 성공이 아닌 경우
