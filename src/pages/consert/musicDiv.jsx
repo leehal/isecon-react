@@ -5,8 +5,13 @@ const MTitle = styled.div`
   background-color: #80808060;
   color: white;
   display: flex;
+  align-items: center;
   width: 100%;
-  height: 8%;
+  height: 7%;
+  border: solid 1px black;
+  &:hover {
+    background-color: #ee82eeba;
+  }
 `;
 
 const MusicDiv = ({ Music }) => {
@@ -17,13 +22,12 @@ const MusicDiv = ({ Music }) => {
   // console.log(music[0].mname);
   return (
     <>
-      <MTitle>
-        {Music.map((music) => (
-          <p key={music.mno}>
-            <h6>{music.mname}</h6>
-          </p>
-        ))}
-      </MTitle>
+      {Music.map((music) => (
+        <MTitle key={music.mno}>
+          {music.mname}
+          {music.singer}
+        </MTitle>
+      ))}
     </>
   );
 };

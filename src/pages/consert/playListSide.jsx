@@ -9,7 +9,7 @@ const Container = styled.div`
   align-items: right;
   justify-content: right;
   height: 100vh;
-  width: 30vw;
+  width: 22vw;
   background-color: #704a81;
   margin: 0%;
 `;

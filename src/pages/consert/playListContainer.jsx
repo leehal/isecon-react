@@ -9,6 +9,7 @@ const Container = styled.div`
   height: 70%;
   background-color: #36293b;
   overflow-y: auto; /* 수직 스크롤 바를 활성화 */
+  flex-direction: column;
 `;
 
 const PlayListContainer = () => {
@@ -16,8 +17,12 @@ const PlayListContainer = () => {
 
   useEffect(() => {
     const conMusic = async () => {
-      const rsp = await ConsertAxiosApi.conAllMusic();
-      setMusic(rsp.data);
+      try {
+        const rsp = await ConsertAxiosApi.conAllMusic();
+        setMusic(rsp.data);
+      } catch (e) {
+        console.log(e);
+      }
     };
     conMusic();
   }, []);
