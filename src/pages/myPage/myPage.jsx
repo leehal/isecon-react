@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -59,6 +61,11 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049; /* Dark green */
+  }
 `;
 
 const Mybox2 = styled.div`
@@ -152,17 +159,43 @@ const MypageMap = () => {
 };
 
 const MyPage = () => {
+  const [mypageInfo, setMypageInfo] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const userData = async (uno) => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8125/isecon/users/userinfo?uno=27"
+        );
+        setMypageInfo(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    userData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <Container>
       <Mybox>
         <Img></Img>
         <Userbox>
           <Ptext>
-            <p>이름</p>
-            <p>아이디</p>
-            <p>닉네임</p>
-            <p>전화번호</p>
-            <p>주소</p>
+            <p>아이디: {mypageInfo.id}</p>
+            <p>닉네임: {mypageInfo.nickname}</p>
+            <p>전화번호: {mypageInfo.phone}</p>
+            <p>주소: {mypageInfo.address}</p>
           </Ptext>
         </Userbox>
         <Button>수정하기</Button>
