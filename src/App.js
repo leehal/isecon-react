@@ -9,6 +9,7 @@ import GlobalStyle from "./global";
 import GoodsDetail from "./pages/goods/goodsdetail";
 import UserStore from "./UserStore";
 import Cart from "./pages/cart/cart";
+import UserUpdateFrom from "./pages/myPage/myInfoChange";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/consert" element={<Consert />} />
+            <Route path="/userupdatefrom" element={<UserUpdateFrom />} />
           </Routes>
         </Router>
       </UserStore>

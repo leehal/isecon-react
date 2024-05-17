@@ -1,34 +1,36 @@
 import { useState } from "react";
 import styled from "styled-components";
+import MyPage from "./myPage";
 
 const Container = styled.div`
+  position: relative;
   width: 100vw;
-  height: 120vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
 const ChangeBox = styled.div`
-  position: relative;
+  position: absolute;
   display: flex;
-  width: 40%;
-  height: 80%;
+  width: 30%;
+  height: 70%;
   justify-content: center;
   align-items: center;
   background: #304a70;
 `;
-const TextForm = styled.div`
-  position: absolute;
-  top: 40%;
+const TextForm = styled.form`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 80%;
+  height: 100%;
+  background: red;
 `;
 const StyledInput = styled.input`
-  width: 550px;
+  width: 400px;
   height: 55px;
   margin-bottom: 20px;
   font-size: 20px;
@@ -75,6 +77,8 @@ function UserUpdateFrom() {
     setAddress(e.target.value);
   };
 
+  const updateInfo = (e) => {};
+
   return (
     <Container>
       <ChangeBox>
@@ -120,7 +124,7 @@ function UserUpdateFrom() {
             />
           </label>
         </TextForm>
-        <Button>저장</Button>
+        <Button onClick={updateInfo}>저장</Button>
       </ChangeBox>
     </Container>
   );
