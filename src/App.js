@@ -8,6 +8,7 @@ import Consert from "./pages/consert/consert";
 import GlobalStyle from "./global";
 import GoodsDetail from "./pages/goods/goodsdetail";
 import UserStore from "./UserStore";
+import Cart from "./pages/cart/cart";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<LOGIN />} />
             <Route path="/goods" element={<Goods />} />
             <Route path="/goodsdetail" element={<GoodsDetail />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/consert" element={<Consert />} />
           </Routes>

@@ -28,25 +28,21 @@ const Pimg = styled.div`
   height: 10%;
   background-size: 80%;
   background-repeat: no-repeat;
-  /* background-image: url("https://cafe24img.poxo.com/withmuulive/web/product/small/202402/054d9313676e4b3ef01ecef081fa4e9b.jpg"); */
   background-image: url(${(props) => props.url});
 `;
 
 const Pdimg = styled.div`
   width: 80%;
   height: 100%;
-  /* background-image: url("https://withdrama.speedgabia.com/star-3/ISEGYE/2402/ISEGYE-01.jpg"); */
   background-image: url(${(props) => props.url});
 `;
 
-const OPN = styled.div`
-  width: 10%;
-  height: 10%;
-`;
+const OPN = styled.option``;
 
 const GoodsDetail = () => {
   const [dtl, setDtl] = useState([]);
   const [proImg, setProImg] = useState();
+  const [prodImg, setProdImg] = useState();
 
   const context = useContext(UserContext);
   const { pname } = context;
@@ -57,7 +53,7 @@ const GoodsDetail = () => {
       console.log(rsp.data);
       setDtl(rsp.data);
       setProImg(rsp.data[0].pimg);
-      console.log(proImg);
+      setProdImg(rsp.data[0].pdimg);
     };
     productDetail();
   }, []);
@@ -67,10 +63,12 @@ const GoodsDetail = () => {
       <Container>
         <Banner>
           <Pimg url={proImg}></Pimg>
-          {dtl.map((dt) => (
-            <OPN key={dtl.pno}>{dt.option}</OPN>
-          ))}
-          {/* <Pdimg url={dtl[0].Pdimg}></Pdimg> */}
+          <select>
+            {dtl.map((dt) => (
+              <OPN key={dtl.pno}>{dt.option}</OPN>
+            ))}
+          </select>
+          <Pdimg url={prodImg}></Pdimg>
         </Banner>
       </Container>
     </>
