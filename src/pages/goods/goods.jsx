@@ -30,9 +30,7 @@ const Goods = () => {
     <>
       <Container>
         <Goodsall>
-          {/* <Link to="/goodsdetail"> */}
           <ProductMap></ProductMap>
-          {/* </Link> */}
         </Goodsall>
       </Container>
     </>

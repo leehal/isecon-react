@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import ProductAxiosApi from "../../api/GoodsAxios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserStore";
 
 const Productdiv = styled.ul`
   width: 30%;
@@ -39,12 +40,15 @@ const ProductMap = () => {
 
   const navigate = useNavigate();
 
+  const context = useContext(UserContext);
+  const { setPname } = context;
   return (
     <>
       {prod.map((pd) => (
         <Productdiv
           onClick={() => {
-            navigate(`/goodsdetail?name=${pd.pname}`);
+            navigate(`/goodsdetail`);
+            setPname(pd.pname);
           }}
         >
           <Productimg url={pd.pimg}></Productimg>

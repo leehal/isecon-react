@@ -7,20 +7,23 @@ import MyPage from "./pages/myPage/myPage";
 import Consert from "./pages/consert/consert";
 import GlobalStyle from "./global";
 import GoodsDetail from "./pages/goods/goodsdetail";
+import UserStore from "./UserStore";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/" element={<LOGIN />} />
-          <Route path="/goods" element={<Goods />} />
-          <Route path="/goodsdetail" element={<GoodsDetail />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/consert" element={<Consert />} />
-        </Routes>
-      </Router>
+      <UserStore>
+        <GlobalStyle />
+        <Router>
+          <Routes>
+            <Route path="/" element={<LOGIN />} />
+            <Route path="/goods" element={<Goods />} />
+            <Route path="/goodsdetail" element={<GoodsDetail />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/consert" element={<Consert />} />
+          </Routes>
+        </Router>
+      </UserStore>
     </>
   );
 }
