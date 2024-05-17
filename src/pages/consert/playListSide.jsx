@@ -43,17 +43,6 @@ const SearchBar = styled.div`
 `;
 
 const PlayListSide = () => {
-  const [music, setMusic] = useState([]); // 음악 넣을 곳
-
-  useEffect(() => {
-    const conMusic = async () => {
-      const rsp = await ConsertAxiosApi.conAllMusic();
-      console.log(rsp.data);
-      setMusic(rsp.data);
-    };
-    conMusic();
-  }, []);
-
   return (
     <>
       <Container>
