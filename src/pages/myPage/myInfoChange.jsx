@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import MyPage from "./myPage";
+import { useNavigate } from "react-router-dom";
+import updateUserInfo from "../../api/MyPageInfoAxios";
 
 const Container = styled.div`
   position: relative;
@@ -47,25 +49,30 @@ const StyledInput = styled.input`
     padding-left: 10px;
   }
 `;
-const Button = styled.button`
+const Save = styled.button`
   position: absolute;
   width: 150px;
   height: 50px;
   bottom: 7%;
+  right: 20%;
+`;
+const Off = styled.button`
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  bottom: 7%;
+  left: 20%;
 `;
 
 function UserUpdateFrom() {
   const [nickName, setNickName] = useState("");
-  const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const uno = localStorage.getItem("uno");
 
   const changeNickName = (e) => {
     setNickName(e.target.value);
-  };
-  const changeId = (e) => {
-    setId(e.target.value);
   };
   const changePwd = (e) => {
     setPwd(e.target.value);
@@ -75,6 +82,28 @@ function UserUpdateFrom() {
   };
   const changeAddress = (e) => {
     setAddress(e.target.value);
+  };
+  const navigate = useNavigate();
+  const saveBtn = async () => {
+    try {
+      const rsp = await updateUserInfo.myUserInfo(
+        nickName,
+        pwd,
+        phone,
+        address,
+        uno
+      );
+      if (rsp.data) {
+        alert("저장완료");
+        navigate("/myPage");
+      }
+    } catch (error) {
+      console.error("유저 정보 업데이트 에러:", error);
+    }
+  };
+
+  const offBtn = () => {
+    navigate("/myPage");
   };
 
   return (
@@ -88,14 +117,7 @@ function UserUpdateFrom() {
               onChange={changeNickName}
               placeholder="닉네임"
             />
-          </label>
-          <label>
-            <StyledInput
-              type="text"
-              value={id}
-              onChange={changeId}
-              placeholder="ID"
-            />
+            <button>확인</button>
           </label>
           <label>
             <StyledInput
@@ -104,6 +126,7 @@ function UserUpdateFrom() {
               onChange={changePwd}
               placeholder="PWD"
             />
+            <button></button>
           </label>
           <label>
             <StyledInput
@@ -112,6 +135,7 @@ function UserUpdateFrom() {
               onChange={changePhone}
               placeholder="전화번호"
             />
+            <button>확인</button>
           </label>
           <label>
             <StyledInput
@@ -122,7 +146,8 @@ function UserUpdateFrom() {
             />
           </label>
         </TextForm>
-        <Button>저장</Button>
+        <Save onClick={saveBtn}>저장</Save>
+        <Off onClick={offBtn}>취소</Off>
       </ChangeBox>
     </Container>
   );

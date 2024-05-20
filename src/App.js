@@ -10,6 +10,7 @@ import GoodsDetail from "./pages/goods/goodsdetail";
 import UserStore from "./UserStore";
 import Cart from "./pages/cart/cart";
 import UserUpdateFrom from "./pages/myPage/myInfoChange";
+import Signup from "./pages/login/sign";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/consert" element={<Consert />} />
             <Route path="/userupdatefrom" element={<UserUpdateFrom />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </Router>
       </UserStore>

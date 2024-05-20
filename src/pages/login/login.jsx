@@ -1,28 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Modal from "../login/modal";
 import LoginAxiosApi from "../../api/LoginAxios";
 const Container = styled.div``;
 const Img = styled.div``;
-const StyledInput = styled.div``;
-
 const LOGIN = () => {
-  // 입력받기
-  const [inputId, setInputId] = useState("");
-  const [inputPwd, setInputPwd] = useState("");
-
-  // 유효성 검사
-  const [isPwd, setIsPwd] = useState("");
-
   const navigate = useNavigate();
-
+  const onClickSignUp = (e) => {
+    navigate("/Signup");
+  };
   const onClickLogin = async () => {
     // 로그인을 위해 axios호출
     try {
       const rsp = await LoginAxiosApi.myLogin(id, pwd);
       console.log(rsp.data);
-      if (rsp.data !== null) {
+      if (rsp.data !== 0) {
         localStorage.setItem("uno", rsp.data); // 저장
         localStorage.setItem("isLogin", "TRUE");
         navigate("/mypage");
@@ -67,6 +59,7 @@ const LOGIN = () => {
           />
         </label>
         <button onClick={onClickLogin}>ㅇㅇ</button>
+        <button onClick={onClickSignUp}>회원가입</button>
       </Container>
     </>
   );

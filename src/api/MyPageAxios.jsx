@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ISECON_URL = "http://localhost:8125/isecon";
-const MY_URL = "/userinfo";
+const MY_URL = "/users";
 
 const MyPageAxiosApi = {
   mypageAll: async (uno) => {
