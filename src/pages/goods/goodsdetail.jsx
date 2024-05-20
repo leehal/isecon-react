@@ -34,6 +34,7 @@ const Pimg = styled.div`
 const Pdimg = styled.div`
   width: 80%;
   height: 100%;
+  background-repeat: no-repeat;
   background-image: url(${(props) => props.url});
 `;
 

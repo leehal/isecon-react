@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CartProduct from "./cartProduct";
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +14,10 @@ const Container = styled.div`
 const CartProductAll = styled.div`
   width: 90%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
   background-color: pink;
 `;
 
@@ -20,7 +25,9 @@ const Cart = () => {
   return (
     <>
       <Container>
-        <CartProductAll></CartProductAll>
+        <CartProductAll>
+          <CartProduct></CartProduct>
+        </CartProductAll>
       </Container>
     </>
   );
