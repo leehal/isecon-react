@@ -9,8 +9,8 @@ const Cartproduct = styled.div`
   width: 70%;
   height: 20%;
   background-color: hotpink;
+  border: solid black 1px;
 `;
-
 const CartImg = styled.div`
   width: 40%;
   height: 100%;
@@ -19,32 +19,47 @@ const CartImg = styled.div`
   flex-wrap: wrap;
   background-repeat: no-repeat;
 `;
-const CartText = styled.div`
+const CartTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
-  background-color: brown;
+  background-color: gray;
+  justify-content: space-around;
+  align-items: center;
+`;
+const CartText1 = styled.div`
+  text-align: center;
+  width: 80%;
+  height: 30%;
+  background-color: red;
+`;
+const CartText2 = styled.div`
+  text-align: center;
+  width: 80%;
+  height: 30%;
+  background-color: red;
+`;
+const CartText3 = styled.div`
+  text-align: center;
+  width: 80%;
+  height: 30%;
+  background-color: red;
 `;
 
 const CartProduct = () => {
-  const [crt, setCrt] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [buttonClick, setButtonClick] = useState(false);
+  const [crt, setCrt] = useState([]); // 장바구니 보기
+  const [cart, setCart] = useState([]); // 장바구니 결제
+  const [isDel, setIsDel] = useState(false); // 장바구니 삭제
+  const [catdelsal, setCatdelsal] = useState();
 
-  const cartCheck = (e) => {
-    setCrt(e.target.value);
-  };
-
-  const onCart = (e) => {
+  const CartCheck = (e) => {
     setCart([...cart, e.target.value]);
   };
-  const cartSubmit = () => {
-    alert(cart);
-    setButtonClick(true);
-  };
 
-  useEffect(() => {
-    console.log("!");
-  }, [buttonClick]);
+  const checkAll = () => {
+    alert(cart);
+  };
 
   useEffect(() => {
     const crtProd = async () => {
@@ -53,24 +68,53 @@ const CartProduct = () => {
       setCrt(rsp2.data);
     };
     crtProd();
-  }, []);
+    setIsDel(false);
+  }, [isDel]);
+
+  const cartDelete = async (cno) => {
+    try {
+      console.log(cno);
+      const rsp = await CartAxiosApi.cartDelete(cno);
+      console.log(rsp.data);
+      setIsDel(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const cartDeleteSale = async () => {
+    try {
+      const uno = 1;
+      const rsp = await CartAxiosApi.cartDeleteSale(cart, uno);
+      console.log(rsp.data);
+      setCatdelsal(rsp.data);
+      setIsDel(true);
+    } catch (e) {
+      console.log(e);
+    }
+    alert(cart);
+  };
 
   return (
     <>
       {crt.map((pd) => (
         <>
           <Cartproduct>
-            <input type="checkbox" value={pd.option} onChange={onCart} />
+            <input type="checkbox" value={pd.pno} onChange={CartCheck} />
             <CartImg url={pd.pimg}></CartImg>
-            <CartText>
-              {pd.pname}
-              {pd.price}
-              {pd.option}
-            </CartText>
+            <CartTextBox>
+              <CartText1>{pd.pname}</CartText1>
+              <CartText2>{pd.option}</CartText2>
+              <CartText3>{pd.price}</CartText3>
+            </CartTextBox>
+            <button type="button" onClick={() => cartDelete(pd.pno)}>
+              삭제하기
+            </button>
           </Cartproduct>
         </>
       ))}
-      <button type="button" onClick={cartSubmit}>
+      {}
+      <button type="button" onClick={cartDeleteSale}>
         결제하기
       </button>
     </>
