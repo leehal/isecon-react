@@ -42,7 +42,9 @@ const SearchBar = styled.div`
   }
 `;
 
-const PlayListSide = () => {
+const PlayListSide = ({ musicList }) => {
+  // console.log(musicList);
+
   return (
     <>
       <Container>
@@ -50,7 +52,7 @@ const PlayListSide = () => {
         <SearchBar>
           <input type="text" placeholder="검색" />
         </SearchBar>
-        <PlayListContainer />
+        <PlayListContainer musicList={musicList} />
       </Container>
     </>
   );

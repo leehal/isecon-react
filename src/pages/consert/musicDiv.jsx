@@ -17,9 +17,12 @@ const MTitle = styled.div`
 const MusicDiv = ({ Music }) => {
   // const [music, setMusic] = useState([]); // 음악 넣을 곳
   // setMusic(Music);
-  console.log(Music);
+  // console.log(Music);
   // console.log(music);
   // console.log(music[0].mname);
+  if (!Music || Music.length === 0) {
+    return <div>No music list available.</div>;
+  }
   return (
     <>
       {Music.map((music) => (

@@ -12,24 +12,13 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const PlayListContainer = () => {
+const PlayListContainer = ({ musicList }) => {
   const [music, setMusic] = useState([]); // 음악 넣을 곳
 
-  useEffect(() => {
-    const conMusic = async () => {
-      try {
-        const rsp = await ConsertAxiosApi.conAllMusic();
-        setMusic(rsp.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    conMusic();
-  }, []);
   return (
     <>
       <Container>
-        <MusicDiv Music={music}></MusicDiv>
+        <MusicDiv Music={musicList}></MusicDiv>
       </Container>
     </>
   );
