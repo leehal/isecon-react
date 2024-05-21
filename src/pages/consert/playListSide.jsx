@@ -42,8 +42,26 @@ const SearchBar = styled.div`
   }
 `;
 
-const PlayListSide = ({ musicList, musicChoice }) => {
-  // console.log(musicList);
+const ButtonBar = styled.div`
+  background-color: black;
+  width: 100%;
+  height: 20%;
+  position: fixed; /* 고정 위치 설정 */
+  bottom: 0; /* 화면의 맨 아래로 설정 */
+`;
+
+const ButtonDiv = styled.div`
+  background-color: violet;
+  width: 100%;
+  height: 30%;
+
+  option[value=""][disabled] {
+    display: none;
+  }
+`;
+
+const PlayListSide = ({ musicChoice }) => {
+  const [nowConsert, setNowConsert] = useState("PlayListContainer");
 
   return (
     <>
@@ -52,7 +70,19 @@ const PlayListSide = ({ musicList, musicChoice }) => {
         <SearchBar>
           <input type="text" placeholder="검색" />
         </SearchBar>
-        <PlayListContainer musicList={musicList} musicChoice={musicChoice} />
+        <PlayListContainer musicChoice={musicChoice} />
+        <ButtonBar>
+          <ButtonDiv>
+            <button>플레이리스트</button>
+            <select placeholder="정렬">
+              <option value="" disabled selected>
+                정렬
+              </option>
+              <option value="가수">가수</option>
+              <option value="노래">노래</option>
+            </select>
+          </ButtonDiv>
+        </ButtonBar>
       </Container>
     </>
   );

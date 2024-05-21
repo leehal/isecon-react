@@ -28,7 +28,7 @@ const maxResults = 10;
 
 const Consert = () => {
   const [videos, setVideos] = useState("vXfs9LEgXfE");
-  const [musicList, setMusicList] = useState([]);
+  // const [nowConsert, setNowConsert] = useState("PlayListContainer");
 
   const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
 
@@ -38,11 +38,7 @@ const Consert = () => {
     const fetchVideos = async () => {
       try {
         const response = await axios.get(url);
-        const rsp = await ConsertAxiosApi.conAllMusic();
-        setMusicList(rsp.data);
-        // console.log(musicList);
-        // console.log(response);
-        // console.log(`url : ${response.url}`);
+
         if (response.status !== 200) {
           throw new Error("Network response was not ok");
         }
@@ -51,8 +47,6 @@ const Consert = () => {
         if (!data.items) {
           throw new Error("No items found in the response");
         }
-        // console.log("Fetched videos:", data.items);
-        // console.log(data[0].items.snippet.title);
       } catch (e) {
         console.error("Error fetching videos:", e);
       }
@@ -64,7 +58,7 @@ const Consert = () => {
     <>
       <Container>
         <YouTubeView video={videos} />
-        <PlayListSide musicList={musicList} musicChoice={musicChoice} />
+        <PlayListSide musicChoice={musicChoice} />
       </Container>
     </>
   );

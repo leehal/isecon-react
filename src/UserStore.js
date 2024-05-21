@@ -6,9 +6,11 @@ const UserStore = (props) => {
   const [uno, setUno] = useState("");
   const a = 0;
 
-  useEffect(() => {
-    localStorage.setItem("uno", uno);
-  }, [uno]);
+  useEffect =
+    (() => {
+      localStorage.setItem("uno");
+    },
+    [uno]);
 
   return (
     <UserContext.Provider

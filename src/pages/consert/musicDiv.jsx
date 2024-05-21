@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ConsertAxiosApi from "../../api/ConsertAxios";
 
 const MTitle = styled.div`
   background-color: #80808060;
@@ -14,21 +15,34 @@ const MTitle = styled.div`
   }
 `;
 
-const MusicDiv = ({ Music, musicChoice }) => {
-  // const [music, setMusic] = useState([]); // 음악 넣을 곳
+const MusicDiv = ({ musicChoice }) => {
+  const [music, setMusic] = useState([]); // 음악 넣을 곳
+
+  useEffect(() => {
+    const MusicList = async () => {
+      try {
+        const rsp = await ConsertAxiosApi.conAllMusic();
+        setMusic(rsp.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    MusicList();
+  }, []);
+
   // setMusic(Music);
   // console.log(Music);
   // console.log(music);
   // console.log(music[0].mname);
-  if (!Music || Music.length === 0) {
+  if (!music || music.length === 0) {
     return <div>No music list available.</div>;
   }
   return (
     <>
-      {Music.map((music) => (
-        <MTitle key={music.mno} onClick={() => musicChoice(music.surl)}>
-          {music.mname}
-          {music.singer}
+      {music.map((m) => (
+        <MTitle key={m.mno} onClick={() => musicChoice(m.surl)}>
+          {m.mname}
+          {m.singer}
         </MTitle>
       ))}
     </>
