@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import YouTubeView from "./youTubeView";
 import PlayListSide from "./playListSide";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import axios from "axios";
 import ConsertAxiosApi from "../../api/ConsertAxios";
@@ -25,11 +25,14 @@ const maxResults = 10;
 // https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=YOUR_CHANNEL_ID&maxResults=5&key=YOUR_API_KEY
 
 // const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playID}&maxResults=${maxResults}&key=${apiKey}`;
-const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videoId}&key=${apiKey}`;
 
 const Consert = () => {
-  const [videos, setVideos] = useState("DPEtmqvaKqY");
+  const [videos, setVideos] = useState("vXfs9LEgXfE");
   const [musicList, setMusicList] = useState([]);
+
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
+
+  const musicChoice = useCallback((videos) => setVideos(videos), []);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -61,7 +64,7 @@ const Consert = () => {
     <>
       <Container>
         <YouTubeView video={videos} />
-        <PlayListSide musicList={musicList} />
+        <PlayListSide musicList={musicList} musicChoice={musicChoice} />
       </Container>
     </>
   );

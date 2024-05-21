@@ -14,7 +14,7 @@ const MTitle = styled.div`
   }
 `;
 
-const MusicDiv = ({ Music }) => {
+const MusicDiv = ({ Music, musicChoice }) => {
   // const [music, setMusic] = useState([]); // 음악 넣을 곳
   // setMusic(Music);
   // console.log(Music);
@@ -26,7 +26,7 @@ const MusicDiv = ({ Music }) => {
   return (
     <>
       {Music.map((music) => (
-        <MTitle key={music.mno}>
+        <MTitle key={music.mno} onClick={() => musicChoice(music.surl)}>
           {music.mname}
           {music.singer}
         </MTitle>
