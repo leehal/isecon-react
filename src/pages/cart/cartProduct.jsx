@@ -67,7 +67,7 @@ const CartProduct = () => {
 
   useEffect(() => {
     const crtProd = async () => {
-      const rsp2 = await CartAxiosApi.cartAllselect(1);
+      const rsp2 = await CartAxiosApi.cartAllselect(uno);
       setCrt(rsp2.data);
     };
     crtProd();
@@ -88,7 +88,7 @@ const CartProduct = () => {
   const cartDeleteSale = async () => {
     alert("결제가 완료 되었습니다.");
     try {
-      const rsp = await CartAxiosApi.cartDeleteSale(cart, 1);
+      const rsp = await CartAxiosApi.cartDeleteSale(cart, uno);
       console.log(rsp.data);
       setIsDel(true);
     } catch (e) {

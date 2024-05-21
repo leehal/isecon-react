@@ -68,7 +68,7 @@ const GoodsDetail = () => {
   const cartInsertProduct = async () => {
     console.log(`프로덕트${option}`);
     try {
-      await ProductAxiosApi.productInsertCart(option, 1);
+      await ProductAxiosApi.productInsertCart(option, uno);
     } catch (e) {
       console.log(e);
     }
@@ -77,7 +77,7 @@ const GoodsDetail = () => {
   const productInsertSale1 = async () => {
     console.log(`세일${option}`);
     try {
-      await ProductAxiosApi.productInsertSale(option, 1);
+      await ProductAxiosApi.productInsertSale(option, uno);
     } catch (e) {
       console.log(e);
     }
