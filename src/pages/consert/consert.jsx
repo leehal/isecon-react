@@ -32,7 +32,10 @@ const Consert = () => {
 
   const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
 
-  const musicChoice = useCallback((videos) => setVideos(videos), []);
+  const musicChoice = useCallback((videos) => {
+    console.log("ddddddddd");
+    setVideos(videos);
+  }, []);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -53,7 +56,7 @@ const Consert = () => {
     };
 
     fetchVideos();
-  }, []);
+  }, [url]);
   return (
     <>
       <Container>

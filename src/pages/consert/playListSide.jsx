@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import ConsertAxiosApi from "../../api/ConsertAxios";
 import PlayListContainer from "./playListContainer";
@@ -63,6 +63,10 @@ const ButtonDiv = styled.div`
 const PlayListSide = ({ musicChoice }) => {
   const [nowConsert, setNowConsert] = useState("allMusic");
   const [selectedOption, setSelectedOption] = useState("");
+
+  const changePlayListSideBar = useCallback((divName) => {
+    setNowConsert(divName);
+  }, []);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
