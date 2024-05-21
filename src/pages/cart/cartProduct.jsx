@@ -51,7 +51,7 @@ const CartProduct = () => {
   const [crt, setCrt] = useState([]); // 장바구니 보기
   const [cart, setCart] = useState([]); // 장바구니 결제
   const [isDel, setIsDel] = useState(false); // 장바구니 삭제
-  const [catdelsal, setCatdelsal] = useState();
+  const [catdelsal, setCatdelsal] = useState(); // 장바구니 삭제 시 결제내역 넘김
 
   const CartCheck = (e) => {
     setCart([...cart, e.target.value]);
@@ -64,7 +64,6 @@ const CartProduct = () => {
   useEffect(() => {
     const crtProd = async () => {
       const rsp2 = await CartAxiosApi.cartAllselect(1);
-      console.log(rsp2.data);
       setCrt(rsp2.data);
     };
     crtProd();
@@ -72,8 +71,8 @@ const CartProduct = () => {
   }, [isDel]);
 
   const cartDelete = async (cno) => {
+    console.log(cno);
     try {
-      console.log(cno);
       const rsp = await CartAxiosApi.cartDelete(cno);
       console.log(rsp.data);
       setIsDel(true);
@@ -83,16 +82,13 @@ const CartProduct = () => {
   };
 
   const cartDeleteSale = async () => {
+    console.log(cart);
     try {
-      const uno = 1;
-      const rsp = await CartAxiosApi.cartDeleteSale(cart, uno);
+      const rsp = await CartAxiosApi.cartDeleteSale(cart, 1);
       console.log(rsp.data);
-      setCatdelsal(rsp.data);
-      setIsDel(true);
     } catch (e) {
       console.log(e);
     }
-    alert(cart);
   };
 
   return (

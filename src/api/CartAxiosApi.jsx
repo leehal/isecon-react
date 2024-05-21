@@ -12,14 +12,13 @@ const CartAxiosApi = {
     return await axios.post(ISECON_URL + Cart_URL + `/deletecart/${cno}`);
   },
 
-  cartDeleteSale: async (cno, uno) => {
+  cartDeleteSale: async (cno1, uno) => {
+    console.log(uno);
     const id = {
-      cno: cno,
+      cnoList: cno1,
+      uno: uno,
     };
-    return await axios.post(
-      ISECON_URL + Cart_URL + `/cartdeletesale${uno}`,
-      id
-    );
+    return await axios.post(ISECON_URL + Cart_URL + `/cartdeletesale`, id);
   },
 };
 
