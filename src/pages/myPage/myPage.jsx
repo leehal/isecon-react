@@ -149,6 +149,16 @@ const MypageMap = () => {
       option: "E. 고세구",
       date: "2024. 05. 16",
     },
+    {
+      name: "이세계 아이돌 - 04 스마트톡",
+      option: "E. 고세구",
+      date: "2024. 05. 16",
+    },
+    {
+      name: "이세계 아이돌 - 04 스마트톡",
+      option: "E. 고세구",
+      date: "2024. 05. 16",
+    },
   ];
   const mypa = mp.map((pa) => (
     <Sellbox>
