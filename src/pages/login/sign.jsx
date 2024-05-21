@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import SignAxiosApi from "../../api/SignUpAxios";
 
 const Container = styled.div`
   position: relative;
@@ -29,22 +30,25 @@ const SignInput = styled.div`
   align-items: center;
 
   label {
-    margin-bottom: 70px;
+    margin-bottom: 80px;
   }
   input {
     position: absolute;
     display: flex;
-    right: 5%;
-    width: 90%;
+    right: 8%;
+    width: 85%;
     height: 50px;
     border: none;
     border-bottom: 2px solid #ccc;
     font-size: 20px;
   }
+  ::placeholder {
+    color: #b4b4b4;
+    font-weight: 600;
+  }
 `;
 const SignImg = styled.div`
   position: absolute;
-  background: red;
   width: 63%;
   height: 100%;
   left: 0;
@@ -58,40 +62,66 @@ const SignImg = styled.div`
 `;
 const OkBtn = styled.div`
   position: absolute;
-  bottom: 5%;
-  right: 7%;
-  width: 150px;
+  bottom: 10%;
+  right: 3%;
+  width: 30%;
   height: 50px;
-  background: red;
+  background: rgb(228, 66, 123);
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
 `;
 const NoBtn = styled.div`
   position: absolute;
+  color: #000;
   bottom: 5%;
-  right: 20%;
-  width: 150px;
-  height: 50px;
-  background: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-`;
+  right: 10%;
+  font-size: 15px;
+  color: #8f8f8f;
 
+  &:hover {
+    border-bottom: 1px solid #bdbdbd;
+    cursor: pointer;
+  }
+`;
 const Signup = () => {
+  const Navigate = useNavigate("");
   const [inputId, setinputId] = useState("");
   const [inputPwd, setInputPwd] = useState("");
   const [inputNickName, setInputNickName] = useState("");
   const [inputPhone, setInputPhone] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
+
+  const clickSave = async (e) => {
+    try {
+      const rsp = await SignAxiosApi.memberReg(
+        inputId,
+        inputPwd,
+        inputNickName,
+        inputPhone,
+        inputAddress
+      );
+      if (rsp.data) {
+        alert("성공.");
+        Navigate("/");
+      } else {
+        alert("회원 가입에 실패 했습니다.");
+      }
+    } catch (e) {
+      // 서버가 응답하지 않는 경우
+      console.log(e);
+    }
+  };
+
+  const clickNo = () => {
+    Navigate("/");
+  };
 
   const signId = (e) => {
     setinputId(e.target.value);
@@ -105,8 +135,10 @@ const Signup = () => {
   const signPhone = (e) => {
     setInputPhone(e.target.value);
   };
+  const signAddress = (e) => {
+    setInputAddress(e.target.value);
+  };
 
-  const Navigate = useNavigate("");
   return (
     <Container>
       <img src="img/Rectangle409.png" alt="Rectangle409" />
@@ -123,18 +155,16 @@ const Signup = () => {
               type="text"
               value={inputId}
               onChange={signId}
-              placeholder="id"
+              placeholder="아이디"
             />
-            <button>확인</button>
           </label>
           <label>
             <input
               type="text"
               value={inputPwd}
               onChange={signPwd}
-              placeholder="pwd"
+              placeholder="비밀번호"
             />
-            <button>확인</button>
           </label>
           <label>
             <input
@@ -143,7 +173,6 @@ const Signup = () => {
               onChange={signNickName}
               placeholder="닉네임"
             />
-            <button>확인</button>
           </label>
           <label>
             <input
@@ -152,11 +181,20 @@ const Signup = () => {
               onChange={signPhone}
               placeholder="전화번호"
             />
-            <button>확인</button>
+          </label>
+          <label>
+            <input
+              type="text"
+              value={inputAddress}
+              onChange={signAddress}
+              placeholder="주소"
+            />
           </label>
         </SignInput>
-        <OkBtn>가입</OkBtn>
-        <NoBtn>취소</NoBtn>
+        <OkBtn onClick={clickSave}>회원가입</OkBtn>
+        <NoBtn onClick={clickNo}>
+          이미 계정이 있으신가요? <span>로그인</span>
+        </NoBtn>
       </SignBox>
     </Container>
   );

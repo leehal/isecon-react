@@ -1,9 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext(null);
 
 const UserStore = (props) => {
   const [pname, setPname] = useState("");
   const [uno, setUno] = useState("");
+
+  useEffect =
+    (() => {
+      localStorage.setItem("uno");
+    },
+    [uno]);
 
   return (
     <UserContext.Provider

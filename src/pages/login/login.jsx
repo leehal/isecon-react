@@ -44,25 +44,40 @@ const LoginInput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 1px 3px 1px #dadce0;
   label {
-    margin-bottom: 70px;
+    margin-bottom: 80px;
   }
   input {
     position: absolute;
     display: flex;
-    right: 5%;
-    width: 90%;
+    right: 8%;
+    width: 85%;
     height: 50px;
     border: none;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 3px solid #e0e0e0;
     font-size: 20px;
+    font-weight: 500;
+  }
+  ::placeholder {
+    color: #b4b4b4;
+    font-weight: 600;
   }
 `;
+
+const TestBox = styled.div`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  flex-direction: column;
+`;
+
 const LoginIcon = styled.div`
   position: absolute;
   width: 100%;
   height: 100px;
-  bottom: 8%;
+  bottom: 3%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,48 +86,48 @@ const Kicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   margin: 0 20px;
   border-radius: 30px;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
-
+  cursor: pointer;
+  background: rgb(255, 233, 0);
   img {
-    width: 60px;
-    height: 70px;
+    width: 45px;
+    height: auto;
   }
 `;
 const Gicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   margin: 0 20px;
   border-radius: 30px;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
+  cursor: pointer;
 
   img {
-    width: 60px;
-    height: 70px;
+    width: 55px;
+    height: auto;
   }
 `;
 const Nicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   margin: 0 20px;
   border-radius: 30px;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
-
+  cursor: pointer;
+  background: rgb(0, 199, 60);
   img {
-    width: 60px;
-    height: 70px;
+    width: 45px;
+    height: auto;
   }
 `;
 const LoginBtn = styled.button`
@@ -120,16 +135,35 @@ const LoginBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 25%;
+  bottom: 27%;
   width: 90%;
   height: 50px;
   border: none;
   border-radius: 10px;
   color: #fff;
   font-size: 15px;
+  cursor: pointer;
   background: rgb(228, 66, 123);
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    transform: translate(1.1);
+    background: rgb(245, 126, 167);
+    box-shadow: 1px 2px 3px 1px #c6c6ca;
+  }
 `;
-const SignBtn = styled.button``;
+const SignBtn = styled.div`
+  cursor: pointer;
+  position: absolute;
+  bottom: 22%;
+  font-size: 15px;
+  font-weight: 600;
+  color: #b8b8b8;
+
+  &:hover {
+    color: #ccc;
+  }
+`;
 
 const LOGIN = () => {
   const navigate = useNavigate();
@@ -182,24 +216,28 @@ const LOGIN = () => {
             />
           </LoginImg>
           <LoginInput>
-            <label>
-              <input
-                type="text"
-                value={id}
-                onChange={changeId}
-                placeholder="id"
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                value={pwd}
-                onChange={changePwd}
-                placeholder="pwd"
-              />
-            </label>
+            <TestBox>
+              <label>
+                <input
+                  type="text"
+                  value={id}
+                  onChange={changeId}
+                  placeholder="아이디"
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  value={pwd}
+                  onChange={changePwd}
+                  placeholder="비밀번호"
+                />
+              </label>
+            </TestBox>
             <LoginBtn onClick={onClickLogin}>로그인</LoginBtn>
-            <SignBtn onClick={onClickSignUp}>회원가입</SignBtn>
+            <SignBtn onClick={onClickSignUp}>
+              새로운 계정을 만들까요? 회원가입
+            </SignBtn>
             <LoginIcon>
               <Kicon>
                 <img src="img/Kicon.png" alt="" />
