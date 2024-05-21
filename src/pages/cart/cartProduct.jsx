@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CartAxiosApi from "../../api/CartAxiosApi";
 import ProductAxiosApi from "../../api/ProductAxios";
+import { UserContext } from "../../UserStore";
 
 const Cartproduct = styled.div`
   display: flex;
@@ -53,6 +54,9 @@ const CartProduct = () => {
   const [isDel, setIsDel] = useState(false); // 장바구니 삭제
   const [catdelsal, setCatdelsal] = useState(); // 장바구니 삭제 시 결제내역 넘김
 
+  const context = useContext(UserContext);
+  const { uno } = context;
+
   const CartCheck = (e) => {
     setCart([...cart, e.target.value]);
   };
@@ -82,7 +86,7 @@ const CartProduct = () => {
   };
 
   const cartDeleteSale = async () => {
-    console.log(cart);
+    alert("결제가 완료 되었습니다.");
     try {
       const rsp = await CartAxiosApi.cartDeleteSale(cart, 1);
       console.log(rsp.data);

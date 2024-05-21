@@ -44,11 +44,10 @@ const GoodsDetail = () => {
   const [dtl, setDtl] = useState([]);
   const [proImg, setProImg] = useState();
   const [prodImg, setProdImg] = useState();
-  const [insert, setInsert] = useState();
   const [option, setOption] = useState();
 
   const context = useContext(UserContext);
-  const { pname } = context;
+  const { pname, uno } = context;
 
   useEffect(() => {
     const productDetail = async () => {
@@ -65,10 +64,20 @@ const GoodsDetail = () => {
   const optionSelect = (e) => {
     setOption(e.target.value);
   };
+
   const cartInsertProduct = async () => {
-    alert(option);
+    console.log(`프로덕트${option}`);
     try {
-      const rsp = await ProductAxiosApi.productInsertCart(option, 1);
+      await ProductAxiosApi.productInsertCart(option, 1);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const productInsertSale1 = async () => {
+    console.log(`세일${option}`);
+    try {
+      await ProductAxiosApi.productInsertSale(option, 1);
     } catch (e) {
       console.log(e);
     }
@@ -88,6 +97,9 @@ const GoodsDetail = () => {
           </select>
           <button type="button" onClick={cartInsertProduct}>
             장바구니 넣기
+          </button>
+          <button type="button" onClick={productInsertSale1}>
+            바로 구매
           </button>
           <Pdimg url={prodImg}></Pdimg>
         </Banner>
