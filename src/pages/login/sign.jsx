@@ -77,6 +77,15 @@ const OkBtn = styled.div`
   font-size: 16px;
   font-weight: 500;
 `;
+const Textbox = styled.div`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  flex-direction: column;
+  top: 8%;
+`;
+
 const NoBtn = styled.div`
   position: absolute;
   color: #000;
@@ -150,46 +159,48 @@ const Signup = () => {
           />
         </SignImg>
         <SignInput>
-          <label>
-            <input
-              type="text"
-              value={inputId}
-              onChange={signId}
-              placeholder="아이디"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={inputPwd}
-              onChange={signPwd}
-              placeholder="비밀번호"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={inputNickName}
-              onChange={signNickName}
-              placeholder="닉네임"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={inputPhone}
-              onChange={signPhone}
-              placeholder="전화번호"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={inputAddress}
-              onChange={signAddress}
-              placeholder="주소"
-            />
-          </label>
+          <Textbox>
+            <label>
+              <input
+                type="text"
+                value={inputId}
+                onChange={signId}
+                placeholder="아이디"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={inputPwd}
+                onChange={signPwd}
+                placeholder="비밀번호"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={inputNickName}
+                onChange={signNickName}
+                placeholder="닉네임"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={inputPhone}
+                onChange={signPhone}
+                placeholder="전화번호"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={inputAddress}
+                onChange={signAddress}
+                placeholder="주소"
+              />
+            </label>
+          </Textbox>
         </SignInput>
         <OkBtn onClick={clickSave}>회원가입</OkBtn>
         <NoBtn onClick={clickNo}>
