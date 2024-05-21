@@ -55,13 +55,18 @@ const ButtonDiv = styled.div`
   width: 100%;
   height: 30%;
 
-  option[value=""][disabled] {
+  /* option[value=""][disabled] {
     display: none;
-  }
+  } */
 `;
 
 const PlayListSide = ({ musicChoice }) => {
-  const [nowConsert, setNowConsert] = useState("PlayListContainer");
+  const [nowConsert, setNowConsert] = useState("allMusic");
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <>
@@ -70,12 +75,14 @@ const PlayListSide = ({ musicChoice }) => {
         <SearchBar>
           <input type="text" placeholder="검색" />
         </SearchBar>
-        <PlayListContainer musicChoice={musicChoice} />
+        <PlayListContainer musicChoice={musicChoice} nowConsert={nowConsert} />
         <ButtonBar>
           <ButtonDiv>
-            <button>플레이리스트</button>
-            <select placeholder="정렬">
-              <option value="" disabled selected>
+            <button onClick={() => setNowConsert("playList")}>
+              플레이리스트
+            </button>
+            <select value={selectedOption} onChange={handleChange}>
+              <option value="" disabled>
                 정렬
               </option>
               <option value="가수">가수</option>

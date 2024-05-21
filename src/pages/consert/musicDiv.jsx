@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ConsertAxiosApi from "../../api/ConsertAxios";
+import { UserContext } from "../../UserStore";
 
 const MTitle = styled.div`
   background-color: #80808060;
@@ -15,25 +16,31 @@ const MTitle = styled.div`
   }
 `;
 
-const MusicDiv = ({ musicChoice }) => {
+const MusicDiv = ({ musicChoice, nowConsert }) => {
   const [music, setMusic] = useState([]); // 음악 넣을 곳
+  const [listData, setListData] = useState("");
+
+  const context = useContext(UserContext);
+  const { uno } = context;
 
   useEffect(() => {
-    const MusicList = async () => {
+    const MusicList = async (viewListData) => {
       try {
-        const rsp = await ConsertAxiosApi.conAllMusic();
-        setMusic(rsp.data);
+        if (viewListData === "allMusic") {
+          const rsp = await ConsertAxiosApi.conAllMusic();
+          setMusic(rsp.data);
+        } else if (viewListData === "playList") {
+          const rsp = await ConsertAxiosApi.conMyPlayList(1);
+        } else {
+        }
       } catch (e) {
         console.log(e);
       }
     };
-    MusicList();
-  }, []);
+    setListData(nowConsert);
+    MusicList(listData);
+  }, [listData]);
 
-  // setMusic(Music);
-  // console.log(Music);
-  // console.log(music);
-  // console.log(music[0].mname);
   if (!music || music.length === 0) {
     return <div>No music list available.</div>;
   }

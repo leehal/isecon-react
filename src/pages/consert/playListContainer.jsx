@@ -12,13 +12,13 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const PlayListContainer = ({ musicChoice }) => {
+const PlayListContainer = ({ musicChoice, nowConsert }) => {
   const [music, setMusic] = useState([]); // 음악 넣을 곳
 
   return (
     <>
       <Container>
-        <MusicDiv musicChoice={musicChoice}></MusicDiv>
+        <MusicDiv musicChoice={musicChoice} nowConsert={nowConsert}></MusicDiv>
       </Container>
     </>
   );
