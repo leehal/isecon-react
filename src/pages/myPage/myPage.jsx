@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyPageAxiosApi from "../../api/MyPageAxios";
-import { UserContext } from "../../UserStore";
+import UserStore, { UserContext } from "../../UserStore";
 
 const Container = styled.div`
   position: relative;
@@ -124,58 +124,11 @@ const Date = styled.div`
   color: #fff;
 `;
 
-const MypageMap = () => {
-  const mp = [
-    {
-      name: "이세계 아이돌 - 01 페이스 쿠션",
-      option: "A. 아이네",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 01 페이스 쿠션",
-      option: "C. 릴파",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 01 페이스 쿠션",
-      option: "B. 징버거",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 04 스마트톡",
-      option: "A. 아이네",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 04 스마트톡",
-      option: "E. 고세구",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 04 스마트톡",
-      option: "E. 고세구",
-      date: "2024. 05. 16",
-    },
-    {
-      name: "이세계 아이돌 - 04 스마트톡",
-      option: "E. 고세구",
-      date: "2024. 05. 16",
-    },
-  ];
-  const mypa = mp.map((pa) => (
-    <Sellbox>
-      <Title>{pa.name}</Title>
-      <Option>{pa.option}</Option>
-      <Date>{pa.date}</Date>
-    </Sellbox>
-  ));
-  return mypa;
-};
-
 const MyPage = () => {
   const [mypageInfo, setMypageInfo] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sle, setSle] = useState([]);
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -186,13 +139,18 @@ const MyPage = () => {
   };
 
   useEffect(() => {
+    const sleProd = async () => {
+      const rsp = await MyPageAxiosApi.myPageSale(uno);
+      setSle(rsp.data);
+    };
+    sleProd();
+  }, []);
+
+  useEffect(() => {
     console.log(uno);
     const userData = async (uno) => {
       try {
         const response = await MyPageAxiosApi.mypageAll(uno);
-        // axios.get(
-        //   `http://localhost:8125/isecon/users/userinfo?uno=${uno}`
-        // );
         setMypageInfo(response.data);
         setLoading(false);
       } catch (error) {
@@ -231,7 +189,13 @@ const MyPage = () => {
       </Mybox>
       <Mybox2>
         <Userbox2>
-          <MypageMap></MypageMap>
+          {sle.map((sp) => (
+            <Sellbox>
+              <Title>{sp.pname}</Title>
+              <Option>{sp.option}</Option>
+              <Date>{sp.price}</Date>
+            </Sellbox>
+          ))}
         </Userbox2>
       </Mybox2>
     </Container>

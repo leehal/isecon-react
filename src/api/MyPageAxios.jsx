@@ -7,5 +7,9 @@ const MyPageAxiosApi = {
   mypageAll: async (uno) => {
     return await axios.get(ISECON_URL + MY_URL + `/userinfo?uno=${uno}`);
   },
+
+  myPageSale: async (uno) => {
+    return await axios.get(ISECON_URL + `/sale/allsale?uno=${uno}`);
+  },
 };
 export default MyPageAxiosApi;
