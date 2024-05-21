@@ -7,7 +7,7 @@ const UserStore = (props) => {
 
   useEffect =
     (() => {
-      localStorage.setItem("uno");
+      localStorage.setItem("uno", uno);
     },
     [uno]);
 
