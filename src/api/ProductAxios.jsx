@@ -13,6 +13,13 @@ const ProductAxiosApi = {
       ISECON_URL + GOD_URL + `/goodsdetail?pname=${pname}`
     );
   },
+  productInsertCart: async (pno, uno) => {
+    const id = {
+      pno: pno,
+      uno: uno,
+    };
+    return await axios.post(ISECON_URL + GOD_URL + `/goodsdetail`, id);
+  },
 };
 
 export default ProductAxiosApi;

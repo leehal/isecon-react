@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CartAxiosApi from "../../api/CartAxiosApi";
-import ProductAxiosApi from "../../api/GoodsAxios";
+import ProductAxiosApi from "../../api/ProductAxios";
 
 const Cartproduct = styled.div`
   display: flex;
@@ -86,6 +86,7 @@ const CartProduct = () => {
     try {
       const rsp = await CartAxiosApi.cartDeleteSale(cart, 1);
       console.log(rsp.data);
+      setIsDel(true);
     } catch (e) {
       console.log(e);
     }

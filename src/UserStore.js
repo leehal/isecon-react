@@ -10,6 +10,8 @@ const UserStore = (props) => {
       value={{
         pname,
         setPname,
+        uno,
+        setUno,
       }}
     >
       {props.children}

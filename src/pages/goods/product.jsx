@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProductAxiosApi from "../../api/GoodsAxios";
+import ProductAxiosApi from "../../api/ProductAxios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserStore";
