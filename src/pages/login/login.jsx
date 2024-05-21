@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginAxiosApi from "../../api/LoginAxios";
+import { UserContext } from "../../UserStore";
 
 const Container = styled.div`
   position: relative;
@@ -166,6 +167,8 @@ const SignBtn = styled.div`
 `;
 
 const LOGIN = () => {
+  const context = useContext(UserContext);
+  const { setUno } = context;
   const navigate = useNavigate();
   const onClickSignUp = (e) => {
     navigate("/Signup");
@@ -174,9 +177,10 @@ const LOGIN = () => {
     // 로그인을 위해 axios호출
     try {
       const rsp = await LoginAxiosApi.myLogin(id, pwd);
-      console.log(rsp.data);
+      console.log(`uno:${rsp.data}`);
       if (rsp.data !== 0) {
-        localStorage.setItem("uno", rsp.data); // 저장
+        setUno(rsp.data);
+        // 저장
         localStorage.setItem("isLogin", "TRUE");
         navigate("/mypage");
         alert("성공");
@@ -195,11 +199,11 @@ const LOGIN = () => {
 
   const changeId = (e) => {
     setId(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   const changePwd = (e) => {
     setPwd(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   return (

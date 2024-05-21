@@ -3,7 +3,7 @@ export const UserContext = createContext(null);
 
 const UserStore = (props) => {
   const [pname, setPname] = useState("");
-  const [uno, setUno] = useState("");
+  const [uno, setUno] = useState(localStorage.getItem("uno") || "");
   const a = 0;
 
   useEffect(() => {

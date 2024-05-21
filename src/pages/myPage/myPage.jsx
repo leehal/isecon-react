@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import MyPageAxiosApi from "../../api/MyPageAxios";
+import { UserContext } from "../../UserStore";
 
 const Container = styled.div`
   position: relative;
@@ -175,19 +177,22 @@ const MyPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const context = useContext(UserContext);
+  const { uno } = context;
+
   const navigate = useNavigate();
   const myinfo = (e) => {
     navigate("/UserUpdateFrom");
   };
 
   useEffect(() => {
-    const muno = localStorage.getItem("uno");
-    console.log(muno);
+    console.log(uno);
     const userData = async (uno) => {
       try {
-        const response = await axios.get(
-          `http://localhost:8125/isecon/users/userinfo?uno=${uno}`
-        );
+        const response = await MyPageAxiosApi.mypageAll(uno);
+        // axios.get(
+        //   `http://localhost:8125/isecon/users/userinfo?uno=${uno}`
+        // );
         setMypageInfo(response.data);
         setLoading(false);
       } catch (error) {
@@ -195,7 +200,7 @@ const MyPage = () => {
         setLoading(false);
       }
     };
-    userData(muno);
+    userData(uno);
   }, []);
 
   if (loading) {
