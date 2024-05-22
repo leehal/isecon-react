@@ -64,8 +64,8 @@ const PlayListSide = ({ musicChoice }) => {
   const [nowConsert, setNowConsert] = useState("allMusic");
   const [selectedOption, setSelectedOption] = useState("");
 
-  const changePlayListSideBar = useCallback((divName) => {
-    setNowConsert(divName);
+  const changePlayListSideBar = useCallback((nowdiv) => {
+    setNowConsert(nowdiv);
   }, []);
 
   const handleChange = (event) => {
@@ -75,11 +75,15 @@ const PlayListSide = ({ musicChoice }) => {
   return (
     <>
       <Container>
-        <PlHead>ISECON</PlHead>
+        <PlHead onClick={() => setNowConsert("allMusic")}>ISECON</PlHead>
         <SearchBar>
           <input type="text" placeholder="검색" />
         </SearchBar>
-        <PlayListContainer musicChoice={musicChoice} nowConsert={nowConsert} />
+        <PlayListContainer
+          musicChoice={musicChoice}
+          nowConsert={nowConsert}
+          changePlayListSideBar={changePlayListSideBar}
+        />
         <ButtonBar>
           <ButtonDiv>
             <button onClick={() => setNowConsert("playList")}>

@@ -10,5 +10,8 @@ const ConsertAxiosApi = {
   conMyPlayList: async (uno) => {
     return await axios.get(ISECON_URL + CON_URL + `/myplaylist/${uno}`);
   },
+  conMyPlMusic: async (plname, uno) => {
+    return await axios.get(ISECON_URL + CON_URL + `/music/${plname}/${uno}`);
+  },
 };
 export default ConsertAxiosApi;

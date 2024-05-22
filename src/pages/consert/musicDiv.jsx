@@ -16,9 +16,10 @@ const MTitle = styled.div`
   }
 `;
 
-const MusicDiv = ({ musicChoice, nowConsert }) => {
+const MusicDiv = ({ musicChoice, nowConsert, changePlayListSideBar }) => {
   const [music, setMusic] = useState([]); // 음악 넣을 곳
   const [playList, setPlayList] = useState([]); //플리이름 넣는 곳
+  const [plistname, setPlistName] = useState(""); //선택된 플리 이름
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -31,21 +32,31 @@ const MusicDiv = ({ musicChoice, nowConsert }) => {
           setMusic(rsp.data);
           console.log(rsp.data);
         } else if (nowConsert === "playList") {
-          const rsp = await ConsertAxiosApi.conMyPlayList(1);
+          const rsp = await ConsertAxiosApi.conMyPlayList(uno);
           setPlayList(rsp.data);
           console.log(rsp.data);
+        } else if ("playMusic") {
+          const rsp = await ConsertAxiosApi.conMyPlMusic(plistname, uno);
+          setMusic(rsp.data);
         }
       } catch (e) {
         console.log(e);
       }
     };
     MusicList();
-  }, [nowConsert]);
+  }, [nowConsert, plistname]);
+
+  const myPlayMusicList = (e) => {
+    setPlistName(e.target.dataset.plname);
+    console.log(`plname : ${plistname}`);
+    console.log(`e.target.value : ${e.target.dataset.plname}`);
+    changePlayListSideBar("playMusic");
+  };
 
   if (!music || music.length === 0) {
     return <div>No music list available.</div>;
   }
-  if (nowConsert === "allMusic") {
+  if (nowConsert === "allMusic" || nowConsert === "playMusic") {
     return (
       <>
         {music.map((m) => (
@@ -55,15 +66,22 @@ const MusicDiv = ({ musicChoice, nowConsert }) => {
         ))}
       </>
     );
+  } else if (nowConsert === "playList") {
+    // 나의 플레이리스트 목록 보여주기
+    return (
+      <>
+        <MTitle>+ 플레이 리스트 추가</MTitle>
+        {playList.map((p) => (
+          <MTitle
+            key={p.INDEX}
+            data-plname={p.plname}
+            onClick={myPlayMusicList}
+          >
+            {p.plname}
+          </MTitle>
+        ))}
+      </>
+    );
   }
-
-  // 만약 nowConsert가 "playList"이면 아무것도 렌더링하지 않습니다.
-  return (
-    <>
-      {playList.map((p) => (
-        <MTitle key={p.INDEX}>{p.plname}</MTitle>
-      ))}
-    </>
-  );
 };
 export default MusicDiv;
