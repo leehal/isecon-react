@@ -5,15 +5,22 @@ import GoodsDetail from "./goodsdetail";
 import React, { useState, useEffect } from "react";
 import Paging from "./paging";
 import ProductAxiosApi from "../../api/ProductAxios";
+
 const Container = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
   align-content: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
   background-color: pink;
 `;
-
+const Pagingbox = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const Goodsall = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -22,8 +29,7 @@ const Goodsall = styled.div`
   width: 80%;
   height: 100%;
   background-color: hotpink;
-  overflow-y: auto;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const Goods = () => {
@@ -54,12 +60,14 @@ const Goods = () => {
       <Container>
         <Goodsall>
           <ProductMap paginatedData={paginatedData}></ProductMap>
-          <Paging
-            page={currentPage}
-            itemsCountPerPage={pageSize}
-            totalItemsCount={prod.length}
-            onPageChange={handlePageChange}
-          />
+          <Pagingbox>
+            <Paging
+              page={currentPage}
+              itemsCountPerPage={pageSize}
+              totalItemsCount={prod.length}
+              onPageChange={handlePageChange}
+            />
+          </Pagingbox>
         </Goodsall>
       </Container>
     </>
