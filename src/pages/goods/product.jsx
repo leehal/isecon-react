@@ -27,24 +27,14 @@ const Producttext = styled.div`
   width: 90%;
   height: 45%;
 `;
-const ProductMap = () => {
-  const [prod, setProd] = useState([]);
-
-  useEffect(() => {
-    const godProd = async () => {
-      const rsp = await ProductAxiosApi.goodAllproduct();
-      setProd(rsp.data);
-    };
-    godProd();
-  }, []);
-
+const ProductMap = ({ paginatedData }) => {
   const navigate = useNavigate();
 
   const context = useContext(UserContext);
   const { setPname } = context;
   return (
     <>
-      {prod.map((pd) => (
+      {paginatedData.map((pd) => (
         <Productdiv
           onClick={() => {
             navigate(`/goodsdetail`);
