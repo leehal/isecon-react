@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import SignAxiosApi from "../../api/SignUpAxios";
@@ -125,6 +125,7 @@ const Signup = () => {
   // 유효성
   const [idComment, setIdComment] = useState("");
   const [pwdComment, setPwdComment] = useState("");
+  const [sle, setSle] = useState("");
 
   const [isId, setIsId] = useState(false); // 써야하는데 안 씀
   const [isPwd, setIsPwd] = useState(false);
@@ -137,6 +138,10 @@ const Signup = () => {
       // 값이 맞지 않을 때 올바른 형식이 아닙니다 실행, setIsMail = false
       setIdComment("이메일이 올바른 형식이 아닙니다");
       setIsId(false); // 최종 회원가입 시 확인용
+    } else if (!sle) {
+      setIdComment("중복된 이메일 입니다.");
+    } else if (sle) {
+      setIdComment("사용가능한 이메일 입니다.");
     } else {
       setIdComment("올바른 형식입니다."); // 값이 맞으면 올바른 형식 실행
       setIsId(true); // 최종 회원가입 시 확인용
@@ -156,6 +161,15 @@ const Signup = () => {
       setIsPwd(true); // 최종 회원가입 시 확인용
     }
   };
+
+  useEffect(() => {
+    const checkSign = async (inputId) => {
+      const rsp = await SignAxiosApi.cheackDpe(inputId);
+      setSle(rsp.data);
+      console.log(rsp.data);
+    };
+    checkSign(inputId);
+  }, [inputId]);
 
   const clickSave = async (e) => {
     e.preventDefault(); // 폼의 기본 동작인 페이지 새로고침 방지
@@ -182,6 +196,14 @@ const Signup = () => {
       }
     } else {
       alert("아이디나 비밀번호 형식을 확인해주세요.");
+    }
+  };
+
+  const checkTrueId = (e) => {
+    if (sle) {
+      alert("중복실패");
+    } else {
+      clickSave(e);
     }
   };
 
@@ -245,7 +267,7 @@ const Signup = () => {
             </label>
           </Textbox>
         </SignInput>
-        <OkBtn onClick={clickSave}>회원가입</OkBtn>
+        <OkBtn onClick={checkTrueId}>회원가입</OkBtn>
         <NoBtn onClick={clickNo}>
           이미 계정이 있으신가요? <span>로그인</span>
         </NoBtn>

@@ -14,5 +14,14 @@ const SignAxiosApi = {
     };
     return await axios.post(ISECON_URL + MY_URL + "/userSignup", signup);
   },
+  cheackDpe: async (id) => {
+    const cheacksign = {
+      id: id,
+    };
+    return await axios.post(
+      ISECON_URL + MY_URL + "/checkDuplicate",
+      cheacksign
+    );
+  },
 };
 export default SignAxiosApi;
