@@ -96,6 +96,8 @@ function UserUpdateFrom() {
       if (rsp.data) {
         alert("저장완료");
         navigate("/myPage");
+      } else {
+        alert("입력 제대로 안하냐?");
       }
     } catch (error) {
       console.error("유저 정보 업데이트 에러:", error);
@@ -117,7 +119,6 @@ function UserUpdateFrom() {
               onChange={changeNickName}
               placeholder="닉네임"
             />
-            <button>확인</button>
           </label>
           <label>
             <StyledInput
@@ -126,7 +127,6 @@ function UserUpdateFrom() {
               onChange={changePwd}
               placeholder="PWD"
             />
-            <button></button>
           </label>
           <label>
             <StyledInput
@@ -135,7 +135,6 @@ function UserUpdateFrom() {
               onChange={changePhone}
               placeholder="전화번호"
             />
-            <button>확인</button>
           </label>
           <label>
             <StyledInput

@@ -99,6 +99,21 @@ const NoBtn = styled.div`
     cursor: pointer;
   }
 `;
+const IdError = styled.div`
+  color: ${({ isMail }) => (isMail ? `green` : `red`)};
+  position: absolute;
+  right: 10%;
+  top: 26%;
+  font-size: 13px;
+`;
+const PwdError = styled.div`
+  color: ${({ isMail }) => (isMail ? `green` : `red`)};
+  position: absolute;
+  right: 10%;
+  top: 62%;
+  font-size: 13px;
+`;
+
 const Signup = () => {
   const Navigate = useNavigate("");
   const [inputId, setinputId] = useState("");
@@ -107,45 +122,71 @@ const Signup = () => {
   const [inputPhone, setInputPhone] = useState("");
   const [inputAddress, setInputAddress] = useState("");
 
+  // 유효성
+  const [idComment, setIdComment] = useState("");
+  const [pwdComment, setPwdComment] = useState("");
+
+  const [isId, setIsId] = useState(false); // 써야하는데 안 씀
+  const [isPwd, setIsPwd] = useState(false);
+
+  const onChangeId = (e) => {
+    // 함수 생성
+    setinputId(e.target.value); // 이벤트가 발생한 곳의 값을 가져옴
+    const idRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; // 유효성 검사
+    if (!idRegex.test(e.target.value)) {
+      // 값이 맞지 않을 때 올바른 형식이 아닙니다 실행, setIsMail = false
+      setIdComment("이메일이 올바른 형식이 아닙니다");
+      setIsId(false); // 최종 회원가입 시 확인용
+    } else {
+      setIdComment("올바른 형식입니다."); // 값이 맞으면 올바른 형식 실행
+      setIsId(true); // 최종 회원가입 시 확인용
+    }
+  };
+
+  const onChangePwd = (e) => {
+    // 함수 생성
+    setInputPwd(e.target.value); // 이벤트가 발생한 곳의 값을 가져옴
+    const pwdRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/; // 유효성 검사
+    if (!pwdRegex.test(e.target.value)) {
+      // 값이 맞지 않을 때 올바른 형식이 아닙니다 실행, setIsMail = false
+      setPwdComment("숫자+영문자 조합으로 8자리 이상 입력해주세요");
+      setIsPwd(false); // 최종 회원가입 시 확인용
+    } else {
+      setPwdComment("안전한 비밀번호 입니다"); // 값이 맞으면 올바른 형식 실행
+      setIsPwd(true); // 최종 회원가입 시 확인용
+    }
+  };
+
   const clickSave = async (e) => {
-    try {
-      const rsp = await SignAxiosApi.memberReg(
-        inputId,
-        inputPwd,
-        inputNickName,
-        inputPhone,
-        inputAddress
-      );
-      if (rsp.data) {
-        alert("성공.");
-        Navigate("/");
-      } else {
-        alert("회원 가입에 실패 했습니다.");
+    e.preventDefault(); // 폼의 기본 동작인 페이지 새로고침 방지
+
+    // 아이디와 비밀번호의 유효성 검사를 통과했는지 확인
+    if (isId && isPwd) {
+      try {
+        const rsp = await SignAxiosApi.memberReg(
+          inputId,
+          inputPwd,
+          inputNickName,
+          inputPhone,
+          inputAddress
+        );
+        if (rsp.data) {
+          alert("회원 가입 성공");
+          Navigate("/");
+        } else {
+          alert("회원 가입에 실패 했습니다.");
+        }
+      } catch (error) {
+        console.log(error);
+        alert("회원 가입에 실패 했습니다. 서버에 문제가 있을 수 있습니다.");
       }
-    } catch (e) {
-      // 서버가 응답하지 않는 경우
-      console.log(e);
+    } else {
+      alert("아이디나 비밀번호 형식을 확인해주세요.");
     }
   };
 
   const clickNo = () => {
     Navigate("/");
-  };
-
-  const signId = (e) => {
-    setinputId(e.target.value);
-  };
-  const signPwd = (e) => {
-    setInputPwd(e.target.value);
-  };
-  const signNickName = (e) => {
-    setInputNickName(e.target.value);
-  };
-  const signPhone = (e) => {
-    setInputPhone(e.target.value);
-  };
-  const signAddress = (e) => {
-    setInputAddress(e.target.value);
   };
 
   return (
@@ -162,25 +203,27 @@ const Signup = () => {
           <Textbox>
             <label>
               <input
-                type="text"
-                value={inputId}
-                onChange={signId}
-                placeholder="아이디"
+                type="email" // 타입이 이메일
+                value={inputId} // e.target.value
+                onChange={onChangeId} // setinputId 함수 내의 값 넣음
+                placeholder="아이디" // 기본값
               />
             </label>
+            <IdError isMail={isId}>{idComment}</IdError>
             <label>
               <input
-                type="text"
+                type="password"
                 value={inputPwd}
-                onChange={signPwd}
+                onChange={onChangePwd}
                 placeholder="비밀번호"
               />
             </label>
+            <PwdError isMail={isPwd}>{pwdComment}</PwdError>
             <label>
               <input
                 type="text"
                 value={inputNickName}
-                onChange={signNickName}
+                onChange={(e) => setInputNickName(e.target.value)}
                 placeholder="닉네임"
               />
             </label>
@@ -188,7 +231,7 @@ const Signup = () => {
               <input
                 type="text"
                 value={inputPhone}
-                onChange={signPhone}
+                onChange={(e) => setInputPhone(e.target.value)}
                 placeholder="전화번호"
               />
             </label>
@@ -196,7 +239,7 @@ const Signup = () => {
               <input
                 type="text"
                 value={inputAddress}
-                onChange={signAddress}
+                onChange={(e) => setInputAddress(e.target.value)}
                 placeholder="주소"
               />
             </label>

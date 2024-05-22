@@ -75,24 +75,24 @@ const HeadBox = () => {
   `;
 
   const MenuAfter = styled.div`
-    position: relative;
-    width: 100%;
-    height: auto;
-    img {
-      width: 100%;
-      height: auto;
-      position: absolute;
-      right: 10%;
-    }
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    background: gray;
+    right: -20%;
+    top: -90%;
+    transform: rotate(-40deg);
+    /* border-radius: 100px; */
   `;
   const MenuT = styled.div`
-    position: absolute;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100px;
     height: 200px;
-    background: red;
+    top: 55%;
+    left: 17%;
+    background: red; */
   `;
   const MyPage = styled.div`
     font-size: 20px;
@@ -123,7 +123,6 @@ const HeadBox = () => {
           <img src="img/menubar.png" alt="" />
         </MenuBar>
         <MenuAfter>
-          <img src="img/circle.png" alt="" />
           <MenuT>
             <MyPage>마이페이지</MyPage>
             <Cart>장바구니</Cart>
