@@ -10,7 +10,7 @@ const Container = styled.div`
   height: 100vh;
   width: 78vw;
   background-color: royalblue;
-  margin: 0%;
+  margin: 0;
 `;
 
 const VideoView = styled.div`
@@ -23,14 +23,18 @@ const YouTubeView = ({ video }) => {
   return (
     <>
       <Container>
-        <YouTube
-          videoId={video}
-          opts={{
-            playerVars: {
-              autoplay: 1,
-            },
-          }}
-        ></YouTube>
+        <VideoView>
+          <YouTube
+            videoId={video}
+            opts={{
+              playerVars: {
+                autoplay: 1,
+              },
+              width: "100%",
+              height: "951px",
+            }}
+          />
+        </VideoView>
       </Container>
     </>
   );
