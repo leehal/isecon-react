@@ -38,7 +38,7 @@ const Goods = () => {
     godProd();
   }, []);
 
-  const pageSize = 5;
+  const pageSize = 12;
 
   const paginatedData = prod.slice(
     (currentPage - 1) * pageSize,
@@ -57,7 +57,7 @@ const Goods = () => {
           <Paging
             page={currentPage}
             itemsCountPerPage={pageSize}
-            totalItemsCount={ProductMap.length}
+            totalItemsCount={prod.length}
             onPageChange={handlePageChange}
           />
         </Goodsall>
