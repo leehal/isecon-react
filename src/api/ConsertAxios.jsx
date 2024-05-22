@@ -13,5 +13,13 @@ const ConsertAxiosApi = {
   conMyPlMusic: async (plname, uno) => {
     return await axios.get(ISECON_URL + CON_URL + `/music/${plname}/${uno}`);
   },
+  conPlInsert: async (mnoList, uno, plname) => {
+    const plInsertVo = {
+      mnoList: mnoList,
+      uno: uno,
+      plname: plname,
+    };
+    return await axios.post(ISECON_URL + CON_URL + "/insertpl", plInsertVo);
+  },
 };
 export default ConsertAxiosApi;

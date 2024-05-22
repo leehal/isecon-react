@@ -32,6 +32,7 @@ const YouTubeView = ({ video }) => {
               },
               width: "100%",
               height: "951px",
+              // height: "100%",
             }}
           />
         </VideoView>

@@ -24,23 +24,23 @@ const PlHead = styled.div`
   justify-content: center;
 `;
 
-const SearchBar = styled.div`
-  background-color: black;
-  width: 100%;
-  height: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  input {
-    border-radius: 5%;
-    background-color: gray;
-    width: 70%;
-    color: white;
-    ::placeholder {
-      color: white;
-    }
-  }
-`;
+// const SearchBar = styled.div`
+//   background-color: black;
+//   width: 100%;
+//   height: 5%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   input {
+//     border-radius: 5%;
+//     background-color: gray;
+//     width: 70%;
+//     color: white;
+//     ::placeholder {
+//       color: white;
+//     }
+//   }
+// `;
 
 const ButtonBar = styled.div`
   background-color: black;
@@ -76,9 +76,9 @@ const PlayListSide = ({ musicChoice }) => {
     <>
       <Container>
         <PlHead onClick={() => setNowConsert("allMusic")}>ISECON</PlHead>
-        <SearchBar>
+        {/* <SearchBar>
           <input type="text" placeholder="검색" />
-        </SearchBar>
+        </SearchBar> */}
         <PlayListContainer
           musicChoice={musicChoice}
           nowConsert={nowConsert}
