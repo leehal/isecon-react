@@ -40,6 +40,7 @@ const Producttext = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const ProductMap = ({ paginatedData }) => {
   const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ const ProductMap = ({ paginatedData }) => {
   return (
     <>
       {paginatedData.map((pd) => (
-        <ProductdivBox>
+        <ProductdivBox key={pd.pno}>
           <Productdiv
             onClick={() => {
               navigate(`/goodsdetail`);

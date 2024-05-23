@@ -8,9 +8,8 @@ const Container = styled.div`
   display: flex;
   align-content: center;
   justify-content: center;
-  width: 100vw;
-  height: 800vh;
   background-color: pink;
+  height: 100%;
 `;
 
 const Banner = styled.div`
@@ -26,16 +25,16 @@ const Banner = styled.div`
 const Pimg = styled.div`
   width: 80%;
   height: 10%;
-  background-size: 80%;
+  /* background-size: 80%;
   background-repeat: no-repeat;
-  background-image: url(${(props) => props.url});
+  background-image: url(${(props) => props.url}); */
 `;
 
 const Pdimg = styled.div`
   width: 80%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.url});
+  /* background-repeat: no-repeat;
+  background-image: url(${(props) => props.url}); */
 `;
 
 const OPN = styled.option``;
@@ -87,7 +86,9 @@ const GoodsDetail = () => {
     <>
       <Container>
         <Banner>
-          <Pimg url={proImg}></Pimg>
+          <Pimg>
+            <img src={proImg} alt="아무거나 쳐봐" />
+          </Pimg>
           <select onChange={optionSelect}>
             {dtl.map((dt) => (
               <OPN key={dt.pno} value={dt.pno}>
@@ -101,7 +102,9 @@ const GoodsDetail = () => {
           <button type="button" onClick={productInsertSale1}>
             바로 구매
           </button>
-          <Pdimg url={prodImg}></Pdimg>
+          <Pdimg>
+            <img src={prodImg} alt="아무거나 쳐봐" />
+          </Pdimg>
         </Banner>
       </Container>
     </>

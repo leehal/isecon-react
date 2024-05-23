@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import ImageUploader from "../src/pages/test";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Goods from "./pages/goods/goods";
@@ -20,6 +21,7 @@ function App() {
         <GlobalStyle />
         <Router>
           <Routes>
+            <Route path="/test" element={<ImageUploader />} />
             <Route path="/" element={<LOGIN />} />
             <Route path="/goods" element={<Goods />} />
             <Route path="/goodsdetail" element={<GoodsDetail />} />

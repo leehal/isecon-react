@@ -12,7 +12,7 @@ const Container = styled.div`
   height: 100%;
   align-content: center;
   justify-content: center;
-  background-color: pink;
+  /* background-color: pink; */
 `;
 const Pagingbox = styled.div`
   width: 100%;
@@ -28,7 +28,9 @@ const Goodsall = styled.div`
   align-content: space-around;
   width: 80%;
   height: 100%;
-  background-color: hotpink;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background: url("https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/goodsBackground.png?alt=media&token=59af943d-2d79-4f58-ab13-862a7bb78c88");
   gap: 20px;
 `;
 

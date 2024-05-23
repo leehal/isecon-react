@@ -12,14 +12,11 @@ const ImageUploader = () => {
   const handleUploadClick = async () => {
     try {
       const storageRef = storage.ref();
-      const fileRef = storageRef.child(
-        `${"5-2 이세돌 수면 안대 상세페이지"}.jpg`
-      ); // 다운로드시
-      // const fileRef = storageRef.child(file.name); 업로드시
+      const fileRef = storageRef.child(file.name);
 
       // // 파일을 업로드합니다.
-      // await fileRef.put(file);
-      // console.log("File uploaded successfully!");
+      await fileRef.put(file);
+      console.log("File uploaded successfully!");
 
       // 파일의 다운로드 URL을 가져옵니다.
       const downloadURL = await fileRef.getDownloadURL();
