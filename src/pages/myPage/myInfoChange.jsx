@@ -97,7 +97,7 @@ function UserUpdateFrom() {
         alert("저장완료");
         navigate("/myPage");
       } else {
-        alert("입력 제대로 안하냐?");
+        alert("저장이 안됬음");
       }
     } catch (error) {
       console.error("유저 정보 업데이트 에러:", error);

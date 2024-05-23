@@ -138,12 +138,15 @@ const Signup = () => {
       // 값이 맞지 않을 때 올바른 형식이 아닙니다 실행, setIsMail = false
       setIdComment("이메일이 올바른 형식이 아닙니다");
       setIsId(false); // 최종 회원가입 시 확인용
-    } else if (!sle) {
-      setIdComment("중복된 이메일 입니다.");
-    } else if (sle) {
-      setIdComment("사용가능한 이메일 입니다.");
+      // } else if (!sle) {
+      //   setIdComment("사용가능한 이메일 입니다.");
+      //   setIsId(true); // 최종 회원가입 시 확인용
+      // } else if (sle) {
+      //   setIdComment("중복된 이메일 입니다.");
+      // setIsId(false);
     } else {
       setIdComment("올바른 형식입니다."); // 값이 맞으면 올바른 형식 실행
+      checkSign(e.target.value);
       setIsId(true); // 최종 회원가입 시 확인용
     }
   };
@@ -162,14 +165,22 @@ const Signup = () => {
     }
   };
 
-  useEffect(() => {
-    const checkSign = async (inputId) => {
-      const rsp = await SignAxiosApi.cheackDpe(inputId);
-      setSle(rsp.data);
-      console.log(rsp.data);
-    };
-    checkSign(inputId);
-  }, [inputId]);
+  // useEffect(() => {
+  const checkSign = async (inputId) => {
+    const rsp = await SignAxiosApi.cheackDpe(inputId);
+    setSle(rsp.data);
+    console.log(rsp.data);
+    if (rsp.data) {
+      setIdComment("사용가능한 이메일 입니다.");
+      //setIsId(true); // 최종 회원가입 시 확인용
+    } else if (!rsp.data) {
+      setIdComment("중복된 이메일 입니다.");
+      // setIsId(false);
+    }
+  };
+  // checkSign(inputId);
+  // console.log(sle);
+  // }, [inputId, sle]);
 
   const clickSave = async (e) => {
     e.preventDefault(); // 폼의 기본 동작인 페이지 새로고침 방지
@@ -201,9 +212,9 @@ const Signup = () => {
 
   const checkTrueId = (e) => {
     if (sle) {
-      alert("중복실패");
-    } else {
       clickSave(e);
+    } else {
+      alert("중복실패");
     }
   };
 
