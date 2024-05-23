@@ -24,79 +24,46 @@ const PlHead = styled.div`
   justify-content: center;
 `;
 
-// const SearchBar = styled.div`
-//   background-color: black;
-//   width: 100%;
-//   height: 5%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   input {
-//     border-radius: 5%;
-//     background-color: gray;
-//     width: 70%;
-//     color: white;
-//     ::placeholder {
-//       color: white;
-//     }
-//   }
-// `;
-
 const ButtonBar = styled.div`
   background-color: black;
   width: 100%;
-  height: 20%;
+  height: 15%;
   position: fixed; /* 고정 위치 설정 */
   bottom: 0; /* 화면의 맨 아래로 설정 */
 `;
 
-const ButtonDiv = styled.div`
-  background-color: violet;
-  width: 100%;
-  height: 30%;
-
-  /* option[value=""][disabled] {
-    display: none;
-  } */
-`;
-
-const PlayListSide = ({ musicChoice }) => {
+const PlayListSide = ({ musicChoice, player, video }) => {
   const [nowConsert, setNowConsert] = useState("allMusic");
-  const [selectedOption, setSelectedOption] = useState("");
 
   const changePlayListSideBar = useCallback((nowdiv) => {
     setNowConsert(nowdiv);
   }, []);
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playPauseBtn = () => {
+    if (player) {
+      if (isPlaying) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   return (
     <>
       <Container>
         <PlHead onClick={() => setNowConsert("allMusic")}>ISECON</PlHead>
-        {/* <SearchBar>
-          <input type="text" placeholder="검색" />
-        </SearchBar> */}
         <PlayListContainer
           musicChoice={musicChoice}
           nowConsert={nowConsert}
           changePlayListSideBar={changePlayListSideBar}
+          video={video}
         />
         <ButtonBar>
-          <ButtonDiv>
-            <button onClick={() => setNowConsert("playList")}>
-              플레이리스트
-            </button>
-            <select value={selectedOption} onChange={handleChange}>
-              <option value="" disabled>
-                정렬
-              </option>
-              <option value="가수">가수</option>
-              <option value="노래">노래</option>
-            </select>
-          </ButtonDiv>
+          <button onClick={playPauseBtn}>{isPlaying ? "Pause" : "Play"}</button>
         </ButtonBar>
       </Container>
     </>

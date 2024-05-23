@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: left;
   height: 100vh;
   width: 78vw;
-  background-color: royalblue;
+  background-color: black;
   margin: 0;
 `;
 
@@ -19,7 +19,7 @@ const VideoView = styled.div`
   position: absolute;
 `;
 
-const YouTubeView = ({ video }) => {
+const YouTubeView = ({ video, onReady }) => {
   return (
     <>
       <Container>
@@ -29,11 +29,15 @@ const YouTubeView = ({ video }) => {
             opts={{
               playerVars: {
                 autoplay: 1,
+                modestbranding: 1, // YouTube 로고를 없애는 옵션
+                rel: 0, // 관련 동영상 표시를 제어
+                showinfo: 0, // 비디오 정보 표시를 제어
+                controls: 0, // 컨트롤 표시 (0: 표시 안함, 1: 표시)
               },
               width: "100%",
               height: "951px",
-              // height: "100%",
             }}
+            onReady={onReady}
           />
         </VideoView>
       </Container>

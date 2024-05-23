@@ -6,7 +6,7 @@ import MusicDiv from "./musicDiv";
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 73%;
+  height: 78%;
   background-color: #36293b;
   overflow-y: auto; /* 수직 스크롤 바를 활성화 */
   flex-direction: column;
@@ -16,6 +16,7 @@ const PlayListContainer = ({
   musicChoice,
   nowConsert,
   changePlayListSideBar,
+  video,
 }) => {
   const [music, setMusic] = useState([]); // 음악 넣을 곳
 
@@ -26,6 +27,7 @@ const PlayListContainer = ({
           musicChoice={musicChoice}
           nowConsert={nowConsert}
           changePlayListSideBar={changePlayListSideBar}
+          video={video}
         ></MusicDiv>
       </Container>
     </>

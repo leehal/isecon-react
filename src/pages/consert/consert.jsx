@@ -28,6 +28,7 @@ const maxResults = 10;
 
 const Consert = () => {
   const [videos, setVideos] = useState("vXfs9LEgXfE");
+  const [player, setPlayer] = useState(null);
   // const [nowConsert, setNowConsert] = useState("PlayListContainer");
 
   const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
@@ -35,6 +36,10 @@ const Consert = () => {
   const musicChoice = useCallback((videos) => {
     console.log("ddddddddd");
     setVideos(videos);
+  }, []);
+
+  const onReady = useCallback((e) => {
+    setPlayer(e.target);
   }, []);
 
   useEffect(() => {
@@ -60,8 +65,12 @@ const Consert = () => {
   return (
     <>
       <Container>
-        <YouTubeView video={videos} />
-        <PlayListSide musicChoice={musicChoice} />
+        <YouTubeView video={videos} onReady={onReady} />
+        <PlayListSide
+          musicChoice={musicChoice}
+          player={player}
+          video={videos}
+        />
       </Container>
     </>
   );
