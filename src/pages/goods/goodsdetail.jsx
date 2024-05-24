@@ -22,12 +22,28 @@ const Banner = styled.div`
   /* background-color: orange; */
 `;
 
-const Pimg = styled.div`
+const ProductBox1 = styled.div`
+  display: flex;
   width: 80%;
-  height: 10%;
+`;
+
+const Pimg = styled.div`
+  width: 28%;
+  background-color: violet;
+  img {
+    width: 100%;
+  }
   /* background-size: 80%;
   background-repeat: no-repeat;
   background-image: url(${(props) => props.url}); */
+`;
+
+const Text = styled.span``;
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  background-color: blue;
 `;
 
 const Pdimg = styled.div`
@@ -86,22 +102,27 @@ const GoodsDetail = () => {
     <>
       <Container>
         <Banner>
-          <Pimg>
-            <img src={proImg} alt="강사님 죄송합니다." />
-          </Pimg>
-          <select onChange={optionSelect}>
-            {dtl.map((dt) => (
-              <OPN key={dt.pno} value={dt.pno}>
-                {dt.option}
-              </OPN>
-            ))}
-          </select>
-          <button type="button" onClick={cartInsertProduct}>
-            장바구니 넣기
-          </button>
-          <button type="button" onClick={productInsertSale1}>
-            바로 구매
-          </button>
+          <ProductBox1>
+            <Pimg>
+              <img src={proImg} alt="강사님 죄송합니다." />
+            </Pimg>
+            <TextBox>
+              <Text>이세계 아이돌 {pname} 1ST POP-UP STORE OFFICAL MD</Text>
+              <select onChange={optionSelect}>
+                {dtl.map((dt) => (
+                  <OPN key={dt.pno} value={dt.pno}>
+                    {dt.option}
+                  </OPN>
+                ))}
+              </select>
+              <button type="button" onClick={cartInsertProduct}>
+                장바구니 넣기
+              </button>
+              <button type="button" onClick={productInsertSale1}>
+                바로 구매
+              </button>
+            </TextBox>
+          </ProductBox1>
           <Pdimg>
             <img src={prodImg} alt="강사님 죄송합니다." />
           </Pdimg>

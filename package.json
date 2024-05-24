@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.6.8",
+    "css-loader": "^7.1.2",
     "firebase": "^10.12.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -14,6 +15,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-youtube": "^10.1.0",
+    "sass": "^1.77.2",
     "styled-components": "^6.1.11",
     "styled-reset": "^4.5.2",
     "web-vitals": "^2.1.0"
