@@ -7,7 +7,7 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   height: 78%;
-  background-color: #36293b;
+  background-color: black;
   overflow-y: auto; /* 수직 스크롤 바를 활성화 */
   flex-direction: column;
 `;

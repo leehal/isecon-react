@@ -10,7 +10,7 @@ const Container = styled.div`
   justify-content: right;
   height: 100vh;
   width: 22vw;
-  background-color: #704a81;
+  background-color: black;
   margin: 0%;
 `;
 
@@ -30,6 +30,13 @@ const ButtonBar = styled.div`
   height: 15%;
   position: fixed; /* 고정 위치 설정 */
   bottom: 0; /* 화면의 맨 아래로 설정 */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  button {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const PlayListSide = ({ musicChoice, player, video }) => {

@@ -7,19 +7,33 @@ const Container = styled.div`
   height: 90%;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
 `;
 
 const MTitle = styled.div`
-  background-color: ${(props) => (props.isActive ? "#d52eff75" : "#80808060")};
+  background-color: ${(props) => (props.isActive ? "#d52eff75" : "black")};
+  margin: 2%;
   color: white;
   display: flex;
-  align-items: center;
+  align-items: left;
   width: 100%;
   height: 60px;
-  border: solid 1px black;
+  padding: 3%;
+  /* border: solid 1px black; */
+  border-radius: 3%;
+  flex-direction: column;
   &:hover {
     background-color: #ee82eeba;
+  }
+  p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 2%;
+  }
+  span {
+    font-size: 0.8rem;
+    color: #e0e0e0;
   }
 `;
 
@@ -44,9 +58,32 @@ const SearchBar = styled.div`
 `;
 
 const ButtonDiv = styled.div`
-  background-color: #ce0aff75;
+  background-color: black;
   width: 100%;
   height: 7%;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+
+  button {
+    margin-top: 10px;
+    background-color: black;
+    width: 100px;
+    height: 40%;
+    color: white;
+    border-radius: 20%;
+    border: black;
+  }
+  select {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: black;
+    width: 50px;
+    height: 40%;
+    color: white;
+    border-radius: 20%;
+    border: black;
+  }
 
   /* option[value=""][disabled] {
     display: none;
@@ -67,7 +104,6 @@ const MusicDiv = ({
   const [selectedOption, setSelectedOption] = useState(""); // select option
   const [upNewPlName, setUpNewPlName] = useState("");
   const [oldPlMusic, setOldPlMusic] = useState([]);
-  const [onCheck, setOnCheck] = useState([]);
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -219,7 +255,8 @@ const MusicDiv = ({
               onClick={() => musicChoice(m.surl)}
               isActive={m.surl === video}
             >
-              {m.mname} {m.singer}
+              <p>{m.mname}</p>
+              <span>{m.singer}</span>
             </MTitle>
           ))}
         </Container>
@@ -293,7 +330,8 @@ const MusicDiv = ({
           {music.map((m) => (
             <MTitle key={m.mno} onClick={(e) => playListCheck(e, m.mno)}>
               <input type="checkbox" value={m.mno} />
-              {m.mname} {m.singer}
+              <p>{m.mname}</p>
+              <span>{m.singer}</span>
             </MTitle>
           ))}
         </Container>
@@ -317,7 +355,8 @@ const MusicDiv = ({
                 onClick={() => musicChoice(m.surl)}
                 isActive={m.surl === video}
               >
-                {m.mname} {m.singer}
+                <p>{m.mname}</p>
+                <span>{m.singer}</span>
               </MTitle>
             ))}
           </Container>
@@ -350,7 +389,8 @@ const MusicDiv = ({
                 checked={isChecked(m.mno)}
                 readOnly
               />
-              {m.mname} {m.singer}
+              <p>{m.mname}</p>
+              <span>{m.singer}</span>
             </MTitle>
           ))}
         </Container>
