@@ -163,13 +163,22 @@ const MusicDiv = ({
 
   const updatePlayList = async () => {
     const finalMnoList = [...mnoList, ...oldPlMusic];
+    let finalPlName = upNewPlName;
+
+    if (finalPlName === "") {
+      finalPlName = plistname;
+    }
+    console.log(`구 플리명 : ${plistname}`);
+    console.log(`현 플리명 : ${finalPlName}`);
+    console.log(`uno : ${uno}`);
+    console.log(`finalMnoList : ${finalMnoList}`);
     const rsp = await ConsertAxiosApi.conPlNameUpdate(
       plistname,
-      upNewPlName,
+      finalPlName,
       uno,
       finalMnoList
     );
-    setPlistName(upNewPlName);
+    // setPlistName(upNewPlName);
     if (rsp) {
       changePlayListSideBar("playList");
       setUpNewPlName(""); // 구 플리이름 초기화
