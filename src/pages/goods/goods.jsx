@@ -8,30 +8,68 @@ import ProductAxiosApi from "../../api/ProductAxios";
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
-  align-content: center;
   justify-content: center;
-  /* background-color: pink; */
+  align-items: center;
+  flex-direction: column;
+  /* background-color: aqua; */
+`;
+
+const Top = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  /* background-color: yellow; */
+`;
+
+const BackgroundBox = styled.div`
+  position: relative;
+  width: 60%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: blueviolet; */
+  img {
+    width: 85%;
+    height: 100%;
+  }
+`;
+const ProductBox = styled.div`
+  width: 75%;
+  height: 80%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: black; */
+`;
+const ProductMapbox = styled.div`
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+  /* background-color: chartreuse; */
 `;
 const Pagingbox = styled.div`
-  width: 100%;
-  height: 20%;
   display: flex;
+  /* background-color: red; */
   align-items: center;
   justify-content: center;
 `;
 const Goodsall = styled.div`
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  top: 7%;
   align-content: space-around;
-  width: 80%;
+  justify-content: space-around;
+  /* background-color: blue; */
+  width: 100%;
   height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background: url("https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/goodsBackground.png?alt=media&token=59af943d-2d79-4f58-ab13-862a7bb78c88");
-  gap: 20px;
 `;
 
 const Goods = () => {
@@ -60,17 +98,28 @@ const Goods = () => {
   return (
     <>
       <Container>
-        <Goodsall>
-          <ProductMap paginatedData={paginatedData}></ProductMap>
-          <Pagingbox>
-            <Paging
-              page={currentPage}
-              itemsCountPerPage={pageSize}
-              totalItemsCount={prod.length}
-              onPageChange={handlePageChange}
-            />
-          </Pagingbox>
-        </Goodsall>
+        <Top>이세계아이돌 굿즈 판매</Top>
+        <BackgroundBox>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/222222222222222222222222.png?alt=media&token=e0331832-d35a-4e83-ab8c-1d78e21a74a6"
+            alt="강사님 죄송합니다."
+          />
+          <ProductBox>
+            <Goodsall>
+              <ProductMapbox>
+                <ProductMap paginatedData={paginatedData}></ProductMap>
+              </ProductMapbox>
+              <Pagingbox>
+                <Paging
+                  page={currentPage}
+                  itemsCountPerPage={pageSize}
+                  totalItemsCount={prod.length}
+                  onPageChange={handlePageChange}
+                />
+              </Pagingbox>
+            </Goodsall>
+          </ProductBox>
+        </BackgroundBox>
       </Container>
     </>
   );

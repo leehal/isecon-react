@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   align-content: center;
   justify-content: center;
-  background-color: pink;
+  /* background-color: pink; */
   height: 100%;
 `;
 
@@ -19,7 +19,7 @@ const Banner = styled.div`
   justify-content: center;
   width: 80%;
   height: 100%;
-  background-color: orange;
+  /* background-color: orange; */
 `;
 
 const Pimg = styled.div`
@@ -50,12 +50,12 @@ const GoodsDetail = () => {
 
   useEffect(() => {
     const productDetail = async () => {
-      const rsp = await ProductAxiosApi.detailProduct(pname);
+      const rsp = await ProductAxiosApi.detailProduct(pname.trim());
       console.log(rsp.data);
       setDtl(rsp.data);
-      setProImg(rsp.data[0].pimg);
-      setProdImg(rsp.data[0].pdimg);
-      setOption(rsp.data[0].pno);
+      setProImg(rsp.data[0]?.pimg);
+      setProdImg(rsp.data[0]?.pdimg);
+      setOption(rsp.data[0]?.pno);
     };
     productDetail();
   }, []);
@@ -87,7 +87,7 @@ const GoodsDetail = () => {
       <Container>
         <Banner>
           <Pimg>
-            <img src={proImg} alt="아무거나 쳐봐" />
+            <img src={proImg} alt="강사님 죄송합니다." />
           </Pimg>
           <select onChange={optionSelect}>
             {dtl.map((dt) => (
@@ -103,7 +103,7 @@ const GoodsDetail = () => {
             바로 구매
           </button>
           <Pdimg>
-            <img src={prodImg} alt="아무거나 쳐봐" />
+            <img src={prodImg} alt="강사님 죄송합니다." />
           </Pdimg>
         </Banner>
       </Container>
