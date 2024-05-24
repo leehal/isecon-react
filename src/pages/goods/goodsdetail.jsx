@@ -19,12 +19,14 @@ const Banner = styled.div`
   justify-content: center;
   width: 80%;
   height: 100%;
-  /* background-color: orange; */
+  /* background-color: navy; */
 `;
 
 const ProductBox1 = styled.div`
   display: flex;
+  justify-content: space-around;
   width: 80%;
+  /* background-color: red; */
 `;
 
 const Pimg = styled.div`
@@ -38,10 +40,15 @@ const Pimg = styled.div`
   background-image: url(${(props) => props.url}); */
 `;
 
-const Text = styled.span``;
+const Text = styled.span`
+  font-size: 24px;
+`;
+
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-content: space-around;
+  justify-content: space-around;
   width: 70%;
   background-color: blue;
 `;
@@ -52,26 +59,70 @@ const Pdimg = styled.div`
   /* background-repeat: no-repeat;
   background-image: url(${(props) => props.url}); */
 `;
+const OPNBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 30%;
+  background-color: orange;
+`;
+const OPNText = styled.div`
+  height: 20%;
+`;
+const OPN = styled.option`
+  font-size: 1em;
+  border-bottom: 1px solid #ccc;
+`;
 
-const OPN = styled.option``;
+const Select = styled.select`
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 16px;
+  margin-bottom: 8px;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  width: 50%;
+  height: 20%;
+  justify-content: space-around;
+  background-color: green;
+`;
+
+const Price = styled.span`
+  text-align: center;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-weight: bold;
+  width: 50%;
+  height: 20%;
+  background-color: yellow;
+`;
 
 const GoodsDetail = () => {
   const [dtl, setDtl] = useState([]);
   const [proImg, setProImg] = useState();
   const [prodImg, setProdImg] = useState();
   const [option, setOption] = useState();
+  const [price, setPrice] = useState();
 
   const context = useContext(UserContext);
   const { pname, uno } = context;
 
   useEffect(() => {
     const productDetail = async () => {
-      const rsp = await ProductAxiosApi.detailProduct(pname.trim());
+      const rsp = await ProductAxiosApi.detailProduct(pname);
       console.log(rsp.data);
       setDtl(rsp.data);
       setProImg(rsp.data[0]?.pimg);
       setProdImg(rsp.data[0]?.pdimg);
       setOption(rsp.data[0]?.pno);
+      setPrice(rsp.data[0]?.price);
     };
     productDetail();
   }, []);
@@ -108,19 +159,25 @@ const GoodsDetail = () => {
             </Pimg>
             <TextBox>
               <Text>이세계 아이돌 {pname} 1ST POP-UP STORE OFFICAL MD</Text>
-              <select onChange={optionSelect}>
-                {dtl.map((dt) => (
-                  <OPN key={dt.pno} value={dt.pno}>
-                    {dt.option}
-                  </OPN>
-                ))}
-              </select>
-              <button type="button" onClick={cartInsertProduct}>
-                장바구니 넣기
-              </button>
-              <button type="button" onClick={productInsertSale1}>
-                바로 구매
-              </button>
+              <OPNBox>
+                <OPNText>옵션 선택</OPNText>
+                <Select onChange={optionSelect}>
+                  {dtl.map((dt) => (
+                    <OPN key={dt.pno} value={dt.pno}>
+                      {dt.option}
+                    </OPN>
+                  ))}
+                </Select>
+              </OPNBox>
+              <Price>{price} 원</Price>
+              <ButtonBox>
+                <button type="button" onClick={cartInsertProduct}>
+                  장바구니 넣기
+                </button>
+                <button type="button" onClick={productInsertSale1}>
+                  바로 구매
+                </button>
+              </ButtonBox>
             </TextBox>
           </ProductBox1>
           <Pdimg>
