@@ -24,7 +24,15 @@ const LoginBox = styled.div`
     height: 100%;
   }
 `;
-const Img = styled.div``;
+const Img = styled.div`
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const LoginImg = styled.div`
   position: absolute;
@@ -45,7 +53,6 @@ const LoginInput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 1px 3px 1px #dadce0;
   label {
     margin-bottom: 80px;
   }
@@ -54,7 +61,7 @@ const LoginInput = styled.div`
     display: flex;
     right: 8%;
     width: 85%;
-    height: 50px;
+    height: 15%;
     border: none;
     border-bottom: 3px solid #e0e0e0;
     font-size: 20px;
@@ -138,7 +145,7 @@ const LoginBtn = styled.button`
   align-items: center;
   bottom: 27%;
   width: 90%;
-  height: 50px;
+  height: 8%;
   border: none;
   border-radius: 10px;
   color: #fff;

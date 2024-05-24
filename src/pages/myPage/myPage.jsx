@@ -4,13 +4,13 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyPageAxiosApi from "../../api/MyPageAxios";
 import UserStore, { UserContext } from "../../UserStore";
+import { storage } from "../../api/firebase";
 
 const Container = styled.div`
   position: relative;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 120vh;
-  background: #fff;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -19,52 +19,69 @@ const Container = styled.div`
 const Mybox = styled.div`
   position: absolute;
   display: flex;
-  width: 80%;
-  height: 35%;
-  top: 15%;
-  background: #fbfbfb;
+  justify-content: center;
+  left: 14%;
+  width: 20%;
+  height: 50%;
+  top: 20%;
+  background: #f3f2f2;
+  box-shadow: 0px 3px 5px -2px #a3a3a3;
 `;
 const Img = styled.div`
   position: absolute;
-  background: yellow;
-  width: 250px;
-  height: 250px;
-  top: 20%;
-  left: 18%;
-  border-radius: 150px;
+  background: #fff;
+  box-shadow: 3px 5px 13px -5px gray;
+  width: 40%;
+  height: 27%;
+  display: flex;
+  left: 50%;
+  transform: translate(-50%);
+  top: 5%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Userbox = styled.div`
   display: flex;
   position: absolute;
-  top: 20%;
-  right: 18%;
-  width: 40%;
-  height: 60%;
+  justify-content: center;
+  align-items: center;
+  top: 40%;
+  width: 100%;
+  height: 30%;
   background: #4f6e9e;
 `;
 const Ptext = styled.div`
   position: absolute;
-  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  font-size: 16px;
   color: #fff;
-  left: 10%;
-  top: 10%;
+  width: 60%;
+  height: 100%;
   line-height: 2;
 `;
 const Button = styled.div`
   position: absolute;
-  bottom: 5%;
-  right: 18%;
-  width: 200px;
-  height: 50px;
+  width: 70%;
+  height: 8%;
   font-size: 20px;
   color: #fff;
   background: #1a345c;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 15%;
   cursor: pointer;
 
   &:hover {
@@ -77,22 +94,23 @@ const Mybox2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: 35%;
-  bottom: 15%;
+  width: 50%;
+  height: 50%;
+  top: 20%;
+  right: 14%;
+  background: #f1f1f1;
+  box-shadow: 0px 3px 5px -2px #a3a3a3;
 `;
 const Userbox2 = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   flex-direction: column;
-  bottom: 0;
-  width: 70%;
-  height: 70%;
-  background: blue;
+  width: 90%;
+  height: 80%;
   overflow-y: auto;
   gap: 10px;
+  background: #fff;
 `;
 
 const Sellbox = styled.div`
@@ -100,35 +118,74 @@ const Sellbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 15%;
-  min-height: 15%;
-  background: #000;
+  width: 100%;
+  height: 40%;
+  min-height: 40%;
+  background: #ffffff;
+  box-shadow: 3px 3px 13px -5px gray;
 `;
 const Title = styled.div`
   position: absolute;
   left: 5%;
-  font-size: 18px;
-  color: #fff;
+  font-size: 20px;
+  color: #000000;
+  font-weight: 600;
 `;
 const Option = styled.div`
   position: absolute;
-  left: 35%;
-  font-size: 18px;
-  color: #fff;
+  left: 25%;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
 `;
 const Date = styled.div`
   position: absolute;
+  right: 40%;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+`;
+const P = styled.div`
+  position: absolute;
   right: 5%;
-  font-size: 18px;
-  color: #fff;
+  font-size: 17px;
 `;
 
 const MyPage = () => {
+  // const onChangeFile = (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   if (selectedFile) {
+  //     setFile(selectedFile);
+  //     setPreviewUrl(URL.cr);
+  //   }
+  // };
+
+  // const onClickProfileEdit = async () => {
+  //   const storageRef = storage.ref();
+  //   let fileRef;
+
+  //   if (file) {
+  //     fileRef = storageRef.child(file.name);
+  //   } else {
+  //     fileRef = storageRef.child("goimg.webp");
+  //   }
+
+  //   try {
+  //     if (file) {
+  //       await fileRef.put(file);
+  //       console.log("파일정상");
+  //     } else {
+  //       const response = await fa;
+  //     }
+  //   } catch {}
+  // };
   const [mypageInfo, setMypageInfo] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [sle, setSle] = useState([]);
+
+  const [file, setFile] = useState(null); // 선택된 파일에 대한 상태관리
+  const [url, setUrl] = useState(""); // 사진 경로 (파이어베이스의 업로드된 경로)
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -172,10 +229,7 @@ const MyPage = () => {
     <Container>
       <Mybox>
         <Img>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHbnGNCaUuLwJDOqaNB7RKM1Cw2Cxb0M24Va-FGjaDTg&s"
-            alt=""
-          />
+          <img src={mypageInfo.uimg || "img/wu.webp"} alt="" />
         </Img>
         <Userbox>
           <Ptext>
@@ -194,6 +248,7 @@ const MyPage = () => {
               <Title>{sp.pname}</Title>
               <Option>{sp.option}</Option>
               <Date>{sp.price}</Date>
+              <P>결제완료</P>
             </Sellbox>
           ))}
         </Userbox2>

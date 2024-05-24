@@ -13,6 +13,7 @@ import Cart from "./pages/cart/cart";
 import UserUpdateFrom from "./pages/myPage/myInfoChange";
 import Signup from "./pages/login/sign";
 import HeadBox from "./pages/main/header";
+import MainPage from "./pages/main/mainPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/userupdatefrom" element={<UserUpdateFrom />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/header" element={<HeadBox />} />
+            <Route path="/main" element={<MainPage />} />
           </Routes>
         </Router>
       </UserStore>
