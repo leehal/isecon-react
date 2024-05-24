@@ -318,7 +318,6 @@ function UserUpdateFrom() {
           <label>
             <StyledInput
               type="text"
-              value={nickName}
               onChange={changeNickName}
               placeholder={mypageInfo.nickname}
             />
@@ -326,7 +325,6 @@ function UserUpdateFrom() {
           <label>
             <StyledInput
               type="text"
-              value={pwd}
               onChange={onChangePwd}
               placeholder={mypageInfo.pwd}
             />
@@ -335,7 +333,6 @@ function UserUpdateFrom() {
           <label>
             <StyledInput
               type="text"
-              value={phone}
               onChange={changePhone}
               placeholder={mypageInfo.phone}
             />
@@ -343,7 +340,6 @@ function UserUpdateFrom() {
           <label>
             <StyledInput
               type="text"
-              value={address}
               onChange={changeAddress}
               placeholder={mypageInfo.address}
             />
