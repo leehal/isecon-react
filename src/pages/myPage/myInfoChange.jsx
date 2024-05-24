@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 import updateUserInfo from "../../api/MyPageInfoAxios";
+import { storage } from "../../api/firebase";
 
 const Container = styled.div`
   position: relative;
@@ -42,6 +43,7 @@ const ImgCircle = styled.div`
   background: #fff;
   box-shadow: 3px 5px 13px -5px gray;
   overflow: hidden;
+  cursor: pointer;
 
   img {
     width: 66%;
@@ -133,10 +135,37 @@ function UserUpdateFrom() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const uno = localStorage.getItem("uno");
+  const [file, setFile] = useState(null); // 회원 사진 수정 파일 선택
+  const [url, setUrl] = useState(""); // firebase 등록 된 사진 url 가져오기
 
   const [pwdComment, setPwdComment] = useState("");
 
   const [isPwd, setIsPwd] = useState(false);
+
+  const inputFile = useRef(null);
+
+  const handleFileInputChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUploadClick = async () => {
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+
+      // // 파일을 업로드합니다.
+      await fileRef.put(file);
+      console.log("File uploaded successfully!");
+
+      // 파일의 다운로드 URL을 가져옵니다.
+      const downloadURL = await fileRef.getDownloadURL();
+
+      // 상태를 업데이트합니다.
+      setUrl(downloadURL);
+    } catch (error) {
+      console.error("파일 업로드 중 오류 발생:", error);
+    }
+  };
 
   const changeNickName = (e) => {
     setNickName(e.target.value);
@@ -178,6 +207,10 @@ function UserUpdateFrom() {
     navigate("/myPage");
   };
 
+  const onClickProfile = () => {
+    inputFile.current.click();
+  };
+
   const onChangePwd = (e) => {
     // 함수 생성
     setPwd(e.target.value); // 이벤트가 발생한 곳의 값을 가져옴
@@ -196,10 +229,16 @@ function UserUpdateFrom() {
     <Container>
       <ChangeBox>
         <ChangeImg>
-          <ImgCircle>
-            <img src="img/wu.webp" alt="" />
+          <ImgCircle onClick={onClickProfile}>
+            <img src={url} alt="" />
+            <input
+              type="file"
+              onChange={handleFileInputChange}
+              ref={inputFile}
+              hidden
+            />
           </ImgCircle>
-          <ChangeBtn>이미지 변경</ChangeBtn>
+          <ChangeBtn onClick={handleUploadClick}>이미지 변경</ChangeBtn>
         </ChangeImg>
         <TextForm>
           <label>

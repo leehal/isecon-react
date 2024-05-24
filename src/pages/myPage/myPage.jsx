@@ -229,7 +229,13 @@ const MyPage = () => {
     <Container>
       <Mybox>
         <Img>
-          <img src={mypageInfo.uimg || "img/wu.webp"} alt="" />
+          <img
+            src={
+              mypageInfo.uimg ||
+              "https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/wu.webp?alt=media&token=2c30d6b5-ff9c-4871-867a-e5a7aaf0de85"
+            }
+            alt=""
+          />
         </Img>
         <Userbox>
           <Ptext>
