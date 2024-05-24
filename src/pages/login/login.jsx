@@ -151,7 +151,7 @@ const LoginBtn = styled.button`
   color: #fff;
   font-size: 15px;
   cursor: pointer;
-  background: rgb(228, 66, 123);
+  background: rgb(240, 90, 153);
   transition: all 0.1s ease-in-out;
 
   &:hover {

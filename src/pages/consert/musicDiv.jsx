@@ -215,7 +215,7 @@ const MusicDiv = ({
       finalMnoList
     );
     // setPlistName(upNewPlName);
-    if (rsp) {
+    if (rsp.data) {
       changePlayListSideBar("playList");
       setUpNewPlName(""); // 구 플리이름 초기화
       setMnoList([]);

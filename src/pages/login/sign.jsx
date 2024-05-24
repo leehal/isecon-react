@@ -30,14 +30,14 @@ const SignInput = styled.div`
   align-items: center;
 
   label {
-    margin-bottom: 80px;
+    margin-bottom: 16%;
   }
   input {
     position: absolute;
     display: flex;
     right: 8%;
     width: 85%;
-    height: 50px;
+    height: 23%;
     border: none;
     border-bottom: 2px solid #ccc;
     font-size: 20px;
@@ -214,7 +214,7 @@ const Signup = () => {
     if (sle) {
       clickSave(e);
     } else {
-      alert("중복실패");
+      alert("정보를 입력해 주세요");
     }
   };
 

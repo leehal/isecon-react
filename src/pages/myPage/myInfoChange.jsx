@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 import updateUserInfo from "../../api/MyPageInfoAxios";
 import { storage } from "../../api/firebase";
+import MyPageAxiosApi from "../../api/MyPageAxios";
 
 const Container = styled.div`
   position: relative;
@@ -14,6 +15,17 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const Img = styled.div`
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const ChangeBox = styled.div`
   display: flex;
   justify-content: center;
@@ -130,13 +142,21 @@ const PwdError = styled.div`
 `;
 
 function UserUpdateFrom() {
-  const [nickName, setNickName] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [mypageInfo, setMypageInfo] = useState("");
+  const [nickName, setNickName] = useState(mypageInfo.nickName);
+  const [pwd, setPwd] = useState(mypageInfo.pwd);
+  const [phone, setPhone] = useState(mypageInfo.phone);
+  const [address, setAddress] = useState(mypageInfo.address);
   const uno = localStorage.getItem("uno");
+  const [uimg, setUimg] = useState("");
   const [file, setFile] = useState(null); // 회원 사진 수정 파일 선택
   const [url, setUrl] = useState(""); // firebase 등록 된 사진 url 가져오기
+
+  const [updateNickName, setUpdateNickName] = useState("");
+  const [updatePwd, setUpdatePwd] = useState("");
+  const [updatePhone, setUpdatePhone] = useState("");
+  const [updateAddress, setUpdateAddress] = useState("");
+  const [updateUimg, setUpdateUimg] = useState("");
 
   const [pwdComment, setPwdComment] = useState("");
 
@@ -159,6 +179,7 @@ function UserUpdateFrom() {
 
       // 파일의 다운로드 URL을 가져옵니다.
       const downloadURL = await fileRef.getDownloadURL();
+      setUpdateUimg(downloadURL);
 
       // 상태를 업데이트합니다.
       setUrl(downloadURL);
@@ -168,38 +189,72 @@ function UserUpdateFrom() {
   };
 
   const changeNickName = (e) => {
-    setNickName(e.target.value);
+    setUpdateNickName(e.target.value);
   };
 
   const changePhone = (e) => {
-    setPhone(e.target.value);
+    setUpdatePhone(e.target.value);
   };
   const changeAddress = (e) => {
-    setAddress(e.target.value);
+    setUpdateAddress(e.target.value);
   };
+  const changeUimg = (e) => {
+    setUpdateUimg(e.target.value);
+  };
+
   const navigate = useNavigate();
+
   const saveBtn = async () => {
-    if (isPwd) {
-      try {
-        const rsp = await updateUserInfo.myUserInfo(
-          nickName,
-          pwd,
-          phone,
-          address,
-          uno,
-          null
-        );
-        if (rsp.data) {
-          alert("저장완료");
-          navigate("/myPage");
-        } else {
-          alert("저장이 안됬음");
-        }
-      } catch (error) {
-        console.error("유저 정보 업데이트 에러:", error);
+    let finalName = updateNickName;
+    let finalPwd = updatePwd;
+    let finalPhone = updatePhone;
+    let finalAddress = updateAddress;
+    let finalUimg = updateUimg;
+
+    if (finalName === "") {
+      finalName = mypageInfo.nickname;
+    }
+    if (finalPwd === "") {
+      finalPwd = mypageInfo.pwd;
+    }
+    if (finalPhone === "") {
+      finalPhone = mypageInfo.phone;
+    }
+    if (finalAddress === "") {
+      finalAddress = mypageInfo.address;
+    }
+    if (finalUimg === "") {
+      finalUimg = mypageInfo.uimg;
+    }
+    console.log(`name : ${finalName}`);
+    console.log(`pwd : ${finalPwd}`);
+    console.log(`phone : ${finalPhone}`);
+    console.log(`addr : ${finalAddress}`);
+    console.log(`uimg : ${finalUimg}`);
+    console.log();
+    try {
+      const rsp = await updateUserInfo.myUserInfo(
+        finalName,
+        finalPwd,
+        finalPhone,
+        finalAddress,
+        uno,
+        finalUimg
+      );
+      if (rsp.data) {
+        setUpdateNickName(""); // 구 정보수정 이름 초기화
+        setUpdatePwd("");
+        setUpdatePhone("");
+        setUpdateAddress("");
+        setUpdateUimg("");
+        alert("저장완료");
+        navigate("/myPage");
+      } else {
+        alert("저장이 안됬음");
+        navigate("/myPage");
       }
-    } else {
-      alert("아이디나 비밀번호 형식을 확인해주세요.");
+    } catch (error) {
+      console.error("유저 정보 업데이트 에러:", error);
     }
   };
 
@@ -213,7 +268,7 @@ function UserUpdateFrom() {
 
   const onChangePwd = (e) => {
     // 함수 생성
-    setPwd(e.target.value); // 이벤트가 발생한 곳의 값을 가져옴
+    setUpdatePwd(e.target.value); // 이벤트가 발생한 곳의 값을 가져옴
     const pwdRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/; // 유효성 검사
     if (!pwdRegex.test(e.target.value)) {
       // 값이 맞지 않을 때 올바른 형식이 아닙니다 실행, setIsMail = false
@@ -225,8 +280,27 @@ function UserUpdateFrom() {
     }
   };
 
+  useEffect(() => {
+    console.log(uno);
+    const userData = async (uno) => {
+      try {
+        const response = await MyPageAxiosApi.mypageAll(uno);
+        setMypageInfo(response.data);
+        setNickName(response.data.nickName);
+        setPwd(response.data.pwd);
+        setPhone(response.data.phone);
+        setAddress(response.data.address);
+        setUimg(response.data.uimg);
+      } catch (error) {}
+    };
+    userData(uno);
+  }, []);
+
   return (
     <Container>
+      <Img>
+        <img src="img/Rectangle409.png" alt="Rectangle409" />
+      </Img>
       <ChangeBox>
         <ChangeImg>
           <ImgCircle onClick={onClickProfile}>
@@ -246,7 +320,7 @@ function UserUpdateFrom() {
               type="text"
               value={nickName}
               onChange={changeNickName}
-              placeholder="닉네임"
+              placeholder={mypageInfo.nickname}
             />
           </label>
           <label>
@@ -254,7 +328,7 @@ function UserUpdateFrom() {
               type="text"
               value={pwd}
               onChange={onChangePwd}
-              placeholder="PWD"
+              placeholder={mypageInfo.pwd}
             />
           </label>
           <PwdError isMail={isPwd}>{pwdComment}</PwdError>
@@ -263,7 +337,7 @@ function UserUpdateFrom() {
               type="text"
               value={phone}
               onChange={changePhone}
-              placeholder="전화번호"
+              placeholder={mypageInfo.phone}
             />
           </label>
           <label>
@@ -271,7 +345,7 @@ function UserUpdateFrom() {
               type="text"
               value={address}
               onChange={changeAddress}
-              placeholder="주소"
+              placeholder={mypageInfo.address}
             />
           </label>
         </TextForm>
