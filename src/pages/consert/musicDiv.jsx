@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const MTitle = styled.div`
-  background-color: ${(props) => (props.isActive ? "#ee82eeba" : "#80808060")};
+  background-color: ${(props) => (props.isActive ? "#d52eff75" : "#80808060")};
   color: white;
   display: flex;
   align-items: center;
@@ -65,6 +65,9 @@ const MusicDiv = ({
   const [mnoList, setMnoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
   const [selectedOption, setSelectedOption] = useState(""); // select option
+  const [upNewPlName, setUpNewPlName] = useState("");
+  const [oldPlMusic, setOldPlMusic] = useState([]);
+  const [onCheck, setOnCheck] = useState([]);
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -73,7 +76,11 @@ const MusicDiv = ({
     const MusicList = async () => {
       try {
         console.log(nowConsert);
-        if (nowConsert === "allMusic" || nowConsert === "PlInsert") {
+        if (
+          nowConsert === "allMusic" ||
+          nowConsert === "PlInsert" ||
+          nowConsert === "plUpdate"
+        ) {
           const rsp = await ConsertAxiosApi.conAllMusic();
           setMusic(rsp.data);
           console.log(rsp.data);
@@ -84,6 +91,7 @@ const MusicDiv = ({
         } else if ("playMusic") {
           const rsp = await ConsertAxiosApi.conMyPlMusic(plistname, uno);
           setMusic(rsp.data);
+          setOldPlMusic(rsp.data.map((m) => m.mno));
         }
       } catch (e) {
         console.log(e);
@@ -115,9 +123,31 @@ const MusicDiv = ({
     }
   };
 
+  const playListAddCheck = (mno) => {
+    if (oldPlMusic.includes(mno)) {
+      setOldPlMusic((prev) => prev.filter((id) => id !== mno));
+    } else if (mnoList.includes(mno)) {
+      setMnoList((prevMnoList) => prevMnoList.filter((id) => id !== mno));
+    } else {
+      setMnoList((prevMnoList) => [...prevMnoList, mno]);
+    }
+    console.log(`oldPlMno : ${oldPlMusic}`);
+    console.log(`newPlMno : ${mnoList}`);
+  };
+
+  const isChecked = (mno) => {
+    return oldPlMusic.includes(mno) || mnoList.includes(mno);
+  };
+
   const addPlayListName = (e) => {
     setPlistName(e.target.value);
     console.log(e.target.value);
+  };
+
+  const upPlayListName = (e) => {
+    setUpNewPlName(e.target.value);
+    console.log(`구 플리 이름 : ${plistname}`);
+    console.log(`현 플리 이름 : ${e.target.value}`);
   };
 
   const addPlayList = async () => {
@@ -126,6 +156,25 @@ const MusicDiv = ({
     setMnoList([]);
     if (rsp) {
       changePlayListSideBar("playList");
+    } else {
+      alert("실패");
+    }
+  };
+
+  const updatePlayList = async () => {
+    const finalMnoList = [...mnoList, ...oldPlMusic];
+    const rsp = await ConsertAxiosApi.conPlNameUpdate(
+      plistname,
+      upNewPlName,
+      uno,
+      finalMnoList
+    );
+    setPlistName(upNewPlName);
+    if (rsp) {
+      changePlayListSideBar("playList");
+      setUpNewPlName(""); // 구 플리이름 초기화
+      setMnoList([]);
+      setOldPlMusic([]); // oldPlMusicList 초기화
     } else {
       alert("실패");
     }
@@ -143,6 +192,7 @@ const MusicDiv = ({
     return <div>No music list available.</div>;
   }
   if (nowConsert === "allMusic") {
+    // 기본/ 모든 음악 보여주기
     return (
       <>
         <SearchBar>
@@ -244,6 +294,7 @@ const MusicDiv = ({
       </>
     );
   } else if (nowConsert === "playMusic") {
+    // 특정 플리의 음악들을 보여줌
     return (
       <>
         <>
@@ -262,11 +313,41 @@ const MusicDiv = ({
             ))}
           </Container>
           <ButtonDiv>
-            <button onClick={() => changePlayListSideBar("playList")}>
+            <button onClick={() => changePlayListSideBar("plUpdate")}>
               플레이 리스트 수정
             </button>
           </ButtonDiv>
         </>
+      </>
+    );
+  } else if (nowConsert === "plUpdate") {
+    // 플레이리스트 수정(선택: 노래 추가, 노래삭제)
+    return (
+      <>
+        <SearchBar>
+          <input
+            type="text"
+            placeholder="플레이리스트 이름"
+            onChange={upPlayListName}
+            // value={plistname}
+          />
+        </SearchBar>
+        <Container>
+          {music.map((m) => (
+            <MTitle key={m.mno} onClick={() => playListAddCheck(m.mno)}>
+              <input
+                type="checkbox"
+                value={m.mno}
+                checked={isChecked(m.mno)}
+                readOnly
+              />
+              {m.mname} {m.singer}
+            </MTitle>
+          ))}
+        </Container>
+        <ButtonDiv>
+          <button onClick={updatePlayList}>플레이 리스트 수정</button>
+        </ButtonDiv>
       </>
     );
   }

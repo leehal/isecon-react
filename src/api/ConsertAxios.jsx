@@ -21,5 +21,16 @@ const ConsertAxiosApi = {
     };
     return await axios.post(ISECON_URL + CON_URL + "/insertpl", plInsertVo);
   },
+  conPlNameUpdate: async (oldName, newName, uno) => {
+    const plUpdateMusicVo = {
+      mname: oldName,
+      surl: newName,
+      mno: uno,
+    };
+    return await axios.post(
+      ISECON_URL + CON_URL + "/plnameup",
+      plUpdateMusicVo
+    );
+  },
 };
 export default ConsertAxiosApi;
