@@ -12,7 +12,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   /* background-color: aqua; */
-  background-image: url("img/Rectangle409.png");
+  // background-image: url("img/Rectangle409.png");
 `;
 
 const Top = styled.div`

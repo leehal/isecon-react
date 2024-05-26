@@ -20,6 +20,13 @@ const CartAxiosApi = {
     };
     return await axios.post(ISECON_URL + Cart_URL + `/cartdeletesale`, id);
   },
+
+  cartSelectDelete: async (cno2) => {
+    const id = {
+      cnoList: cno2,
+    };
+    return await axios.post(ISECON_URL + Cart_URL + `/cartcheckdelete`, id);
+  },
 };
 
 export default CartAxiosApi;

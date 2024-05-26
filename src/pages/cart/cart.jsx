@@ -3,28 +3,38 @@ import CartProduct from "./cartProduct";
 
 const Container = styled.div`
   display: flex;
+  height: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background-color: blue;
+  padding-top: 3%;
+  background-color: #f8f8f8;
 `;
 
 const CartProductAll = styled.div`
-  width: 90%;
+  width: 60%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  background-color: pink;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: white;
+`;
+
+const CartText = styled.div`
+  height: 20%;
+  font-weight: bold;
+  font-size: 30px;
+  padding-bottom: 2%;
 `;
 
 const Cart = () => {
   return (
     <>
       <Container>
+        <CartText>장바구니</CartText>
         <CartProductAll>
           <CartProduct></CartProduct>
         </CartProductAll>
