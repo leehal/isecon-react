@@ -185,7 +185,7 @@ const Button = styled.button`
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
     background: rgb(235, 112, 155);
   }
 `;

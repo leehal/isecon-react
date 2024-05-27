@@ -30,6 +30,15 @@ const Productdiv = styled.ul`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    img {
+      transition: all 0.2s ease-in-out;
+      transform: scale(1.02);
+    }
+  }
 `;
 const Productimg = styled.div`
   background-color: #f5f5f7;
@@ -91,6 +100,7 @@ const ProductMap = ({ paginatedData }) => {
 
   const context = useContext(UserContext);
   const { setPname } = context;
+
   return (
     <>
       {paginatedData.map((pd) => (
