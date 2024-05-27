@@ -14,6 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url("img/Rectangle409.png");
 `;
 const Img = styled.div`
   z-index: -1;
@@ -32,6 +33,7 @@ const ChangeBox = styled.div`
   align-items: center;
   position: absolute;
   width: 30%;
+  background: #f8fde7;
   height: 70%;
   box-shadow: 1px 5px 15px -5px gray;
 `;
@@ -99,7 +101,7 @@ const TextForm = styled.div`
     font-size: 16px;
     font-weight: 500;
     border: none;
-    border-bottom: 1px solid #ccc;
+    box-shadow: 1px 1px 11px -5px gray;
   }
 `;
 const StyledInput = styled.input``;
@@ -298,9 +300,7 @@ function UserUpdateFrom() {
 
   return (
     <Container>
-      <Img>
-        <img src="img/Rectangle409.png" alt="Rectangle409" />
-      </Img>
+      <Img></Img>
       <ChangeBox>
         <ChangeImg>
           <ImgCircle onClick={onClickProfile}>

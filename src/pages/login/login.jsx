@@ -190,7 +190,7 @@ const LOGIN = () => {
         setUno(rsp.data);
         // 저장
         localStorage.setItem("isLogin", "TRUE");
-        navigate("/mypage");
+        navigate("/main");
         alert("성공");
       } else {
         // 서버의 응답을 줬지만 성공이 아닌 경우

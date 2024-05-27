@@ -82,6 +82,9 @@ const ClickIdol = styled.div`
   left: 10%;
   background: #fff;
   border-radius: 50px;
+  left: ${(props) => (props.selectedIdolName ? "10%" : "50%")};
+  transform: ${(props) =>
+    props.selectedIdolName ? "none" : "translate(-50%, -50%)"};
 
   ul {
     display: flex; /* 이 부분 추가 */
@@ -146,11 +149,14 @@ const Textbox = styled.div`
   border-radius: 10px;
   box-shadow: 5px 5px 13px -5px gray;
   h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 25px;
+    font-weight: 600;
   }
   p {
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 600;
   }
 `;
 
@@ -283,7 +289,7 @@ const Main = () => {
               />
             )}
           </YouTubeV>
-          <ClickIdol>
+          <ClickIdol selectedIdolName={selectedIdolName}>
             <ul>
               {idols.map((idol) => (
                 <IdolItem
