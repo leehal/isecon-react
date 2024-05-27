@@ -80,7 +80,7 @@ const ClickIdol = styled.div`
   width: 50%;
   height: auto;
   left: 10%;
-  background: #fff;
+
   border-radius: 50px;
   left: ${(props) => (props.selectedIdolName ? "10%" : "50%")};
   transform: ${(props) =>
@@ -223,12 +223,12 @@ const idolImages = {
 };
 
 const YoutubeVideoId = {
-  아이네: "cFQgyKvQ48A",
-  징버거: "mQk1RJ-oNUQ",
-  릴파: "KoMlJAR37Ps",
-  주르르: "pZisa2yAdVE",
-  고세구: "ehW-aR791yA",
-  비챤: "OxwQkgr2gz8",
+  아이네: "Dl9l3kQ1Wjs",
+  징버거: "goBJJTlcC_M",
+  릴파: "eEPmx_JZCkY",
+  주르르: "O7GlqoF5GXI",
+  고세구: "6GQV6lhwgNs",
+  비챤: "WHtoRKgIHZc",
 };
 
 const Main = () => {
