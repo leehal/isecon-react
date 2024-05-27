@@ -1,101 +1,119 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import React, { useState, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
-const Container = styled.div`
+const AppContainer = styled.div`
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+`;
+
+const Sidebar = styled.div`
+  position: fixed;
+  top: -17%;
+  right: -8%;
+  width: 500px;
+  height: 500px;
+  border-radius: 100%;
+  background-color: #333;
+  color: white;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  transform: ${(props) =>
+    props.isHovered ? "translate(0)" : "translate(100%)"};
+`;
+
+const SidebarText = styled.div`
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background: green;
+  flex-direction: column;
+  width: 30%;
+  height: 40%;
+  /* background: red; */
+  bottom: 5%;
+  right: 35%;
+
+  p {
+    font-size: 20px;
+    color: #fff;
+    margin: 10px 0;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 1px solid #fff;
+    }
+  }
 `;
 
-const Header = styled.div`
-  display: flex;
-  align-items: right;
-  justify-content: right;
+const Overlay = styled.div`
+  display: ${(props) => (props.isHovered ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px;
-  background: #ceee82;
-`;
-
-const Logo = styled.img`
   height: 100%;
-  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+  transition: opacity 0.3s ease-in-out;
+  opacity: ${(props) => (props.isHovered ? "1" : "0")};
 `;
 
-const expandCircle = keyframes`
-  from {
-    width: 0;
-    height: 0;
-    opacity: 0.5;
+const MenuButton = styled.img`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+  height: 10%;
+`;
+
+const SidebarWrapper = styled.div`
+  &:hover ${Sidebar} {
+    transform: translate(0);
   }
-  to {
-    width: 500px;
-    height: 500px;
+  &:hover ${Overlay} {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  ${Sidebar}:hover + ${Overlay} {
     opacity: 1;
   }
 `;
 
-const HeaderBar = styled.div`
-  background-color: violet;
-  border-radius: 50%;
-  width: 0;
-  height: 0;
-  position: fixed;
-  position: absolute;
-  top: 50%; /* Adjust this to position the circle below the logo */
-  right: -20%;
-  transform: translate(-50%, -50%);
-  display: ${(props) => (props.show ? "block" : "none")};
-  animation: ${(props) => (props.show ? expandCircle : "none")} 0.5s ease-out
-    forwards;
-`;
-const HeadOption = styled.div`
-  list-style: none;
-  display: flex;
-`;
-const HeaderBarContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000037;
-  display: ${(props) => (props.show ? "block" : "none")};
-  animation: ${(props) => (props.show ? expandCircle : "none")} 0.5s ease-out;
-`;
 const HeadBox = () => {
-  const [isHead, setIsHead] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
-  const viewHeader = () => {
-    setIsHead(true);
-  };
-  const byeHeader = () => {
-    setIsHead(false);
-  };
+  useEffect(() => {
+    if (isHovered) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isHovered]);
 
   return (
-    <Container>
-      <Header>
-        <Logo
-          src="https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/%EC%9D%B4%EC%84%B8%EB%8F%8C%EB%B3%B4%EB%9D%BC%EB%A1%9C%EA%B3%A0.png?alt=media&token=65154553-9a9a-43dc-9435-d081d5961835"
-          alt=""
-          onClick={() => navigate("/main")}
-          onMouseEnter={viewHeader}
-          onMouseLeave={byeHeader}
-        />
-        {/* <HeaderBarContainer > */}
-        <HeaderBar
-          show={isHead}
-          onMouseEnter={viewHeader}
-          onMouseLeave={byeHeader}
-        />
-        {/* </HeaderBarContainer> */}
-      </Header>
-    </Container>
+    <AppContainer>
+      <MenuButton
+        src="img/headLogo.png"
+        onMouseEnter={() => setIsHovered(true)}
+        onClick={() => navigate("/main")}
+        // onMouseLeave={() => setIsHovered(false)}
+      ></MenuButton>
+      <SidebarWrapper>
+        <Sidebar isHovered={isHovered} onMouseLeave={() => setIsHovered(false)}>
+          <SidebarText>
+            <p onClick={() => navigate("/goods")}>goods</p>
+            <p onClick={() => navigate("/cart")}>cart</p>
+            <p onClick={() => navigate("/consert")}>consert</p>
+            <p onClick={() => navigate("/mypage")}>mypage</p>
+          </SidebarText>
+        </Sidebar>
+        <Overlay isHovered={isHovered} />
+      </SidebarWrapper>
+      <Outlet />
+    </AppContainer>
   );
 };
 

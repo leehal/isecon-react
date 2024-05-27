@@ -22,17 +22,19 @@ function App() {
         <GlobalStyle />
         <Router>
           <Routes>
+            <Route element={<HeadBox />}>
+              <Route path="/goods" element={<Goods />} />
+              <Route path="/goodsdetail" element={<GoodsDetail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/main" element={<MainPage />} />
+            </Route>
             <Route path="/test" element={<ImageUploader />} />
             <Route path="/" element={<LOGIN />} />
-            <Route path="/goods" element={<Goods />} />
-            <Route path="/goodsdetail" element={<GoodsDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/mypage" element={<MyPage />} />
             <Route path="/consert" element={<Consert />} />
             <Route path="/userupdatefrom" element={<UserUpdateFrom />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/header" element={<HeadBox />} />
-            <Route path="/main" element={<MainPage />} />
           </Routes>
         </Router>
       </UserStore>
