@@ -67,6 +67,7 @@ const MenuButton = styled.img`
   right: 20px;
   z-index: 1100;
   height: 10%;
+  cursor: pointer;
 `;
 
 const SidebarWrapper = styled.div`
