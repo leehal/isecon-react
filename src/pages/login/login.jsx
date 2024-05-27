@@ -53,6 +53,7 @@ const LoginInput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 15px;
   label {
     margin-bottom: 80px;
   }

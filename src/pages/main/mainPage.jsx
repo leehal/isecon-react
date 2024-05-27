@@ -12,10 +12,10 @@ const fadeIn = keyframes`
 
 const Container = styled.div`
   width: 100vw;
-
   overflow: hidden;
 `;
 const SlideImg = styled.div`
+  overflow: hidden;
   width: 400vw;
   height: 100vh;
   display: flex;
@@ -41,7 +41,10 @@ const ChangeImg = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-image: url(img/Rectangle.png);
+  background: linear-gradient(to top left, #eeeaf8, transparent 50%) top left,
+    linear-gradient(to top right, #ebbbd4, transparent 50%) top right,
+    linear-gradient(to bottom left, #bff7bd, transparent 50%) bottom left,
+    linear-gradient(to bottom right, #ebbbd4, transparent 50%) bottom right;
 `;
 
 const ClickIdol = styled.div`

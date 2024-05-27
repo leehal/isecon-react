@@ -76,7 +76,7 @@ const Button = styled.div`
   height: 8%;
   font-size: 20px;
   color: #fff;
-  background: #1a345c;
+  background: rgb(240, 90, 153);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -85,7 +85,7 @@ const Button = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #45a049; /* Dark green */
+    background: rgb(245, 126, 167);
   }
 `;
 

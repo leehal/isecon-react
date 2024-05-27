@@ -72,11 +72,11 @@ const ChangeBtn = styled.button`
   border: none;
   color: #ffffff;
   box-shadow: 3px 3px 6px -3px gray;
-  background: #1a345c;
+  background: rgb(240, 90, 153);
   cursor: pointer;
 
   &:hover {
-    background-color: #45a049; /* Dark green */
+    background: rgb(245, 126, 167);
   }
 `;
 const TextForm = styled.div`
@@ -109,13 +109,13 @@ const Save = styled.button`
   height: 6%;
   bottom: 5%;
   right: 28%;
-  background: #1a345c;
+  background: rgb(240, 90, 153);
   cursor: pointer;
   color: #fff;
   border: none;
 
   &:hover {
-    background-color: #45a049; /* Dark green */
+    background: rgb(245, 126, 167); /* Dark green */
   }
 `;
 const Off = styled.button`
@@ -124,13 +124,13 @@ const Off = styled.button`
   height: 6%;
   bottom: 5%;
   left: 28%;
-  background: #1a345c;
+  background: rgb(240, 90, 153);
   cursor: pointer;
   color: #fff;
   border: none;
 
   &:hover {
-    background-color: #45a049; /* Dark green */
+    background: rgb(245, 126, 167); /* Dark green */
   }
 `;
 const PwdError = styled.div`
