@@ -31,7 +31,7 @@ const Consert = () => {
   const [player, setPlayer] = useState(null);
   // const [nowConsert, setNowConsert] = useState("PlayListContainer");
 
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
+  // const url = `https://www.googleapis.com/youtube/v3/videos?part=${part}&id=${videos}&key=${apiKey}`;
 
   const musicChoice = useCallback((videos) => {
     console.log("ddddddddd");
@@ -42,26 +42,26 @@ const Consert = () => {
     setPlayer(e.target);
   }, []);
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await axios.get(url);
+  // useEffect(() => {
+  //   const fetchVideos = async () => {
+  //     try {
+  //       const response = await axios.get(url);
 
-        if (response.status !== 200) {
-          throw new Error("Network response was not ok");
-        }
+  //       if (response.status !== 200) {
+  //         throw new Error("Network response was not ok");
+  //       }
 
-        const data = response.data;
-        if (!data.items) {
-          throw new Error("No items found in the response");
-        }
-      } catch (e) {
-        console.error("Error fetching videos:", e);
-      }
-    };
+  //       const data = response.data;
+  //       if (!data.items) {
+  //         throw new Error("No items found in the response");
+  //       }
+  //     } catch (e) {
+  //       console.error("Error fetching videos:", e);
+  //     }
+  //   };
 
-    fetchVideos();
-  }, [url]);
+  //   fetchVideos();
+  // }, [url]);
   return (
     <>
       <Container>
