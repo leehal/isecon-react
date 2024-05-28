@@ -15,7 +15,8 @@ const Header = styled.div`
   align-items: center;
   opacity: 0.7; /* 50% 투명도 */
   background: #fff;
-  width: 100%;
+  /* background: blue; */
+  width: 100vw;
   height: 15%;
 `;
 const Logo = styled.div`
@@ -41,30 +42,48 @@ const GnbLeft = styled.div`
   height: 25%;
 
   ul {
-    display: flex; /* 이 부분 추가 */
+    display: flex;
     justify-content: center;
-    flex-direction: row; /* 이 부분 추가 */
+    flex-direction: row;
     align-items: center;
     width: 100%;
     height: 100%;
+    list-style: none;
   }
-  li {
-    display: flex; /* 이 부분 추가 */
-    justify-content: center;
-    flex-direction: row; /* 이 부분 추가 */
-    align-items: center;
 
+  li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     margin: 0 30px;
-    font-size: 1.3rem;
+    padding: 0 5px;
+    font-size: 1vw;
     font-weight: 500;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover {
-      border-bottom: 1px solid #ccc;
+      color: rgb(240, 90, 153);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px; /* 가상 요소를 li의 아래쪽에 배치 */
+      left: 0;
+      width: 0;
+      border-bottom: 2px solid rgb(240, 90, 153);
+      transition: width 250ms ease-in-out;
+    }
+
+    &:hover::after {
+      width: 100%;
     }
   }
 `;
+
 const GnbRight = styled.div`
   position: absolute;
   bottom: 10%;
@@ -73,27 +92,44 @@ const GnbRight = styled.div`
   height: 25%;
 
   ul {
-    display: flex; /* 이 부분 추가 */
+    display: flex;
     justify-content: center;
-    flex-direction: row; /* 이 부분 추가 */
+    flex-direction: row;
     align-items: center;
     width: 100%;
     height: 100%;
+    list-style: none;
   }
-  li {
-    display: flex; /* 이 부분 추가 */
-    justify-content: center;
-    flex-direction: row; /* 이 부분 추가 */
-    align-items: center;
 
-    height: 90%;
+  li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     margin: 0 30px;
-    font-size: 1.3rem;
+    padding: 0 5px;
+    font-size: 1vw;
     font-weight: 500;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover {
-      border-bottom: 1px solid #ccc;
+      color: rgb(240, 90, 153);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px; /* 가상 요소를 li의 아래쪽에 배치 */
+      left: 0;
+      width: 0;
+      border-bottom: 2px solid rgb(240, 90, 153);
+      transition: width 250ms ease-in-out;
+    }
+
+    &:hover::after {
+      width: 100%;
     }
   }
 `;
@@ -104,7 +140,7 @@ const Login = styled.div`
   right: 5%;
   width: 10%;
   height: 20%;
-  font-size: 1.2rem;
+  font-size: 1vw;
   display: flex;
   justify-content: center;
   ul {
@@ -118,10 +154,11 @@ const Login = styled.div`
     padding: 5px;
     margin: 0 10px;
     cursor: pointer;
+    white-space: nowrap;
+    font-size: 1vw;
 
     &:hover {
-      background: #ccc;
-      border-radius: 10px;
+      color: rgb(240, 90, 153);
     }
   }
 `;
