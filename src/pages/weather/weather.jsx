@@ -92,30 +92,12 @@ const WeatherForecast = () => {
     icons.cloudy,
   ]);
   const [onairAll, setOnairAll] = useState();
-  // const context = useContextt(UserContext);
-  // const { uno } = context;
+
   const uno = 1;
   const changeWeather = (e, index) => {
     setInputOnair[index](e.targer.value);
   };
-  // const getDisabledStatus = (uno, itemName) => {
-  //   switch (uno) {
-  //     case 1:
-  //       return itemName !== "아이네";
-  //     case 2:
-  //       return itemName !== "징버거";
-  //     case 3:
-  //       return itemName !== "릴파";
-  //     case 4:
-  //       return itemName !== "주르르";
-  //     case 5:
-  //       return itemName !== "고세구";
-  //     case 6:
-  //       return itemName !== "비챤";
-  //     default:
-  //       return true;
-  //   }
-  // };
+
   useEffect(() => {
     console.log(uno);
     const weatherOn = async (uno) => {
@@ -130,12 +112,13 @@ const WeatherForecast = () => {
         console.log(rsp.data);
         if (rsp.data) {
           setOnairAll(rsp.data);
-          setInputOnair(rsp.data);
         }
       } catch (e) {}
     };
     weatherAll();
   }, []);
+
+  const viewSelect = () => {};
 
   return (
     <>
@@ -144,7 +127,6 @@ const WeatherForecast = () => {
           <Title>이세계 일기예보</Title>
         </Header>
         <WeatherList>
-          {/* {weatherData.map((item, index) => ( */}
           <WeatherItem>
             <Icon style={{ backgroundImage: inputOnair[0] }} />
             <Description>

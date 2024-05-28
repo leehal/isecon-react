@@ -6,7 +6,7 @@ import { UserContext } from "../../UserStore";
 
 const ProductdivBox = styled.div`
   width: 31%;
-  height: 45vh;
+  height: 20%;
   background: linear-gradient(to top left, #eeeaf8, transparent 50%) top left,
     linear-gradient(to top right, #f8ebf2, transparent 50%) top right,
     linear-gradient(to bottom left, #d9b0da, transparent 50%) bottom left,
@@ -58,10 +58,10 @@ const ProductimgBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Producttextbox = styled.div`
   width: 100%;
   height: 100%;
-  font-size: 24px;
   font-weight: bold;
   text-align: center;
   display: flex;
@@ -69,15 +69,16 @@ const Producttextbox = styled.div`
   flex-direction: column;
   align-items: flex-end;
 `;
+
 const KRW = styled.span`
   position: relative;
   top: 12%;
   right: 3%;
-  font-size: 20px;
+  font-size: 1.3em;
 `;
 
 const Producttext1 = styled.div`
-  font-size: 20px;
+  font-size: 1.5em;
   font-weight: bold;
   height: 10%;
   display: flex;
@@ -85,7 +86,7 @@ const Producttext1 = styled.div`
   align-items: center;
 `;
 const Producttext2 = styled.div`
-  font-size: 40px;
+  font-size: 2.4em;
   height: 50%;
   right: 2%;
   display: flex;
