@@ -108,7 +108,6 @@ const SummaryContainer = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
-  /* background-color: red; */
   flex-direction: column;
   border-bottom: 2px solid #e9e3e3;
 `;
@@ -117,10 +116,8 @@ const SummaryItem = styled.div`
   display: flex;
   width: 20%;
   justify-content: space-between;
-  /* background-color: orange; */
   text-align: center;
   font-size: 16px;
-  /* margin-bottom: 2%; */
   margin-top: 2%;
   margin-bottom: 1%;
 `;
@@ -210,7 +207,7 @@ const CartProduct = () => {
   const [isDel, setIsDel] = useState(false); // 장바구니 삭제
   const [totalPrice, setTotalPrice] = useState(0);
   const [deliveryFee, setDeliveryFee] = useState(3000);
-  const [selectAll, setSelectAll] = useState(false); // 전체 선택 상태
+  const [selectAll, setSelectAll] = useState(); // 전체 선택 상태
 
   const context = useContext(UserContext);
   const { uno } = context;
@@ -236,7 +233,6 @@ const CartProduct = () => {
 
   const handleSelectAll = (e) => {
     if (e.target.checked) {
-      const allItems = crt.map((item) => item.pno);
       setCheckedItems(crt);
       setTotalPrice(crt.reduce((acc, item) => acc + item.price, 0));
     } else {
@@ -270,6 +266,8 @@ const CartProduct = () => {
       );
       console.log(rsp.data);
       setIsDel(true);
+      setSelectAll(false);
+      setTotalPrice(0);
     } catch (e) {
       console.log(e);
     }
