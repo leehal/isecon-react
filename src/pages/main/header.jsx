@@ -2,119 +2,160 @@ import React, { useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: auto;
+const Container = styled.div`
   position: relative;
-  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 `;
-
-const Sidebar = styled.div`
+const Header = styled.div`
+  display: flex;
   position: fixed;
-  top: -17%;
-  right: -8%;
-  width: 500px;
-  height: 500px;
-  border-radius: 100%;
-  background-color: #333;
-  color: white;
-  z-index: 1000;
-  transition: transform 0.3s ease-in-out;
-  transform: ${(props) =>
-    props.isHovered ? "translate(0)" : "translate(100%)"};
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7; /* 50% 투명도 */
+  background: #fff;
+  width: 100%;
+  height: 15%;
 `;
-
-const SidebarText = styled.div`
-  position: absolute;
+const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 30%;
-  height: 40%;
-  /* background: red; */
-  bottom: 5%;
-  right: 35%;
+  position: absolute;
+  width: 55%;
+  height: 100%;
+  cursor: pointer;
 
-  p {
-    font-size: 20px;
-    color: #fff;
-    margin: 10px 0;
+  img {
+    width: 30%;
+    height: auto;
+    object-fit: cover;
+  }
+`;
+const GnbLeft = styled.div`
+  position: absolute;
+  bottom: 10%;
+  left: 25%;
+  width: 15%;
+  height: 25%;
+
+  ul {
+    display: flex; /* 이 부분 추가 */
+    justify-content: center;
+    flex-direction: row; /* 이 부분 추가 */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  li {
+    display: flex; /* 이 부분 추가 */
+    justify-content: center;
+    flex-direction: row; /* 이 부분 추가 */
+    align-items: center;
+
+    height: 100%;
+    margin: 0 30px;
+    font-size: 1.3rem;
+    font-weight: 500;
     cursor: pointer;
 
     &:hover {
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+`;
+const GnbRight = styled.div`
+  position: absolute;
+  bottom: 10%;
+  right: 25%;
+  width: 15%;
+  height: 25%;
+
+  ul {
+    display: flex; /* 이 부분 추가 */
+    justify-content: center;
+    flex-direction: row; /* 이 부분 추가 */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  li {
+    display: flex; /* 이 부분 추가 */
+    justify-content: center;
+    flex-direction: row; /* 이 부분 추가 */
+    align-items: center;
+
+    height: 90%;
+    margin: 0 30px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 1px solid #ccc;
     }
   }
 `;
 
-const Overlay = styled.div`
-  display: ${(props) => (props.isHovered ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 900;
-  transition: opacity 0.3s ease-in-out;
-  opacity: ${(props) => (props.isHovered ? "1" : "0")};
-`;
-
-const MenuButton = styled.img`
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1100;
-  height: 10%;
-  cursor: pointer;
-`;
-
-const SidebarWrapper = styled.div`
-  &:hover ${Sidebar} {
-    transform: translate(0);
+const Login = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 10%;
+  height: 20%;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
   }
-  &:hover ${Overlay} {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  ${Sidebar}:hover + ${Overlay} {
-    opacity: 1;
+
+  li {
+    padding: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: #ccc;
+      border-radius: 10px;
+    }
   }
 `;
 
 const HeadBox = () => {
-  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isHovered) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isHovered]);
-
   return (
-    <AppContainer>
-      <MenuButton
-        src="img/headLogo.png"
-        onMouseEnter={() => setIsHovered(true)}
-        onClick={() => navigate("/main")}
-        // onMouseLeave={() => setIsHovered(false)}
-      ></MenuButton>
-      <SidebarWrapper>
-        <Sidebar isHovered={isHovered} onMouseLeave={() => setIsHovered(false)}>
-          <SidebarText>
-            <p onClick={() => navigate("/goods")}>goods</p>
-            <p onClick={() => navigate("/cart")}>cart</p>
-            <p onClick={() => navigate("/consert")}>consert</p>
-            <p onClick={() => navigate("/mypage")}>mypage</p>
-          </SidebarText>
-        </Sidebar>
-        <Overlay isHovered={isHovered} />
-      </SidebarWrapper>
+    <Container>
+      <Header>
+        <Logo onClick={() => navigate("/main")}>
+          <img src="img/logoLong.webp" alt="" />
+        </Logo>
+        <GnbLeft>
+          <ul>
+            <li onClick={() => navigate("/goods")}>굿즈</li>
+            <li onClick={() => navigate("/cart")}>장바구니</li>
+          </ul>
+        </GnbLeft>
+        <GnbRight>
+          <ul>
+            <li onClick={() => navigate("/consert")}>콘서트</li>
+            <li onClick={() => navigate("/mypage")}>마이페이지</li>
+          </ul>
+        </GnbRight>
+        <Login>
+          <ul>
+            <li onClick={() => navigate("/")}>로그인</li>
+            <li onClick={() => navigate("/Signup")}>회원가입</li>
+          </ul>
+        </Login>
+      </Header>
       <Outlet />
-    </AppContainer>
+    </Container>
   );
 };
 

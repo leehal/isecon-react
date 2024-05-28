@@ -13,11 +13,12 @@ const fadeIn = keyframes`
 
 const Container = styled.div`
   width: 100vw;
-  overflow-x: hidden;
+  height: auto;
+  overflow: hidden;
 `;
 const SlideImg = styled.div`
   overflow-x: hidden;
-  width: 400vw;
+  width: 400%;
   height: 100vh;
   display: flex;
   transition: transform 1s ease-in-out;
@@ -38,6 +39,7 @@ const ChangeWrap = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  /* background: red; */
   justify-content: center;
   align-items: center;
 `;
@@ -45,10 +47,9 @@ const ChangeImg = styled.div`
   position: absolute;
   width: 80%;
   height: 100%;
+  z-index: 2;
   object-fit: contain;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+
   background: ${(props) => {
     console.log("Selected Idol:", props.selectedIdolName); // 콘솔에 선택된 아이돌 이름 출력
     switch (props.selectedIdolName) {
@@ -79,6 +80,8 @@ const ClickIdol = styled.div`
   bottom: 10%;
   width: 50%;
   height: auto;
+  min-width: 200px;
+  min-height: 50px;
   left: 10%;
 
   border-radius: 50px;
@@ -102,7 +105,8 @@ const IdolItem = styled.li`
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: 100%;
+  min-width: 50px;
+  min-height: 30px;
   border-radius: 50%;
   background: ${(props) => (props.isSelected ? "navy" : "yellow")};
   color: ${(props) => (props.isSelected ? "#fff" : "#000")};
@@ -136,18 +140,18 @@ const LeftBox = styled.div`
 `;
 
 const Textbox = styled.div`
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  font-size: 20px;
+  font-size: 1.5rem;
   color: #000;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 5px 5px 13px -5px gray;
+  box-shadow: 3px 3px 9px -5px gray;
   h2 {
     font-size: 22px;
     margin-bottom: 25px;
@@ -162,7 +166,7 @@ const Textbox = styled.div`
 
 const YouTubeV = styled.div`
   position: absolute;
-  width: 50%;
+  width: 45%;
   height: 13%;
   overflow: hidden;
   border-radius: 20px;
@@ -179,9 +183,19 @@ const YouTubeV = styled.div`
 const RightBox = styled.div`
   position: absolute;
   z-index: 999;
-  width: 25%;
+  width: 30%;
   height: 60%;
-  right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  box-shadow: 5px 5px 11px -2px #ccc;
+  background: linear-gradient(to top left, #f8f2f6, transparent 50%),
+    linear-gradient(to top right, #f8f2f6, transparent 50%),
+    linear-gradient(to bottom left, #f8f2f6, transparent 50%),
+    linear-gradient(to bottom right, #f8f2f6, transparent 50%);
+  border-radius: 100%;
+  right: 5%;
   bottom: 5%;
   opacity: ${(props) => (props.showRightBox ? 1 : 0)};
   visibility: ${(props) => (props.showRightBox ? "visible" : "hidden")};
@@ -190,8 +204,9 @@ const RightBox = styled.div`
 
   img {
     width: 100%;
+    height: auto;
     position: absolute;
-    right: 0;
+    top: -10%;
     object-fit: cover;
   }
 `;
@@ -231,6 +246,11 @@ const YoutubeVideoId = {
   비챤: "WHtoRKgIHZc",
 };
 
+const Footer = styled.div`
+  width: 100%;
+  height: 100px;
+  background: #acacac;
+`;
 const Main = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedIdol, setSelectedIdol] = useState(null);
@@ -336,6 +356,7 @@ const Main = () => {
           </VideoIdol>
         </ChangeImg>
       </ChangeWrap>
+      <Footer></Footer>
     </Container>
   );
 };
