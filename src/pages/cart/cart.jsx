@@ -3,11 +3,10 @@ import CartProduct from "./cartProduct";
 
 const Container = styled.div`
   display: flex;
-  height: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 3%;
+  padding: 13% 0;
   background-color: #f8f8f8;
 `;
 

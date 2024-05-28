@@ -8,6 +8,7 @@ const Container = styled.div`
   align-content: center;
   justify-content: center;
   padding: 20px;
+  padding-top: 12%;
   background-color: #f8f8f8;
   min-height: 100vh;
 `;
@@ -52,9 +53,11 @@ const Reservation = styled.div`
 `;
 
 const Rsvtext1 = styled.span`
+  font-size: 0.9vw;
   margin: 2% 0 0 0;
 `;
 const Rsvtext2 = styled.span`
+  font-size: 0.9vw;
   margin: 2% 0;
 `;
 
@@ -73,14 +76,17 @@ const International = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  font-size: 13px;
+  font-size: 0.7vw;
   color: red;
   margin: 10% 0;
 `;
-
+const PdimgBox = styled.div`
+  width: 90%;
+`;
 const Pdimg = styled.div`
+  width: 100%;
   img {
-    width: "100%";
+    width: 100%;
     border-radius: 10px;
     margin-top: 10px;
   }
@@ -94,7 +100,7 @@ const TitleBox = styled.div`
 `;
 
 const Text = styled.span`
-  font-size: 24px;
+  font-size: 1.3vw;
   font-weight: bold;
 `;
 
@@ -125,16 +131,24 @@ const OPNBox = styled.div`
 
 const OPNText = styled.div`
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 0.95vw;
+  /* background-color: bisque; */
+`;
+
+const SelectBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const Select = styled.select`
-  width: 100%;
-  padding: 10px;
+  width: 80%;
+  height: 70%;
+  padding: 1.5%;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
-  font-size: 16px;
+  font-size: 0.9vw;
 `;
 
 const ShippingInfo = styled.div`
@@ -143,7 +157,7 @@ const ShippingInfo = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 13px;
+  font-size: 0.7vw;
   font-weight: bold;
   color: #555;
   /* background-color: red; */
@@ -157,30 +171,30 @@ const PriceBox = styled.div`
 `;
 
 const PriceLabel = styled.span`
-  font-size: 18px;
+  font-size: 1.1vw;
   font-weight: bold;
 `;
 
 const Price = styled.span`
-  font-size: 24px;
+  font-size: 1.3vw;
   font-weight: bold;
   color: #d9534f;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
 `;
 
 const Button = styled.button`
-  width: 48%;
-  padding: 15px;
+  width: 40%;
+  padding: 1.3%;
   background: rgb(240, 90, 153);
   border-radius: 4px;
   border: none;
   color: #fff;
-  font-size: 20px;
+  font-size: 1vw;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 
@@ -199,6 +213,7 @@ const TableContainer = styled.div`
 `;
 
 const Title = styled.h2`
+  font-size: 0.9vw;
   text-align: center;
   margin-bottom: 20px;
 `;
@@ -207,7 +222,7 @@ const Table = styled.table`
   width: 50%;
   border-collapse: collapse;
   margin: 20px 0;
-  font-size: 12px;
+  font-size: 0.6vw;
 `;
 const Th = styled.th`
   background-color: #f2f2f2;
@@ -288,13 +303,15 @@ const GoodsDetail = () => {
             <InfoBox>
               <OPNBox>
                 <OPNText>옵션 선택</OPNText>
-                <Select onChange={optionSelect}>
-                  {dtl.map((dt) => (
-                    <option key={dt.pno} value={dt.pno}>
-                      {dt.option}
-                    </option>
-                  ))}
-                </Select>
+                <SelectBox>
+                  <Select onChange={optionSelect}>
+                    {dtl.map((dt) => (
+                      <option key={dt.pno} value={dt.pno}>
+                        {dt.option}
+                      </option>
+                    ))}
+                  </Select>
+                </SelectBox>
               </OPNBox>
               <PriceBox>
                 <PriceLabel>가격</PriceLabel>
@@ -336,9 +353,11 @@ const GoodsDetail = () => {
             check before purchasing.
           </Intertext2>
         </International>
-        <Pdimg>
-          <img src={prodImg} alt="강사님 죄송합니다." />
-        </Pdimg>
+        <PdimgBox>
+          <Pdimg>
+            <img src={prodImg} alt="강사님 죄송합니다." />
+          </Pdimg>
+        </PdimgBox>
         <TableContainer>
           <Title>전자상거래등에서의 상품정보제공 고시</Title>
           <Table>

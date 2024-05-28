@@ -22,6 +22,7 @@ const ProductdivBox = styled.div`
 
   @media (max-width: 768px) {
     width: 40%;
+    height: 15%;
   }
 `;
 
@@ -53,6 +54,11 @@ const Productimg = styled.div`
   img {
     width: 100%;
   }
+  @media (max-width: 768px) {
+    img {
+      width: 50%;
+    }
+  }
 `;
 const ProductimgBox = styled.div`
   display: flex;
@@ -69,6 +75,13 @@ const Producttextbox = styled.div`
   justify-content: flex-end;
   flex-direction: column;
   align-items: flex-end;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
 `;
 
 const KRW = styled.span`

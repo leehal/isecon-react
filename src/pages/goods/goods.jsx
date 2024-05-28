@@ -11,6 +11,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 10%;
+  padding-bottom: 10%;
   /* background-color: aqua; */
   // background-image: url("img/Rectangle409.png");
 `;
@@ -20,10 +22,13 @@ const Top = styled.div`
   justify-content: center;
   position: relative;
   align-items: center;
-  height: 50vh;
+  height: 20vh;
   font-size: 1vw;
   font-weight: bold;
   /* background-color: yellow; */
+
+  @media (max-width: 1000px) {
+  }
 `;
 
 const BackgroundBox = styled.div`
@@ -60,11 +65,15 @@ const ProductMapbox = styled.div`
   height: 70%;
   display: flex;
   position: relative;
-  top: 10%;
+  top: 5%;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-content: space-around;
-  background-color: chartreuse;
+  align-content: space-between;
+  /* background-color: chartreuse; */
+
+  @media (max-width: 768px) {
+    top: 7%;
+  }
 `;
 const Pagingbox = styled.div`
   display: flex;
@@ -83,6 +92,9 @@ const Goodsall = styled.div`
   /* background-color: blue; */
   width: 100%;
   height: 100%;
+  @media (max-width: 667px) {
+    top: 12%;
+  }
 `;
 
 const Goods = () => {
