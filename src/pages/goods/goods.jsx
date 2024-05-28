@@ -18,13 +18,23 @@ const Container = styled.div`
 const Top = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
   align-items: center;
-  height: 30vh;
+  height: 50vh;
+  font-size: 1vw;
+  font-weight: bold;
   /* background-color: yellow; */
 `;
 
 const BackgroundBox = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   width: 60%;
   height: 80%;
   display: flex;
@@ -47,12 +57,14 @@ const ProductBox = styled.div`
 `;
 const ProductMapbox = styled.div`
   width: 100%;
-  height: 90%;
+  height: 70%;
   display: flex;
+  position: relative;
+  top: 10%;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-content: space-between;
-  /* background-color: chartreuse; */
+  align-content: space-around;
+  background-color: chartreuse;
 `;
 const Pagingbox = styled.div`
   display: flex;
@@ -65,7 +77,7 @@ const Goodsall = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  top: 7%;
+  top: 10%;
   align-content: space-around;
   justify-content: space-around;
   /* background-color: blue; */
@@ -99,8 +111,8 @@ const Goods = () => {
   return (
     <>
       <Container>
-        <Top>이세계아이돌 굿즈 판매</Top>
         <BackgroundBox>
+          <Top>이세계아이돌</Top>
           <img
             src="https://firebasestorage.googleapis.com/v0/b/isecon-ee0a6.appspot.com/o/222222222222222222222222.png?alt=media&token=e0331832-d35a-4e83-ab8c-1d78e21a74a6"
             alt="강사님 죄송합니다."

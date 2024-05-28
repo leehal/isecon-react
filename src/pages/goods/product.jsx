@@ -5,19 +5,24 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserStore";
 
 const ProductdivBox = styled.div`
-  width: 31%;
-  height: 20%;
+  width: 28%;
+  height: 19%;
   background: linear-gradient(to top left, #eeeaf8, transparent 50%) top left,
     linear-gradient(to top right, #f8ebf2, transparent 50%) top right,
     linear-gradient(to bottom left, #d9b0da, transparent 50%) bottom left,
     linear-gradient(to bottom right, #dce5fe, transparent 50%) bottom right;
   /* background-color: hotpink; */
+  background-color: #f8f8f8;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0.1, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 40%;
+  }
 `;
 
 const Productdiv = styled.ul`
@@ -48,10 +53,6 @@ const Productimg = styled.div`
   img {
     width: 100%;
   }
-  /* background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat; */
-  /* background-image: url(${(props) => props.url}); */
 `;
 const ProductimgBox = styled.div`
   display: flex;
@@ -72,13 +73,13 @@ const Producttextbox = styled.div`
 
 const KRW = styled.span`
   position: relative;
-  top: 12%;
+  top: 8%;
   right: 3%;
-  font-size: 1.3em;
+  font-size: 0.9vw;
 `;
 
 const Producttext1 = styled.div`
-  font-size: 1.5em;
+  font-size: 1.1vw;
   font-weight: bold;
   height: 10%;
   display: flex;
@@ -86,7 +87,7 @@ const Producttext1 = styled.div`
   align-items: center;
 `;
 const Producttext2 = styled.div`
-  font-size: 2.4em;
+  font-size: 1.5vw;
   height: 50%;
   right: 2%;
   display: flex;

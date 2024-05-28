@@ -9,7 +9,7 @@
 }
 
 .pagination > li > a {
-  padding: 5px 10px;
+  padding: 5% 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
   color: #333;
@@ -25,6 +25,5 @@
 .pagination > .disabled > a {
   pointer-events: none;
   color: #6c757d;
-  background-color: #f8f9fa;
   border-color: #dee2e6;
 }
