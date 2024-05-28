@@ -189,7 +189,7 @@ const LOGIN = () => {
       if (rsp.data !== 0) {
         setUno(rsp.data);
         // 저장
-        localStorage.setItem("isLogin", "TRUE");
+        localStorage.setItem("isLogin", true);
         navigate("/main");
         alert("성공");
       } else {

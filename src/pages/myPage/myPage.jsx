@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyPageAxiosApi from "../../api/MyPageAxios";
-import UserStore, { UserContext } from "../../UserStore";
+import { UserContext } from "../../UserStore";
 import { storage } from "../../api/firebase";
 
 const Container = styled.div`
@@ -152,33 +152,6 @@ const P = styled.div`
 `;
 
 const MyPage = () => {
-  // const onChangeFile = (e) => {
-  //   const selectedFile = e.target.files[0];
-  //   if (selectedFile) {
-  //     setFile(selectedFile);
-  //     setPreviewUrl(URL.cr);
-  //   }
-  // };
-
-  // const onClickProfileEdit = async () => {
-  //   const storageRef = storage.ref();
-  //   let fileRef;
-
-  //   if (file) {
-  //     fileRef = storageRef.child(file.name);
-  //   } else {
-  //     fileRef = storageRef.child("goimg.webp");
-  //   }
-
-  //   try {
-  //     if (file) {
-  //       await fileRef.put(file);
-  //       console.log("파일정상");
-  //     } else {
-  //       const response = await fa;
-  //     }
-  //   } catch {}
-  // };
   const [mypageInfo, setMypageInfo] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -191,20 +164,28 @@ const MyPage = () => {
   const { uno } = context;
 
   const navigate = useNavigate();
-  const myinfo = (e) => {
-    navigate("/UserUpdateFrom");
+  const myinfo = () => {
+    if (!uno) {
+      alert("로그인하세요");
+      navigate("/");
+    } else {
+      navigate("/UserUpdateFrom");
+    }
   };
 
   useEffect(() => {
     const sleProd = async () => {
-      const rsp = await MyPageAxiosApi.myPageSale(uno);
-      setSle(rsp.data);
+      try {
+        const rsp = await MyPageAxiosApi.myPageSale(uno);
+        setSle(rsp.data);
+      } catch (error) {
+        console.error("Error fetching sales:", error);
+      }
     };
     sleProd();
-  }, []);
+  }, [uno]);
 
   useEffect(() => {
-    console.log(uno);
     const userData = async (uno) => {
       try {
         const response = await MyPageAxiosApi.mypageAll(uno);
@@ -215,8 +196,13 @@ const MyPage = () => {
         setLoading(false);
       }
     };
-    userData(uno);
-  }, []);
+    if (!uno) {
+      alert("로그인하세요");
+      navigate("/");
+    } else {
+      userData(uno);
+    }
+  }, [navigate, uno]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -225,6 +211,7 @@ const MyPage = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
   return (
     <Container>
       <Mybox>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../../UserStore";
 
 const Container = styled.div`
   position: relative;
@@ -164,7 +165,15 @@ const Login = styled.div`
 `;
 
 const HeadBox = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // 사용자 로그인 상태
   const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { uno, setUno } = context;
+
+  const logOut = () => {
+    if (localStorage.getItem("isLogin")) {
+    }
+  };
 
   return (
     <Container>
@@ -185,10 +194,16 @@ const HeadBox = () => {
           </ul>
         </GnbRight>
         <Login>
-          <ul>
-            <li onClick={() => navigate("/")}>로그인</li>
-            <li onClick={() => navigate("/Signup")}>회원가입</li>
-          </ul>
+          {uno === "" ? (
+            <ul>
+              <li onClick={() => navigate("/")}>로그인</li>
+              <li onClick={() => navigate("/Signup")}>회원가입</li>
+            </ul>
+          ) : (
+            <ul>
+              <li onClick={() => setUno("")}>로그아웃</li>
+            </ul>
+          )}
         </Login>
       </Header>
       <Outlet />
