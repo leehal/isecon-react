@@ -33,5 +33,8 @@ const ConsertAxiosApi = {
       plUpdateMusicVo
     );
   },
+  conSearch: async (search) => {
+    return await axios.get(ISECON_URL + CON_URL + `/plsearch/${search}`);
+  },
 };
 export default ConsertAxiosApi;

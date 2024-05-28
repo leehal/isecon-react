@@ -43,11 +43,15 @@ const WeatherItem = styled.div`
   align-items: center;
 `;
 
-const Icon = styled.div`
+const Icon = styled.select`
   width: 30px;
   height: 30px;
   margin-right: 10px;
   background-size: cover;
+  /* cursor: ${(props) => (props.isSelect ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.isSelect ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.isSelect ? "none" : "auto")}; */
+  /* :disabled */
 `;
 
 const Description = styled.div`
@@ -83,6 +87,7 @@ const weatherData = [
 ];
 
 const WeatherForecast = () => {
+  const [isSelect, setIsSelect] = useState(true);
   const [inputOnair, setInputOnair] = useState([
     icons.cloudy,
     icons.cloudy,
@@ -92,92 +97,228 @@ const WeatherForecast = () => {
     icons.cloudy,
   ]);
   const [onairAll, setOnairAll] = useState();
-
+  // const context = useContextt(UserContext);
+  // const { uno } = context;
   const uno = 1;
-  const changeWeather = (e, index) => {
-    setInputOnair[index](e.targer.value);
+  const changeWeather = (e) => {
+    let onair = e.target.value;
+    const weatherOn = async (uno, onair) => {
+      try {
+        const rsp = await WeatherAxiosApi.weather(uno, onair);
+        setIsSelect(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log("실행됨");
+    weatherOn(uno, onair);
   };
-
+  // const getDisabledStatus = (uno, itemName) => {
+  //   switch (uno) {
+  //     case 1:
+  //       return itemName !== "아이네";
+  //     case 2:
+  //       return itemName !== "징버거";
+  //     case 3:
+  //       return itemName !== "릴파";
+  //     case 4:
+  //       return itemName !== "주르르";
+  //     case 5:
+  //       return itemName !== "고세구";
+  //     case 6:
+  //       return itemName !== "비챤";
+  //     default:
+  //       return true;
+  //   }
+  // };
   useEffect(() => {
     console.log(uno);
-    const weatherOn = async (uno) => {
-      try {
-        const rsp = await WeatherAxiosApi.weather(uno);
-        setOnairAll(rsp.data);
-      } catch (error) {}
-    };
     const weatherAll = async () => {
       try {
         const rsp = await WeatherAxiosApi.weatherAll();
         console.log(rsp.data);
         if (rsp.data) {
+          console.log(rsp.data);
+          console.log(weatherData[rsp.data[0].onair]);
           setOnairAll(rsp.data);
+          setInputOnair(rsp.data);
         }
       } catch (e) {}
     };
     weatherAll();
-  }, []);
+  }, [isSelect]);
 
-  const viewSelect = () => {};
+  const isDisabled = (index) => {
+    // console.log(typeof uno);
+    // console.log(index);
+    if (index === uno - 1) {
+      // setIsSelect(false);
+      return false;
+    }
+    return true;
+  };
 
   return (
     <>
-      <WeatherContainer>
-        <Header>
-          <Title>이세계 일기예보</Title>
-        </Header>
-        <WeatherList>
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[0] }} />
-            <Description>
-              <Name>아이네</Name>
-              <Detail>{weatherData[inputOnair[0]]}</Detail>
-            </Description>
-          </WeatherItem>
+      {onairAll && (
+        <WeatherContainer>
+          <Header>
+            <Title>이세계 일기예보</Title>
+          </Header>
+          <WeatherList>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[0]?.onair].icon,
+                }}
+                onChange={changeWeather}
+              >
+                <option value="1" disabled={isDisabled(0)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(0)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(0)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(0)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>아이네</Name>
+                <Detail>{weatherData[onairAll[0]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
 
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[1] }} />
-            <Description>
-              <Name>징버거</Name>
-              <Detail>{weatherData[inputOnair[1]]}</Detail>
-            </Description>
-          </WeatherItem>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[1]?.onair].icon,
+                }}
+              >
+                <option value="1" disabled={isDisabled(1)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(1)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(1)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(1)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>징버거</Name>
+                <Detail>{weatherData[onairAll[1]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
 
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[2] }} />
-            <Description>
-              <Name>릴파</Name>
-              <Detail>{weatherData[inputOnair[2]]}</Detail>
-            </Description>
-          </WeatherItem>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[2]?.onair].icon,
+                }}
+              >
+                <option value="1" disabled={isDisabled(2)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(2)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(2)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(2)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>릴파</Name>
+                <Detail>{weatherData[onairAll[2]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
 
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[3] }} />
-            <Description>
-              <Name>주르르</Name>
-              <Detail>{weatherData[inputOnair[3]]}</Detail>
-            </Description>
-          </WeatherItem>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[3]?.onair].icon,
+                }}
+              >
+                <option value="1" disabled={isDisabled(3)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(3)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(3)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(3)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>주르르</Name>
+                <Detail>{weatherData[onairAll[3]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
 
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[4] }} />
-            <Description>
-              <Name>고세구</Name>
-              <Detail>{weatherData[inputOnair[4]]}</Detail>
-            </Description>
-          </WeatherItem>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[4]?.onair].icon,
+                }}
+              >
+                <option value="1" disabled={isDisabled(4)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(4)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(4)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(4)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>고세구</Name>
+                <Detail>{weatherData[onairAll[4]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
 
-          <WeatherItem>
-            <Icon style={{ backgroundImage: inputOnair[5] }} />
-            <Description>
-              <Name>비챤</Name>
-              <Detail>{weatherData[inputOnair[5]]}</Detail>
-            </Description>
-          </WeatherItem>
-
-          {/* ))} */}
-        </WeatherList>
-      </WeatherContainer>
+            <WeatherItem>
+              <Icon
+                style={{
+                  backgroundImage: weatherData[onairAll[5]?.onair].icon,
+                }}
+              >
+                <option value="1" disabled={isDisabled(5)}>
+                  뱅온예상
+                </option>
+                <option value="2" disabled={isDisabled(5)}>
+                  정보X
+                </option>
+                <option value="3" disabled={isDisabled(5)}>
+                  휴뱅
+                </option>
+                <option value="4" disabled={isDisabled(5)}>
+                  뱅온
+                </option>
+              </Icon>
+              <Description>
+                <Name>비챤</Name>
+                <Detail>{weatherData[onairAll[5]?.onair].detail}</Detail>
+              </Description>
+            </WeatherItem>
+          </WeatherList>
+        </WeatherContainer>
+      )}
     </>
   );
 };

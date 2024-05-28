@@ -119,7 +119,7 @@ const MusicDiv = ({
         ) {
           const rsp = await ConsertAxiosApi.conAllMusic();
           setMusic(rsp.data);
-          console.log(rsp.data);
+          console.log(rsp.data, "lIST");
         } else if (nowConsert === "playList") {
           const rsp = await ConsertAxiosApi.conMyPlayList(uno);
           setPlayList(rsp.data);
@@ -129,16 +129,22 @@ const MusicDiv = ({
           setMusic(rsp.data);
           setOldPlMusic(rsp.data.map((m) => m.mno));
         }
+        //  else if ("searchMusic") {
+        //   const rsp = await ConsertAxiosApi.conSearch(searchTerm);
+        //   setMusic(rsp.data);
+        //   console.log(rsp.data);
+        //   console.log(nowConsert);
+        // }
       } catch (e) {
         console.log(e);
       }
     };
     MusicList();
-  }, [nowConsert, plistname, uno]);
+  }, [nowConsert, plistname, searchTerm, uno]);
 
-  useEffect(() => {
-    setSearchTerm(""); // nowConsert가 변경될 때마다 검색어 초기화
-  }, [nowConsert]);
+  // useEffect(() => {
+  //   setSearchTerm(""); // nowConsert가 변경될 때마다 검색어 초기화
+  // }, [nowConsert]);
 
   const myPlayMusicList = (e) => {
     setPlistName(e.target.dataset.plname);
@@ -232,11 +238,27 @@ const MusicDiv = ({
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  // const [word , setWord] =useState()
+  const searchMusicList = (e) => {
+    setSearchTerm(e.target.value);
+    console.log(searchTerm, "!");
+    const search = async (word) => {
+      const rsp = await ConsertAxiosApi.conSearch(word);
+      setMusic(rsp.data);
+      console.log(rsp.data, "검색 결과 데이터");
+    };
+    search(e.target.value);
+    setSearchTerm("");
+    console.log(nowConsert);
+    // console.log(e.target.value);
+    changePlayListSideBar("searchMusic");
+    // console.log(nowConsert);
+  };
 
   if (!music || music.length === 0) {
     return <div>No music list available.</div>;
   }
-  if (nowConsert === "allMusic") {
+  if (nowConsert === "allMusic" || nowConsert === "searchMusic") {
     // 기본/ 모든 음악 보여주기
     return (
       <>
@@ -245,7 +267,7 @@ const MusicDiv = ({
             type="text"
             placeholder="검색"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={searchMusicList}
           />
         </SearchBar>
         <Container>
@@ -399,6 +421,13 @@ const MusicDiv = ({
         </ButtonDiv>
       </>
     );
+    // } else if(nowConsert === "searchMusic"){
+    //   // search 한 곡들 목록
+    //   return (
+    //     <>
+
+    //     </>
+    //   )
   }
 };
 export default MusicDiv;
