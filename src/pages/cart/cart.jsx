@@ -25,7 +25,7 @@ const CartProductAll = styled.div`
 const CartText = styled.div`
   height: 20%;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 1.4vw;
   padding-bottom: 2%;
 `;
 

@@ -16,6 +16,7 @@ const CartHeader = styled.div`
   padding: 10px 0;
   border-bottom: 2px solid #000;
   font-weight: bold;
+  font-size: 0.9vw;
 `;
 
 const HeaderItem1 = styled.div`
@@ -79,28 +80,32 @@ const Cartimgbox = styled.div`
 const CartText1 = styled.div`
   font-weight: bold;
   width: 30%;
-  font-size: 16px;
+  font-size: 0.8vw;
   margin-bottom: 10px;
+  /* background-color: red; */
 `;
 
 const CartText2 = styled.div`
   width: 20%;
-  font-size: 14px;
+  font-size: 0.73vw;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
+  /* background-color: blue; */
 `;
 
 const CartText3 = styled.div`
   width: 10%;
-  font-size: 14px;
+  font-size: 0.75vw;
   text-align: center;
+  /* background-color: violet; */
 `;
 
 const CartText4 = styled.div`
   width: 10%;
-  font-size: 14px;
+  font-size: 0.75vw;
   text-align: center;
+  /* background-color: aqua; */
 `;
 
 const SummaryContainer = styled.div`
@@ -117,9 +122,10 @@ const SummaryItem = styled.div`
   width: 20%;
   justify-content: space-between;
   text-align: center;
-  font-size: 16px;
+  font-size: 0.8vw;
   margin-top: 2%;
   margin-bottom: 1%;
+  /* background-color: blueviolet; */
 `;
 
 const Summarytitle = styled.div``;
@@ -128,7 +134,7 @@ const Summarydetail = styled.div``;
 const Delivery = styled.span`
   position: relative;
   right: 4%;
-  font-size: 13px;
+  font-size: 0.7vw;
   color: red;
   padding-bottom: 2%;
 `;
@@ -136,7 +142,7 @@ const Delivery = styled.span`
 const SummaryTotal = styled.div`
   width: 20%;
   text-align: center;
-  font-size: 20px;
+  font-size: 1vw;
   font-weight: bold;
   color: blue;
 `;
@@ -191,7 +197,7 @@ const Button = styled.button`
   border-radius: 4px;
   border: none;
   color: #fff;
-  font-size: 20px;
+  font-size: 1.1vw;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 
