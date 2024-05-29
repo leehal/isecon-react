@@ -23,6 +23,11 @@ const LoginBox = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 1024px) {
+    width: 90%;
+    height: 50%;
+  }
 `;
 const Img = styled.div`
   width: 100%;
@@ -36,15 +41,19 @@ const Img = styled.div`
 
 const LoginImg = styled.div`
   position: absolute;
-  background: red;
   width: 63%;
   height: 100%;
   left: 0;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const LoginInput = styled.div`
   position: absolute;
   width: 36%;
+  min-width: 255px;
   background: #fff;
   height: 100%;
   top: 0;
@@ -55,37 +64,53 @@ const LoginInput = styled.div`
   align-items: center;
   border-radius: 15px;
   label {
-    margin-bottom: 80px;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
   }
   input {
-    position: absolute;
-    display: flex;
-    right: 8%;
-    width: 85%;
-    height: 15%;
+    width: 80%;
+    height: 80%;
     border: none;
-    border-bottom: 3px solid #e0e0e0;
-    font-size: 20px;
-    font-weight: 500;
+    background: #f1f0f0;
+    border-radius: 5px;
+    font-size: 1.2em;
+
+    @media (max-width: 768px) {
+    }
   }
   ::placeholder {
     color: #b4b4b4;
+    font-size: 1em;
     font-weight: 600;
+  }
+  @media (max-width: 768px) {
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
   }
 `;
 
 const TestBox = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 100%;
   height: 40%;
+  top: 20%;
   flex-direction: column;
 `;
 
 const LoginIcon = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100px;
+  width: 55%;
+  min-width: 55%;
+  height: 10%;
   bottom: 3%;
   display: flex;
   justify-content: center;
@@ -95,15 +120,17 @@ const Kicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55px;
-  height: 55px;
-  margin: 0 20px;
+  width: 20%;
+  min-width: 20%;
+  height: auto;
+  margin: 0 5%;
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;
   background: rgb(255, 233, 0);
   img {
-    width: 45px;
+    width: 100%;
+    min-width: 100%;
     height: auto;
   }
 `;
@@ -111,15 +138,17 @@ const Gicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55px;
-  height: 55px;
-  margin: 0 20px;
+  width: 20%;
+  min-width: 20%;
+  height: auto;
+  margin: 0 5%;
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;
 
   img {
-    width: 55px;
+    width: 100%;
+    min-width: 100%;
     height: auto;
   }
 `;
@@ -127,15 +156,17 @@ const Nicon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55px;
-  height: 55px;
-  margin: 0 20px;
+  width: 20%;
+  min-width: 20%;
+  height: auto;
+  margin: 0 5%;
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;
   background: rgb(0, 199, 60);
   img {
-    width: 45px;
+    width: 100%;
+    min-width: 100%;
     height: auto;
   }
 `;
@@ -146,18 +177,19 @@ const LoginBtn = styled.button`
   align-items: center;
   bottom: 27%;
   width: 90%;
+  min-width: 240px;
   height: 8%;
   border: none;
   border-radius: 10px;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
-  background: rgb(240, 90, 153);
+  background: rgb(228, 66, 123);
   transition: all 0.1s ease-in-out;
 
   &:hover {
     transform: translate(1.1);
-    background: rgb(245, 126, 167);
+    background: rgb(231, 93, 142);
     box-shadow: 1px 2px 3px 1px #c6c6ca;
   }
 `;
@@ -171,6 +203,19 @@ const SignBtn = styled.div`
 
   &:hover {
     color: #ccc;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    min-width: 240px;
+    height: 8%;
+    bottom: 16%;
+    color: #fff;
+    background: rgb(250, 176, 202);
+    border-radius: 10px;
+    white-space: nowrap;
   }
 `;
 

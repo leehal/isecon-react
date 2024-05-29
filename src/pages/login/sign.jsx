@@ -16,10 +16,20 @@ const SignBox = styled.div`
   width: 70%;
   height: 60%;
   position: absolute;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+    height: 50%;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 const SignInput = styled.div`
   position: absolute;
   width: 36%;
+  min-width: 255px;
   background: #fff;
   height: 100%;
   top: 0;
@@ -29,25 +39,39 @@ const SignInput = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-
   label {
-    margin-bottom: 16%;
-  }
-  input {
-    position: absolute;
+    width: 100%;
+    height: 20%;
     display: flex;
-    right: 8%;
-    width: 85%;
-    height: 23%;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    font-size: 20px;
+    justify-content: center;
   }
-  ::placeholder {
+
+  input {
+    width: 80%;
+    height: 80%;
+    border: none;
+    background: #f1f0f0;
+    border-radius: 5px;
+    font-size: 1.2em;
+
+    @media (max-width: 768px) {
+    }
+  }
+
+  input::placeholder {
     color: #b4b4b4;
+    font-size: 1em;
     font-weight: 600;
   }
+  @media (max-width: 768px) {
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
 `;
+
 const SignImg = styled.div`
   position: absolute;
   width: 63%;
@@ -60,13 +84,16 @@ const SignImg = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const OkBtn = styled.div`
   position: absolute;
-  bottom: 10%;
-  right: 3%;
+  bottom: 13%;
   width: 30%;
-  height: 50px;
+  right: 3%;
+  height: 8%;
   background: rgb(228, 66, 123);
   display: flex;
   justify-content: center;
@@ -75,29 +102,64 @@ const OkBtn = styled.div`
   border-radius: 10px;
   cursor: pointer;
   color: #fff;
+  transition: all 0.1s ease-in-out;
   font-size: 16px;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    left: 50%;
+    transform: translate(-50%);
+    width: 55%;
+    min-width: 240px;
+    height: 8%;
+    bottom: 15%;
+  }
+  &:hover {
+    background: rgb(231, 93, 142);
+  }
 `;
 const Textbox = styled.div`
   display: flex;
   position: absolute;
   width: 100%;
-  height: 40%;
+  height: 60%;
+  top: 15%;
   flex-direction: column;
-  top: 8%;
 `;
 
 const NoBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   color: #000;
-  bottom: 5%;
-  right: 10%;
-  font-size: 15px;
+  bottom: 7%;
+  width: 30%;
+  height: 5%;
+  right: 3%;
+  font-size: 1em;
   color: #8f8f8f;
+  white-space: nowrap;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    min-width: 240px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 8%;
+    bottom: 3%;
+    color: #fff;
+    background: rgb(250, 176, 202);
+    border-radius: 10px;
+    white-space: nowrap;
+  }
 
   &:hover {
-    border-bottom: 1px solid #bdbdbd;
-    cursor: pointer;
+    color: #ccc;
   }
 `;
 const IdError = styled.div`
