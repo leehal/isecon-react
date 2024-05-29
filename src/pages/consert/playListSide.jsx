@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PlayListContainer from "./playListContainer";
 import { MdOutlineMotionPhotosPaused } from "react-icons/md";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { AiFillFastForward, AiFillFastBackward } from "react-icons/ai";
 
 const Container = styled.div`
   display: flex;
@@ -13,24 +14,34 @@ const Container = styled.div`
   width: 22vw;
   background-color: black;
   margin: 0%;
+  @media (max-width: 768px) {
+    height: 50vh;
+    width: 100vw;
+  }
 `;
 
 const PlHead = styled.div`
-  background-color: #ce0aff75;
+  background-color: rgb(240, 90, 153);
   color: white;
   width: 100%;
   height: 7%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  font-size: 1.5vw;
+  letter-spacing: 0.35vw;
 `;
 
 const ButtonBar = styled.div`
   background-color: black;
-
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 15%;
-  position: fixed; /* 고정 위치 설정 */
+  /* position: fixed; */
   bottom: 0; /* 화면의 맨 아래로 설정 */
   /* display: flex;
   align-items: center;
@@ -40,8 +51,11 @@ const ButtonBar = styled.div`
     height: 80px;
     background-color: transparent;
     color: pink;
-
     border: 0;
+  }
+  @media (max-width: 768px) {
+    position: relative;
+    bottom: 4%;
   }
 `;
 
@@ -76,15 +90,31 @@ const PlayListSide = ({ musicChoice, player, video }) => {
           video={video}
         />
         <ButtonBar>
+          <AiFillFastBackward
+            style={{ color: "rgb(240, 90, 153)", width: "30%", height: "30%" }}
+          />
           <button onClick={playPauseBtn}>
             {isPlaying ? (
               <MdOutlineMotionPhotosPaused
-                style={{ width: "100%", height: "100%" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  color: "rgb(240, 90, 153)",
+                }}
               />
             ) : (
-              <IoPlayCircleOutline style={{ width: "100%", height: "100%" }} />
+              <IoPlayCircleOutline
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  color: "rgb(240, 90, 153)",
+                }}
+              />
             )}
           </button>
+          <AiFillFastForward
+            style={{ color: "rgb(240, 90, 153)", width: "30%", height: "30%" }}
+          />
         </ButtonBar>
       </Container>
     </>

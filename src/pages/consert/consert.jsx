@@ -13,6 +13,9 @@ const Container = styled.div`
   margin: 0%;
   padding: 0%;
   display: flex;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 const videoId = "DPEtmqvaKqY";
 const apiKey = "AIzaSyCAJ10MmyMcOipEdJUlTaPt5OeEnrgvQv0";

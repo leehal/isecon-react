@@ -12,7 +12,8 @@ const Container = styled.div`
 `;
 
 const MTitle = styled.div`
-  background-color: ${(props) => (props.isActive ? "#d52eff75" : "black")};
+  background-color: ${(props) =>
+    props.isActive ? "rgba(240, 90, 152, 0.534)" : "black"};
   margin: 2%;
   color: white;
   display: flex;
@@ -21,7 +22,7 @@ const MTitle = styled.div`
   height: 60px;
   padding: 3%;
   /* border: solid 1px black; */
-  border-radius: 3%;
+  border-radius: 3px;
   flex-direction: column;
   &:hover {
     background-color: #ee82eeba;
@@ -35,6 +36,13 @@ const MTitle = styled.div`
     font-size: 0.8rem;
     color: #e0e0e0;
   }
+  @media (max-width: 768) {
+    margin: 0%;
+    padding: 0%;
+    p {
+      margin: 0;
+    }
+  }
 `;
 
 const SearchBar = styled.div`
@@ -46,11 +54,13 @@ const SearchBar = styled.div`
   justify-content: center;
   color: white;
   input {
-    border-radius: 5%;
+    border-radius: 10px;
     background-color: gray;
-    width: 70%;
-    height: 60%;
+    width: 90%;
+    height: 55%;
     color: white;
+    padding-left: 10px;
+    border: solid 2px gray;
     ::placeholder {
       color: white;
     }
@@ -140,7 +150,7 @@ const MusicDiv = ({
       }
     };
     MusicList();
-  }, [nowConsert, plistname, searchTerm, uno]);
+  }, [nowConsert, plistname, uno]);
 
   // useEffect(() => {
   //   setSearchTerm(""); // nowConsert가 변경될 때마다 검색어 초기화
@@ -258,6 +268,14 @@ const MusicDiv = ({
     // console.log(e.target.value);
     // console.log(nowConsert);
   };
+  const onKeyEnter = (e) => {
+    if (e.key === "Enter") {
+      searchMusicList();
+    }
+  };
+
+  //대소문자 구분없이 비교하기위해 인풋을 다 소문자로변경
+  const searchTermLower = searchTerm.toLowerCase();
 
   if (!music || music.length === 0) {
     return <div>No music list available.</div>;
@@ -272,20 +290,28 @@ const MusicDiv = ({
             placeholder="검색"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={onKeyEnter}
           />
-          <button onClick={searchMusicList}>검색</button>
+          {/* <button onClick={searchMusicList}>검색</button> */}
         </SearchBar>
         <Container>
-          {music.map((m) => (
-            <MTitle
-              key={m.mno}
-              onClick={() => musicChoice(m.surl)}
-              isActive={m.surl === video}
-            >
-              <p>{m.mname}</p>
-              <span>{m.singer}</span>
-            </MTitle>
-          ))}
+          {music
+            .filter(
+              (music) =>
+                music &&
+                (music.mname.toLowerCase().includes(searchTermLower) ||
+                  music.singer.toLowerCase().includes(searchTermLower))
+            )
+            .map((m) => (
+              <MTitle
+                key={m.mno}
+                onClick={() => musicChoice(m.surl)}
+                isActive={m.surl === video}
+              >
+                <p>{m.mname}</p>
+                <span>{m.singer}</span>
+              </MTitle>
+            ))}
         </Container>
         <ButtonDiv>
           <button onClick={() => changePlayListSideBar("playList")}>
@@ -426,13 +452,6 @@ const MusicDiv = ({
         </ButtonDiv>
       </>
     );
-    // } else if(nowConsert === "searchMusic"){
-    //   // search 한 곡들 목록
-    //   return (
-    //     <>
-
-    //     </>
-    //   )
   }
 };
 export default MusicDiv;
