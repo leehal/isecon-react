@@ -239,19 +239,23 @@ const MusicDiv = ({
     setSelectedOption(event.target.value);
   };
   // const [word , setWord] =useState()
-  const searchMusicList = (e) => {
-    setSearchTerm(e.target.value);
+  const searchMusicList = () => {
+    // setSearchTerm(e.target.value);
     console.log(searchTerm, "!");
     const search = async (word) => {
-      const rsp = await ConsertAxiosApi.conSearch(word);
-      setMusic(rsp.data);
-      console.log(rsp.data, "검색 결과 데이터");
+      if (searchTerm === "") {
+        changePlayListSideBar("allMusic");
+      } else {
+        const rsp = await ConsertAxiosApi.conSearch(word);
+        setMusic(rsp.data);
+        console.log(rsp.data, "검색 결과 데이터");
+      }
     };
-    search(e.target.value);
+    search(searchTerm);
     setSearchTerm("");
+    changePlayListSideBar("searchMusic");
     console.log(nowConsert);
     // console.log(e.target.value);
-    changePlayListSideBar("searchMusic");
     // console.log(nowConsert);
   };
 
@@ -267,8 +271,9 @@ const MusicDiv = ({
             type="text"
             placeholder="검색"
             value={searchTerm}
-            onChange={searchMusicList}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button onClick={searchMusicList}>검색</button>
         </SearchBar>
         <Container>
           {music.map((m) => (

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import ConsertAxiosApi from "../../api/ConsertAxios";
 import PlayListContainer from "./playListContainer";
+import { MdOutlineMotionPhotosPaused } from "react-icons/md";
+import { IoPlayCircleOutline } from "react-icons/io5";
 
 const Container = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const PlHead = styled.div`
 
 const ButtonBar = styled.div`
   background-color: black;
+
   width: 100%;
   height: 15%;
   position: fixed; /* 고정 위치 설정 */
@@ -36,6 +38,10 @@ const ButtonBar = styled.div`
   button {
     width: 80px;
     height: 80px;
+    background-color: transparent;
+    color: pink;
+
+    border: 0;
   }
 `;
 
@@ -70,7 +76,15 @@ const PlayListSide = ({ musicChoice, player, video }) => {
           video={video}
         />
         <ButtonBar>
-          <button onClick={playPauseBtn}>{isPlaying ? "Pause" : "Play"}</button>
+          <button onClick={playPauseBtn}>
+            {isPlaying ? (
+              <MdOutlineMotionPhotosPaused
+                style={{ width: "100%", height: "100%" }}
+              />
+            ) : (
+              <IoPlayCircleOutline style={{ width: "100%", height: "100%" }} />
+            )}
+          </button>
         </ButtonBar>
       </Container>
     </>

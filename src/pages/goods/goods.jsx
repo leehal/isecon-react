@@ -69,7 +69,7 @@ const ProductMapbox = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-between;
-  /* background-color: chartreuse; */
+  background-color: chartreuse;
 
   @media (max-width: 768px) {
     top: 7%;
