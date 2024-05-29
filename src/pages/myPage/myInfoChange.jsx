@@ -16,11 +16,11 @@ const Container = styled.div`
   justify-content: center;
   background-image: url("img/Rectangle409.png");
 `;
+
 const Img = styled.div`
   z-index: -1;
   width: 100%;
   height: 100%;
-
   img {
     width: 100%;
     height: 100%;
@@ -33,7 +33,7 @@ const ChangeBox = styled.div`
   align-items: center;
   position: absolute;
   width: 30%;
-  background: #f8fde7;
+  /* background: #f8fde7; */
   height: 70%;
   box-shadow: 1px 5px 15px -5px gray;
 `;
