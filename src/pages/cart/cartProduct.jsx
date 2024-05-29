@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CartAxiosApi from "../../api/CartAxiosApi";
 import { UserContext } from "../../UserStore";
+import { BsTrash3Fill } from "react-icons/bs";
 
 const CartContainer = styled.div`
   width: 100%;
@@ -91,6 +92,7 @@ const CartText2 = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
   /* background-color: blue; */
 `;
 
@@ -165,8 +167,8 @@ const Buttonbox = styled.div`
 
 const Checkbox = styled.input.attrs({ type: "checkbox" })`
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 0.85vw;
+  height: 1.8vh;
   background-color: #fff;
   border: 2px solid rgb(240, 90, 153);
   border-radius: 4px;
@@ -180,13 +182,29 @@ const Checkbox = styled.input.attrs({ type: "checkbox" })`
   &:checked::after {
     content: "";
     position: absolute;
-    top: 2px;
-    left: 5px;
-    width: 4px;
-    height: 8px;
+    top: 4%;
+    left: 30%;
+    width: 29%;
+    height: 50%;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+  }
+  @media (max-width: 1598px) {
+    height: 1.6vh;
+    border-radius: 3px;
+  }
+  @media (max-width: 1450px) {
+    height: 1.4vh;
+    border-radius: 3px;
+  }
+  @media (max-width: 1240px) {
+    height: 1.2vh;
+    border-radius: 3px;
+  }
+  @media (max-width: 850px) {
+    height: 1vh;
+    border-radius: 2px;
   }
 `;
 
@@ -205,6 +223,14 @@ const Button = styled.button`
     transform: scale(1.01);
     background: rgb(235, 112, 155);
   }
+`;
+
+const DeleteButton = styled.button`
+  width: 40%;
+  border: none;
+  background: rgba(235, 112, 155, 0);
+  cursor: pointer;
+  /* background-color: red; */
 `;
 
 const CartProduct = () => {
@@ -252,7 +278,13 @@ const CartProduct = () => {
     setDeliveryFee(totalPrice >= 50000 ? 0 : 3000);
   }, [totalPrice]);
 
-  const cartDelete = async (cno) => {
+  const cartDelete = async (price, cno, pd) => {
+    console.log(`가격 : ${price}`);
+    console.log(checkedItems);
+    setTotalPrice((prevPrice) => prevPrice - pd.price);
+    if (checkedItems.includes(cno)) {
+      setTotalPrice(totalPrice - price);
+    }
     console.log(cno);
     try {
       const rsp = await CartAxiosApi.cartDelete(cno);
@@ -309,12 +341,15 @@ const CartProduct = () => {
           <CartText4>택배</CartText4>
           <CartText3>{pd.price}원</CartText3>
           <Deletebox>
-            <button onClick={() => cartDelete(pd.pno)}>
-              <img
-                src="https://i.namu.wiki/i/OmG-AXDt3L7SIMTobiuQoA8IB4Om9XPNfSXHVuPie1uC3gflfcL-W23uqdcgJJK0QB3yetg1Tnp1iAW_ag0dwg.webp"
-                alt="삭제"
+            <DeleteButton onClick={() => cartDelete(pd.price, pd.pno, pd)}>
+              <BsTrash3Fill
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  color: "rgb(235, 112, 155)",
+                }}
               />
-            </button>
+            </DeleteButton>
           </Deletebox>
         </Cartproduct>
       ))}

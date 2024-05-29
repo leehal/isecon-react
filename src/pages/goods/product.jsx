@@ -27,7 +27,7 @@ const ProductdivBox = styled.div`
 `;
 
 const Productdiv = styled.ul`
-  width: 90%;
+  width: 80%;
   height: 85%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f5f5f7;
