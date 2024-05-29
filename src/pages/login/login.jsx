@@ -77,6 +77,7 @@ const LoginInput = styled.div`
     background: #f1f0f0;
     border-radius: 5px;
     font-size: 1.2em;
+    padding-left: 3%;
 
     @media (max-width: 768px) {
     }
@@ -236,7 +237,6 @@ const LOGIN = () => {
         // 저장
         localStorage.setItem("isLogin", true);
         navigate("/main");
-        alert("성공");
       } else {
         // 서버의 응답을 줬지만 성공이 아닌 경우
         alert("아이디 및 패스워드를 재 확인 해 주세요.");

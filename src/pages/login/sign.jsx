@@ -44,6 +44,7 @@ const SignInput = styled.div`
     height: 20%;
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
   }
 
   input {
@@ -53,15 +54,20 @@ const SignInput = styled.div`
     background: #f1f0f0;
     border-radius: 5px;
     font-size: 1.2em;
-
-    @media (max-width: 768px) {
-    }
+    padding-left: 3%;
   }
 
   input::placeholder {
     color: #b4b4b4;
-    font-size: 1em;
+    font-size: 17px;
     font-weight: 600;
+
+    @media (max-width: 1024px) {
+      font-size: 16px;
+    }
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
   }
   @media (max-width: 768px) {
     width: 70%;
@@ -165,16 +171,36 @@ const NoBtn = styled.div`
 const IdError = styled.div`
   color: ${({ isMail }) => (isMail ? `green` : `red`)};
   position: absolute;
-  right: 10%;
-  top: 26%;
+  right: 13%;
+  top: 15%;
   font-size: 13px;
+
+  @media (max-width: 1600px) {
+    font-size: 11px;
+  }
+  @media (max-width: 1260px) {
+    font-size: 10px;
+  }
+  @media (max-width: 1143px) {
+    font-size: 9px;
+  }
 `;
 const PwdError = styled.div`
   color: ${({ isMail }) => (isMail ? `green` : `red`)};
   position: absolute;
-  right: 10%;
-  top: 62%;
+  right: 13%;
+  top: 35%;
   font-size: 13px;
+
+  @media (max-width: 1600px) {
+    font-size: 11px;
+  }
+  @media (max-width: 1260px) {
+    font-size: 10px;
+  }
+  @media (max-width: 1143px) {
+    font-size: 9px;
+  }
 `;
 
 const Signup = () => {
