@@ -25,6 +25,9 @@ const Img = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media (max-width: 1250px) {
+    width: 80%;
+  }
 `;
 
 const ChangeBox = styled.div`
@@ -36,6 +39,16 @@ const ChangeBox = styled.div`
   /* background: #f8fde7; */
   height: 70%;
   box-shadow: 1px 5px 15px -5px gray;
+
+  @media (max-width: 1250px) {
+    height: 55%;
+  }
+  @media (max-width: 1000px) {
+    height: 45%;
+  }
+  @media (max-width: 768px) {
+    height: 35%;
+  }
 `;
 const ChangeImg = styled.div`
   position: absolute;
@@ -58,7 +71,6 @@ const ImgCircle = styled.div`
   box-shadow: 3px 5px 13px -5px gray;
   overflow: hidden;
   cursor: pointer;
-
   img {
     width: 66%;
     height: auto;
@@ -76,6 +88,7 @@ const ChangeBtn = styled.button`
   box-shadow: 3px 3px 6px -3px gray;
   background: rgb(240, 90, 153);
   cursor: pointer;
+  font-size: 0.8vw;
 
   &:hover {
     background: rgb(245, 126, 167);
@@ -92,14 +105,15 @@ const TextForm = styled.div`
   label {
     width: 100%;
     height: 30%;
-    background: yellow;
+    /* background: yellow; */
     margin: 10px 0;
   }
   input {
     width: 100%;
     height: 100%;
-    font-size: 16px;
+    font-size: 1vw;
     font-weight: 500;
+    padding-left: 10px;
     border: none;
     box-shadow: 1px 1px 11px -5px gray;
   }
@@ -115,6 +129,7 @@ const Save = styled.button`
   cursor: pointer;
   color: #fff;
   border: none;
+  font-size: 0.8vw;
 
   &:hover {
     background: rgb(245, 126, 167); /* Dark green */
@@ -130,6 +145,7 @@ const Off = styled.button`
   cursor: pointer;
   color: #fff;
   border: none;
+  font-size: 0.8vw;
 
   &:hover {
     background: rgb(245, 126, 167); /* Dark green */
